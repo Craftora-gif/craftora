@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Checkout — Craftora</title>
 
@@ -36,29 +31,28 @@ body{
 
 nav{
     height:80px;
-    padding:0 6%;
     background:white;
-    border-bottom:1px solid #eee;
-
     display:flex;
     align-items:center;
     justify-content:space-between;
+    padding:0 6%;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
 }
 
 .logo{
-    font-size:27px;
+    font-size:25px;
     font-weight:bold;
-    color:#9b5b32;
+    letter-spacing:2px;
 }
 
 .logo span{
-    color:#29251f;
+    color:#9b5b32;
 }
 
 .menu{
     display:flex;
-    gap:25px;
     list-style:none;
+    gap:30px;
 }
 
 .menu a{
@@ -67,18 +61,14 @@ nav{
     font-size:14px;
 }
 
-.menu a:hover{
-    color:#9b5b32;
-}
-
 .nav-actions{
     display:flex;
-    gap:15px;
+    gap:18px;
+    align-items:center;
 }
 
 .nav-actions a{
     text-decoration:none;
-    color:#29251f;
     font-size:20px;
 }
 
@@ -94,58 +84,60 @@ nav{
 }
 
 .header h1{
-    font-size:45px;
-    margin:15px 0;
+    font-size:42px;
+    margin:12px 0;
 }
 
 .header p{
     color:#777;
 }
 
-.checkout{
-    max-width:1150px;
+.checkout-container{
+    max-width:1100px;
     margin:auto;
-    padding:0 25px 80px;
-
+    padding:20px;
     display:grid;
-    grid-template-columns:1.5fr 1fr;
+    grid-template-columns:1.2fr .8fr;
     gap:30px;
 }
 
 .box{
     background:white;
-    padding:30px;
-    border-radius:8px;
+    padding:28px;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,.05);
 }
 
 .box h2{
-    margin-bottom:25px;
+    margin-bottom:22px;
+    font-size:20px;
 }
 
 .form-group{
-    margin-bottom:18px;
+    margin-bottom:17px;
 }
 
 .form-group label{
     display:block;
-    font-weight:bold;
-    font-size:14px;
     margin-bottom:7px;
+    font-size:13px;
+    font-weight:bold;
 }
 
 .form-group input,
-.form-group textarea{
+.form-group textarea,
+.form-group select{
     width:100%;
     padding:13px;
     border:1px solid #ddd;
-    border-radius:5px;
-    font-size:15px;
+    border-radius:6px;
+    font-size:14px;
     outline:none;
 }
 
-.form-group input:focus,
-.form-group textarea:focus{
-    border-color:#9b5b32;
+.form-group textarea{
+    min-height:90px;
+    resize:vertical;
 }
 
 .form-row{
@@ -156,227 +148,141 @@ nav{
 
 .payment-option{
     border:1px solid #ddd;
-    border-radius:6px;
-    padding:15px;
+    padding:14px;
+    border-radius:7px;
     margin-bottom:10px;
     cursor:pointer;
 }
 
-.payment-option:hover{
-    border-color:#9b5b32;
+.payment-option label{
+    cursor:pointer;
+}
+
+.payment-option input{
+    margin-right:8px;
 }
 
 .order-item{
     display:flex;
-    align-items:center;
-    gap:12px;
-    padding:12px 0;
+    justify-content:space-between;
+    gap:15px;
+    padding:14px 0;
     border-bottom:1px solid #eee;
 }
 
-.order-image{
+.item-left{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.item-image{
     width:55px;
     height:55px;
-    border-radius:6px;
-
-    background:linear-gradient(
-        135deg,
-        #e9d8c7,
-        #c69b73
-    );
-
+    border-radius:7px;
+    background:#f5f0ea;
     display:flex;
     align-items:center;
     justify-content:center;
-
-    font-size:25px;
+    font-size:27px;
 }
 
-.order-info{
-    flex:1;
-}
-
-.order-info h4{
-    margin-bottom:5px;
-}
-
-.order-info p{
-    color:#777;
-    font-size:13px;
-}
-
-.order-price{
+.item-name{
     font-weight:bold;
+    font-size:14px;
+}
+
+.item-quantity{
+    color:#777;
+    font-size:12px;
+    margin-top:4px;
+}
+
+.item-price{
+    font-weight:bold;
+    white-space:nowrap;
 }
 
 .summary-row{
     display:flex;
     justify-content:space-between;
-    padding:12px 0;
-    border-bottom:1px solid #eee;
+    padding:9px 0;
+    font-size:14px;
 }
 
 .summary-row.total{
-    border-bottom:0;
-    font-size:20px;
+    border-top:1px solid #ddd;
+    margin-top:10px;
+    padding-top:18px;
+    font-size:18px;
     font-weight:bold;
-    padding-top:20px;
 }
 
-.total-price{
-    color:#9b5b32;
-}
-
-.place-order{
+.place-btn{
     width:100%;
     margin-top:20px;
-    padding:16px;
+    padding:15px;
     border:0;
-    border-radius:5px;
+    border-radius:6px;
     background:#9b5b32;
     color:white;
-    font-size:16px;
+    font-size:15px;
+    font-weight:bold;
     cursor:pointer;
 }
 
-.place-order:hover{
-    background:#704020;
+.place-btn:hover{
+    background:#814824;
 }
 
-.place-order:disabled{
+.place-btn:disabled{
     opacity:.6;
     cursor:not-allowed;
 }
 
-.empty{
-    grid-column:1 / -1;
-
-    max-width:700px;
-    margin:70px auto;
-
-    background:white;
-    border-radius:10px;
-    padding:60px 20px;
-
-    text-align:center;
-}
-
-.empty h2{
-    margin-bottom:15px;
-}
-
-.empty p{
-    color:#777;
-    margin-bottom:25px;
-}
-
-.shop-btn{
-    display:inline-block;
-    padding:13px 25px;
-    background:#9b5b32;
-    color:white;
-    text-decoration:none;
-    border-radius:5px;
-}
-
-.login-required{
-    grid-column:1 / -1;
-
-    max-width:650px;
-    margin:70px auto;
-
-    background:white;
-    border-radius:10px;
-    padding:60px 25px;
-
-    text-align:center;
-}
-
-.login-required .icon{
-    font-size:60px;
-    margin-bottom:20px;
-}
-
-.login-required h2{
-    margin-bottom:12px;
-}
-
-.login-required p{
-    color:#777;
-    margin-bottom:25px;
-    line-height:1.7;
-}
-
-.login-btn{
-    display:inline-block;
-    padding:13px 28px;
-    background:#9b5b32;
-    color:white;
-    text-decoration:none;
-    border-radius:5px;
+.error-message{
+    display:none;
+    background:#fff1f1;
+    color:#b42318;
+    padding:12px;
+    border-radius:6px;
+    margin-bottom:18px;
+    font-size:13px;
 }
 
 .success{
     display:none;
+    max-width:600px;
+    margin:50px auto 100px;
+    background:white;
+    padding:50px 25px;
     text-align:center;
-    padding:40px 20px;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,.05);
 }
 
 .success-icon{
-    font-size:65px;
-    margin-bottom:20px;
+    font-size:55px;
+    margin-bottom:15px;
 }
 
 .success h2{
-    margin-bottom:12px;
+    margin-bottom:15px;
 }
 
 .success p{
-    color:#777;
-    line-height:1.7;
+    margin:8px 0;
+    color:#666;
 }
 
 .success a{
     display:inline-block;
-    margin-top:25px;
-    padding:13px 25px;
+    margin-top:20px;
     background:#9b5b32;
     color:white;
     text-decoration:none;
+    padding:12px 25px;
     border-radius:5px;
-}
-
-.buy-mode{
-    display:inline-block;
-    background:#f4e7d5;
-    color:#9b5b32;
-    padding:7px 12px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-    margin-bottom:15px;
-}
-
-.cart-mode{
-    display:inline-block;
-    background:#eee;
-    color:#29251f;
-    padding:7px 12px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-    margin-bottom:15px;
-}
-
-.error-message{
-    display:none;
-    margin-top:15px;
-    padding:12px;
-    border-radius:5px;
-    background:#fff0f0;
-    color:#b00020;
-    font-size:14px;
-    text-align:center;
 }
 
 footer{
@@ -384,6 +290,7 @@ footer{
     color:white;
     text-align:center;
     padding:45px 20px;
+    margin-top:60px;
 }
 
 footer p{
@@ -397,20 +304,27 @@ footer p{
         display:none;
     }
 
-    .checkout{
-        grid-template-columns:1fr;
-    }
-
-}
-
-@media(max-width:550px){
-
-    .form-row{
+    .checkout-container{
         grid-template-columns:1fr;
     }
 
     .header h1{
-        font-size:36px;
+        font-size:34px;
+    }
+}
+
+@media(max-width:500px){
+
+    nav{
+        padding:0 20px;
+    }
+
+    .logo{
+        font-size:21px;
+    }
+
+    .form-row{
+        grid-template-columns:1fr;
     }
 
     .box{
@@ -423,14 +337,11 @@ footer p{
 
 </head>
 
-
 <body>
-
 
 <div class="topbar">
     Free shipping on orders above ₹999
 </div>
-
 
 <nav>
 
@@ -438,294 +349,229 @@ footer p{
         CRAFT<span>ORA</span>
     </div>
 
-
     <ul class="menu">
 
         <li>
-            <a href="index.html">
-                Home
-            </a>
+            <a href="index.html">Home</a>
         </li>
 
         <li>
-            <a href="shop.html">
-                Shop
-            </a>
+            <a href="shop.html">Shop</a>
         </li>
 
         <li>
-            <a href="shop.html">
-                Categories
-            </a>
+            <a href="shop.html">Categories</a>
         </li>
 
         <li>
-            <a href="about.html">
-                About
-            </a>
+            <a href="about.html">About</a>
         </li>
 
         <li>
-            <a href="contact.html">
-                Contact
-            </a>
+            <a href="contact.html">Contact</a>
         </li>
 
     </ul>
 
-
     <div class="nav-actions">
 
-        <a href="wishlist.html">
-            ❤️
-        </a>
+        <a href="wishlist.html">❤️</a>
 
-        <a href="login.html">
-            👤
-        </a>
+        <a href="login.html">👤</a>
 
-        <a href="cart.html">
-            🛒
-        </a>
+        <a href="cart.html">🛒</a>
 
     </div>
 
 </nav>
 
-
 <section class="header">
 
-    <small>
-        SECURE CHECKOUT
-    </small>
+    <small>CRAFTORA CHECKOUT</small>
 
-    <h1>
-        Checkout 💳
-    </h1>
+    <h1>Complete Your Order</h1>
 
-    <p>
-        Complete your order securely.
-    </p>
+    <p>Enter your details and place your Craftora order.</p>
 
 </section>
 
-
-<section
-    class="checkout"
-    id="checkoutArea"
+<div
+    class="checkout-container"
+    id="checkoutContainer"
 >
 
     <div class="box">
 
-        <h2>
-            Delivery Information
-        </h2>
+        <h2>Delivery Details</h2>
 
+        <div
+            class="error-message"
+            id="errorMessage"
+        ></div>
 
-        <form
-            id="checkoutForm"
-            onsubmit="placeOrder(event)"
-        >
+        <div class="form-group">
+
+            <label>
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Mobile Number
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                maxlength="10"
+                placeholder="Enter 10 digit mobile number"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Address
+            </label>
+
+            <textarea
+                id="address"
+                placeholder="Enter your complete address"
+            ></textarea>
+
+        </div>
+
+        <div class="form-row">
 
             <div class="form-group">
 
                 <label>
-                    Full Name
+                    City
                 </label>
 
                 <input
                     type="text"
-                    id="name"
-                    placeholder="Enter your full name"
-                    required
+                    id="city"
+                    placeholder="City"
                 >
 
             </div>
 
-
-            <div class="form-row">
-
-                <div class="form-group">
-
-                    <label>
-                        Email
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="Enter your email"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Phone
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="phone"
-                        placeholder="Enter phone number"
-                        maxlength="10"
-                        required
-                    >
-
-                </div>
-
-            </div>
-
-
             <div class="form-group">
 
                 <label>
-                    Address
+                    PIN Code
                 </label>
 
-                <textarea
-                    id="address"
-                    rows="4"
-                    placeholder="House No., Street, Area"
-                    required
-                ></textarea>
+                <input
+                    type="text"
+                    id="pincode"
+                    maxlength="6"
+                    placeholder="PIN Code"
+                >
 
             </div>
 
-
-            <div class="form-row">
-
-                <div class="form-group">
-
-                    <label>
-                        City
-                    </label>
-
-                    <input
-                        type="text"
-                        id="city"
-                        placeholder="City"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        PIN Code
-                    </label>
-
-                    <input
-                        type="text"
-                        id="pincode"
-                        placeholder="6-digit PIN"
-                        maxlength="6"
-                        required
-                    >
-
-                </div>
-
-            </div>
-
-
-            <h2 style="margin-top:25px;">
-                Payment Method
-            </h2>
-
-
-            <div class="payment-option">
-
-                <label>
-
-                    <input
-                        type="radio"
-                        name="payment"
-                        value="cod"
-                        checked
-                    >
-
-                    💵 Cash on Delivery
-
-                </label>
-
-            </div>
-
-
-            <div class="payment-option">
-
-                <label>
-
-                    <input
-                        type="radio"
-                        name="payment"
-                        value="upi"
-                    >
-
-                    📱 UPI
-
-                </label>
-
-            </div>
-
-
-            <div class="payment-option">
-
-                <label>
-
-                    <input
-                        type="radio"
-                        name="payment"
-                        value="card"
-                    >
-
-                    💳 Credit / Debit Card
-
-                </label>
-
-            </div>
-
-
-            <button
-                type="submit"
-                class="place-order"
-                id="placeOrderButton"
-            >
-                Place Order
-            </button>
-
-
-            <div
-                class="error-message"
-                id="errorMessage"
-            ></div>
-
-        </form>
-
-
-        <div
-            class="success"
-            id="success"
-        >
         </div>
+
+        <h2>
+            Payment Method
+        </h2>
+
+        <div class="payment-option">
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="COD"
+                >
+
+                Cash on Delivery
+
+            </label>
+
+        </div>
+
+        <div class="payment-option">
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="UPI"
+                >
+
+                UPI
+
+            </label>
+
+        </div>
+
+        <div class="payment-option">
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="Card"
+                >
+
+                Credit / Debit Card
+
+            </label>
+
+        </div>
+
+        <button
+            class="place-btn"
+            id="placeOrderBtn"
+            onclick="placeOrder()"
+        >
+            Place Order
+        </button>
 
     </div>
 
 
     <div class="box">
 
-        <h2>
-            Your Order
-        </h2>
+        <h2>Order Summary</h2>
 
-        <div id="checkoutMode"></div>
+        <div id="orderItems">
 
-        <div id="orderItems"></div>
+            <div style="color:#777;">
+                Loading order...
+            </div>
 
+        </div>
 
         <div class="summary-row">
 
@@ -733,12 +579,11 @@ footer p{
                 Subtotal
             </span>
 
-            <span id="subtotal">
+            <strong id="subtotal">
                 ₹0
-            </span>
+            </strong>
 
         </div>
-
 
         <div class="summary-row">
 
@@ -746,12 +591,11 @@ footer p{
                 Shipping
             </span>
 
-            <span id="shipping">
+            <strong id="shipping">
                 ₹0
-            </span>
+            </strong>
 
         </div>
-
 
         <div class="summary-row total">
 
@@ -759,18 +603,21 @@ footer p{
                 Total
             </span>
 
-            <span
-                class="total-price"
-                id="total"
-            >
+            <strong id="total">
                 ₹0
-            </span>
+            </strong>
 
         </div>
 
     </div>
 
-</section>
+</div>
+
+
+<div
+    class="success"
+    id="success"
+></div>
 
 
 <footer>
@@ -789,27 +636,19 @@ footer p{
 
 <script>
 
+/* =========================================
+   LIVE BACKEND
+========================================= */
 
-/* =========================
-   VARIABLES
-========================= */
-
-let checkoutType = "cart";
-
-let checkoutItems = [];
-
-let currentSubtotal = 0;
-
-let currentShipping = 0;
-
-let currentTotal = 0;
+const API_URL =
+    "https://craftora-nef4.onrender.com";
 
 
-/* =========================
-   LOGIN CHECK
-========================= */
+/* =========================================
+   GET USER
+========================================= */
 
-function getLoggedUser(){
+function getUser(){
 
     try{
 
@@ -819,7 +658,8 @@ function getLoggedUser(){
             )
         ) || null;
 
-    }catch(error){
+    }
+    catch(error){
 
         return null;
 
@@ -827,6 +667,10 @@ function getLoggedUser(){
 
 }
 
+
+/* =========================================
+   CHECK LOGIN
+========================================= */
 
 function checkLogin(){
 
@@ -836,8 +680,7 @@ function checkLogin(){
         );
 
     const user =
-        getLoggedUser();
-
+        getUser();
 
     if(
         loggedIn !== "true" ||
@@ -845,35 +688,8 @@ function checkLogin(){
         !user.id
     ){
 
-        document.getElementById(
-            "checkoutArea"
-        ).innerHTML = `
-
-            <div class="login-required">
-
-                <div class="icon">
-                    🔐
-                </div>
-
-                <h2>
-                    Login Required
-                </h2>
-
-                <p>
-                    Please login to your Craftora account
-                    before proceeding to checkout.
-                </p>
-
-                <a
-                    href="login.html"
-                    class="login-btn"
-                >
-                    Login to Continue
-                </a>
-
-            </div>
-
-        `;
+        window.location.href =
+            "login.html";
 
         return false;
 
@@ -884,114 +700,96 @@ function checkLogin(){
 }
 
 
-/* =========================
-   FILL USER DATA
-========================= */
+/* =========================================
+   GET CHECKOUT ITEMS
+========================================= */
 
-function fillUserData(){
+function getCheckoutItems(){
 
-    const user =
-        getLoggedUser();
+    let directBuy = null;
 
+    try{
 
-    if(!user){
-        return;
+        directBuy =
+            JSON.parse(
+                sessionStorage.getItem(
+                    "craftoraDirectBuy"
+                )
+            );
+
     }
+    catch(error){
 
-
-    const nameInput =
-        document.getElementById(
-            "name"
-        );
-
-    const phoneInput =
-        document.getElementById(
-            "phone"
-        );
-
-
-    if(
-        nameInput &&
-        user.name
-    ){
-
-        nameInput.value =
-            user.name;
+        directBuy = null;
 
     }
 
 
     if(
-        phoneInput &&
-        user.mobile
+        directBuy &&
+        Array.isArray(directBuy) &&
+        directBuy.length > 0
     ){
 
-        phoneInput.value =
-            user.mobile;
-
-    }
-
-}
-
-
-/* =========================
-   GET CART
-========================= */
-
-function getCart(){
-
-    return JSON.parse(
-        localStorage.getItem(
-            "craftoraCart"
-        )
-    ) || [];
-
-}
-
-
-/* =========================
-   GET BUY NOW
-========================= */
-
-function getBuyNow(){
-
-    /*
-        Current Buy Now
-    */
-
-    const directBuy =
-        JSON.parse(
-            sessionStorage.getItem(
-                "craftoraDirectBuy"
-            )
-        );
-
-
-    if(directBuy){
-
-        return [directBuy];
+        return directBuy;
 
     }
 
 
-    /*
-        Old Buy Now support
-    */
+    let buyNow = null;
 
-    const oldBuy =
-        JSON.parse(
-            localStorage.getItem(
-                "craftoraBuyNow"
-            )
-        );
+    try{
+
+        buyNow =
+            JSON.parse(
+                localStorage.getItem(
+                    "craftoraBuyNow"
+                )
+            );
+
+    }
+    catch(error){
+
+        buyNow = null;
+
+    }
 
 
     if(
-        Array.isArray(oldBuy) &&
-        oldBuy.length > 0
+        buyNow &&
+        Array.isArray(buyNow) &&
+        buyNow.length > 0
     ){
 
-        return oldBuy;
+        return buyNow;
+
+    }
+
+
+    let cart = null;
+
+    try{
+
+        cart =
+            JSON.parse(
+                localStorage.getItem(
+                    "craftoraCart"
+                )
+            );
+
+    }
+    catch(error){
+
+        cart = null;
+
+    }
+
+
+    if(
+        Array.isArray(cart)
+    ){
+
+        return cart;
 
     }
 
@@ -1001,197 +799,125 @@ function getBuyNow(){
 }
 
 
-/* =========================
-   SHOW ORDER
-========================= */
+/* =========================================
+   RENDER ORDER
+========================================= */
 
-function showOrder(){
+function renderOrder(){
 
-    const buyNow =
-        getBuyNow();
-
-
-    if(
-        buyNow &&
-        buyNow.length > 0
-    ){
-
-        checkoutItems =
-            buyNow;
-
-        checkoutType =
-            "buy";
-
-    }else{
-
-        checkoutItems =
-            getCart();
-
-        checkoutType =
-            "cart";
-
-    }
-
-
-    if(
-        checkoutItems.length === 0
-    ){
-
-        document.getElementById(
-            "checkoutArea"
-        ).innerHTML = `
-
-            <div class="empty">
-
-                <h2>
-                    Your cart is empty 🛒
-                </h2>
-
-                <p>
-                    Add some products before
-                    proceeding to checkout.
-                </p>
-
-                <a
-                    href="shop.html"
-                    class="shop-btn"
-                >
-                    Go to Shop
-                </a>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    const mode =
-        document.getElementById(
-            "checkoutMode"
-        );
-
-
-    if(
-        checkoutType === "buy"
-    ){
-
-        mode.innerHTML = `
-
-            <div class="buy-mode">
-                ⚡ BUY NOW — Selected Product
-            </div>
-
-        `;
-
-    }else{
-
-        mode.innerHTML = `
-
-            <div class="cart-mode">
-                🛒 CART ORDER
-            </div>
-
-        `;
-
-    }
-
+    const items =
+        getCheckoutItems();
 
     const container =
         document.getElementById(
             "orderItems"
         );
 
+    if(
+        !items ||
+        items.length === 0
+    ){
 
-    container.innerHTML =
-        "";
+        container.innerHTML = `
+            <div style="
+                color:#777;
+                padding:20px 0;
+            ">
+                Your order is empty.
+            </div>
+        `;
+
+        document.getElementById(
+            "subtotal"
+        ).innerText = "₹0";
+
+        document.getElementById(
+            "shipping"
+        ).innerText = "₹0";
+
+        document.getElementById(
+            "total"
+        ).innerText = "₹0";
+
+        return;
+
+    }
 
 
-    currentSubtotal =
-        0;
+    let subtotal = 0;
+
+    let html = "";
 
 
-    checkoutItems.forEach(
+    items.forEach(
         function(item){
-
-            const quantity =
-                Number(item.quantity) || 1;
-
 
             const price =
                 Number(item.price) || 0;
 
+            const quantity =
+                Number(item.quantity) || 1;
 
             const itemTotal =
                 price * quantity;
 
-
-            currentSubtotal +=
-                itemTotal;
+            subtotal += itemTotal;
 
 
-            const div =
-                document.createElement(
-                    "div"
-                );
+            html += `
 
+                <div class="order-item">
 
-            div.className =
-                "order-item";
+                    <div class="item-left">
 
+                        <div class="item-image">
+                            ${item.image || "🛍️"}
+                        </div>
 
-            div.innerHTML = `
+                        <div>
 
-                <div class="order-image">
-                    ${item.image || "🛍️"}
-                </div>
+                            <div class="item-name">
+                                ${item.name || "Product"}
+                            </div>
 
-                <div class="order-info">
+                            <div class="item-quantity">
+                                Quantity: ${quantity}
+                            </div>
 
-                    <h4>
-                        ${item.name}
-                    </h4>
+                        </div>
 
-                    <p>
-                        Quantity:
-                        ${quantity}
-                    </p>
+                    </div>
 
-                </div>
+                    <div class="item-price">
+                        ₹${itemTotal.toLocaleString("en-IN")}
+                    </div>
 
-                <div class="order-price">
-                    ₹${itemTotal.toLocaleString("en-IN")}
                 </div>
 
             `;
-
-
-            container.appendChild(
-                div
-            );
 
         }
     );
 
 
-    currentShipping =
-        currentSubtotal >= 999
-        ? 0
-        : 99;
+    const shipping =
+        subtotal >= 999
+            ? 0
+            : 99;
+
+    const total =
+        subtotal + shipping;
 
 
-    currentTotal =
-        currentSubtotal +
-        currentShipping;
+    container.innerHTML =
+        html;
 
 
     document.getElementById(
         "subtotal"
     ).innerText =
         "₹" +
-        currentSubtotal.toLocaleString(
+        subtotal.toLocaleString(
             "en-IN"
         );
 
@@ -1199,46 +925,59 @@ function showOrder(){
     document.getElementById(
         "shipping"
     ).innerText =
-        currentShipping === 0
-        ? "FREE"
-        : "₹" +
-          currentShipping.toLocaleString(
-              "en-IN"
-          );
+        shipping === 0
+            ? "FREE"
+            : "₹" +
+              shipping.toLocaleString(
+                  "en-IN"
+              );
 
 
     document.getElementById(
         "total"
     ).innerText =
         "₹" +
-        currentTotal.toLocaleString(
+        total.toLocaleString(
             "en-IN"
         );
 
 }
 
 
-/* =========================
+/* =========================================
+   SHOW ERROR
+========================================= */
+
+function showError(message){
+
+    const errorMessage =
+        document.getElementById(
+            "errorMessage"
+        );
+
+    errorMessage.innerText =
+        message;
+
+    errorMessage.style.display =
+        "block";
+
+}
+
+
+/* =========================================
    PLACE ORDER
-========================= */
+========================================= */
 
-async function placeOrder(event){
-
-    event.preventDefault();
-
+async function placeOrder(){
 
     const user =
-        getLoggedUser();
+        getUser();
 
 
     if(
         !user ||
         !user.id
     ){
-
-        alert(
-            "Please login before placing an order."
-        );
 
         window.location.href =
             "login.html";
@@ -1253,30 +992,25 @@ async function placeOrder(event){
             "name"
         ).value.trim();
 
-
     const email =
         document.getElementById(
             "email"
         ).value.trim();
-
 
     const phone =
         document.getElementById(
             "phone"
         ).value.trim();
 
-
     const address =
         document.getElementById(
             "address"
         ).value.trim();
 
-
     const city =
         document.getElementById(
             "city"
         ).value.trim();
-
 
     const pincode =
         document.getElementById(
@@ -1290,15 +1024,13 @@ async function placeOrder(event){
         );
 
 
+    const checkoutItems =
+        getCheckoutItems();
+
+
     const errorMessage =
         document.getElementById(
             "errorMessage"
-        );
-
-
-    const placeButton =
-        document.getElementById(
-            "placeOrderButton"
         );
 
 
@@ -1306,36 +1038,22 @@ async function placeOrder(event){
         "none";
 
 
-    /* PIN CHECK */
+    if(!name){
 
-    if(
-        pincode.length !== 6 ||
-        isNaN(pincode)
-    ){
-
-        errorMessage.innerText =
-            "Please enter a valid 6-digit PIN code.";
-
-        errorMessage.style.display =
-            "block";
+        showError(
+            "Please enter your name."
+        );
 
         return;
 
     }
 
 
-    /* PHONE CHECK */
+    if(!email){
 
-    if(
-        phone.length !== 10 ||
-        isNaN(phone)
-    ){
-
-        errorMessage.innerText =
-            "Please enter a valid 10-digit phone number.";
-
-        errorMessage.style.display =
-            "block";
+        showError(
+            "Please enter your email."
+        );
 
         return;
 
@@ -1343,14 +1061,77 @@ async function placeOrder(event){
 
 
     if(
-        !payment
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+            email
+        )
     ){
 
-        errorMessage.innerText =
-            "Please select a payment method.";
+        showError(
+            "Please enter a valid email."
+        );
 
-        errorMessage.style.display =
-            "block";
+        return;
+
+    }
+
+
+    if(
+        !/^[0-9]{10}$/.test(
+            phone
+        )
+    ){
+
+        showError(
+            "Please enter a valid 10 digit mobile number."
+        );
+
+        return;
+
+    }
+
+
+    if(!address){
+
+        showError(
+            "Please enter your address."
+        );
+
+        return;
+
+    }
+
+
+    if(!city){
+
+        showError(
+            "Please enter your city."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !/^[0-9]{6}$/.test(
+            pincode
+        )
+    ){
+
+        showError(
+            "Please enter a valid 6 digit PIN code."
+        );
+
+        return;
+
+    }
+
+
+    if(!payment){
+
+        showError(
+            "Please select a payment method."
+        );
 
         return;
 
@@ -1361,22 +1142,44 @@ async function placeOrder(event){
         checkoutItems.length === 0
     ){
 
-        errorMessage.innerText =
-            "Your order is empty.";
-
-        errorMessage.style.display =
-            "block";
+        showError(
+            "Your order is empty."
+        );
 
         return;
 
     }
 
 
+    let subtotal = 0;
+
+
+    checkoutItems.forEach(
+        function(item){
+
+            subtotal +=
+                (Number(item.price) || 0) *
+                (Number(item.quantity) || 1);
+
+        }
+    );
+
+
+    const shipping =
+        subtotal >= 999
+            ? 0
+            : 99;
+
+
+    const total =
+        subtotal + shipping;
+
+
     const orderNumber =
         "CR" +
         Date.now()
-        .toString()
-        .slice(-6);
+            .toString()
+            .slice(-6);
 
 
     const orderData = {
@@ -1416,13 +1219,17 @@ async function placeOrder(event){
                             item.name,
 
                         price:
-                            Number(item.price),
+                            Number(
+                                item.price
+                            ),
 
                         image:
                             item.image || "",
 
                         quantity:
-                            Number(item.quantity) || 1
+                            Number(
+                                item.quantity
+                            ) || 1
 
                     };
 
@@ -1430,13 +1237,13 @@ async function placeOrder(event){
             ),
 
         subtotal:
-            currentSubtotal,
+            subtotal,
 
         shipping:
-            currentShipping,
+            shipping,
 
         total:
-            currentTotal,
+            total,
 
         paymentMethod:
             payment.value,
@@ -1447,7 +1254,11 @@ async function placeOrder(event){
     };
 
 
-    /* DISABLE BUTTON */
+    const placeButton =
+        document.getElementById(
+            "placeOrderBtn"
+        );
+
 
     placeButton.disabled =
         true;
@@ -1460,10 +1271,12 @@ async function placeOrder(event){
 
         const response =
             await fetch(
-                "http://localhost:5000/api/orders",
+                API_URL +
+                "/api/orders",
                 {
 
-                    method:"POST",
+                    method:
+                        "POST",
 
                     headers:{
                         "Content-Type":
@@ -1495,14 +1308,17 @@ async function placeOrder(event){
         }
 
 
-        /*
-            ONLY CLEAR DATA
-            AFTER SERVER SUCCESS
-        */
+        /* =================================
+           CLEAR ONLY AFTER SERVER SUCCESS
+        ================================= */
 
-        if(
-            checkoutType === "buy"
-        ){
+        const directBuy =
+            sessionStorage.getItem(
+                "craftoraDirectBuy"
+            );
+
+
+        if(directBuy){
 
             sessionStorage.removeItem(
                 "craftoraDirectBuy"
@@ -1512,7 +1328,8 @@ async function placeOrder(event){
                 "craftoraBuyNow"
             );
 
-        }else{
+        }
+        else{
 
             localStorage.removeItem(
                 "craftoraCart"
@@ -1527,15 +1344,11 @@ async function placeOrder(event){
         );
 
 
-        /* HIDE FORM */
-
         document.getElementById(
-            "checkoutForm"
+            "checkoutContainer"
         ).style.display =
             "none";
 
-
-        /* SUCCESS */
 
         const success =
             document.getElementById(
@@ -1571,18 +1384,18 @@ async function placeOrder(event){
             <p>
                 Order Status:
                 <strong>
-                    ${data.order.status}
+                    ${data.order.status || "Pending"}
                 </strong>
             </p>
 
-            <a href="index.html">
-                Continue Shopping
+            <a href="orders.html">
+                Track My Order
             </a>
 
         `;
 
-
-    }catch(error){
+    }
+    catch(error){
 
         console.error(
             "Order Error:",
@@ -1590,12 +1403,10 @@ async function placeOrder(event){
         );
 
 
-        errorMessage.innerText =
+        showError(
             error.message ||
-            "Something went wrong while placing your order.";
-
-        errorMessage.style.display =
-            "block";
+            "Failed to place order. Please try again."
+        );
 
 
         placeButton.disabled =
@@ -1609,23 +1420,19 @@ async function placeOrder(event){
 }
 
 
-/* =========================
+/* =========================================
    START
-========================= */
+========================================= */
 
 if(
     checkLogin()
 ){
 
-    fillUserData();
-
-    showOrder();
+    renderOrder();
 
 }
 
 </script>
 
-
 </body>
-
 </html>
