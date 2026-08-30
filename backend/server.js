@@ -1,7 +1,8 @@
-const express = require("express");
+dconst express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const crypto = require("crypto");
+const path = require("path");
 
 require("dotenv").config();
 
@@ -29,25 +30,33 @@ app.use(cors());
 
 app.use(express.json());
 
+// Serve Craftora frontend files from the project root.
+// Render runs this server from the /backend directory.
+app.use(express.static(path.join(__dirname, "..")));
+
 
 /* =========================
    HOME
 ========================= */
 
 app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "index.html"));
+});
 
+
+/* =========================
+   HEALTH CHECK
+========================= */
+
+app.get("/api/health", (req, res) => {
     res.json({
-
-        message:
-            "Craftora Backend is Running 🚀",
-
+        success: true,
+        message: "Craftora Backend is Running 🚀",
         database:
             mongoose.connection.readyState === 1
                 ? "MongoDB Connected ✅"
                 : "MongoDB Not Connected ❌"
-
     });
-
 });
 
 
@@ -599,7 +608,8 @@ app.post(
 
                 return res.status(400).json({
 
-                    success: false,
+                    success:
+                        false,
 
                     message:
                         "Username and password are required."
@@ -610,10 +620,13 @@ app.post(
 
 
             const adminUsername =
-                process.env.ADMIN_USERNAME;
+                process.env.ADMIN_USERNAME ||
+                "admin";
+
 
             const adminPassword =
-                process.env.ADMIN_PASSWORD;
+                process.env.ADMIN_PASSWORD ||
+                "";
 
 
             if (
@@ -623,10 +636,11 @@ app.post(
 
                 return res.status(401).json({
 
-                    success: false,
+                    success:
+                        false,
 
                     message:
-                        "Invalid admin username or password."
+                        "Invalid admin credentials."
 
                 });
 
@@ -634,22 +648,19 @@ app.post(
 
 
             const token =
-                crypto
-                .randomBytes(32)
-                .toString("hex");
+                crypto.randomBytes(32).toString("hex");
 
 
-            adminSessions.add(
-                token
-            );
+            adminSessions.add(token);
 
 
             res.status(200).json({
 
-                success: true,
+                success:
+                    true,
 
                 message:
-                    "Admin login successful!",
+                    "Admin login successful.",
 
                 token:
                     token
@@ -668,10 +679,11 @@ app.post(
 
             res.status(500).json({
 
-                success: false,
+                success:
+                    false,
 
                 message:
-                    "Something went wrong during admin login."
+                    "Unable to login as admin."
 
             });
 
@@ -697,14 +709,13 @@ function adminAuth(
 
     if (
         !authHeader ||
-        !authHeader.startsWith(
-            "Bearer "
-        )
+        !authHeader.startsWith("Bearer ")
     ) {
 
         return res.status(401).json({
 
-            success: false,
+            success:
+                false,
 
             message:
                 "Admin authentication required."
@@ -719,17 +730,16 @@ function adminAuth(
 
 
     if (
-        !adminSessions.has(
-            token
-        )
+        !adminSessions.has(token)
     ) {
 
         return res.status(401).json({
 
-            success: false,
+            success:
+                false,
 
             message:
-                "Admin session expired or invalid."
+                "Invalid or expired admin session."
 
         });
 
@@ -752,15 +762,13 @@ app.post(
 
         const token =
             req.headers.authorization
-            .substring(7);
+                .substring(7);
 
 
-        adminSessions.delete(
-            token
-        );
+        adminSessions.delete(token);
 
 
-        res.json({
+        res.status(200).json({
 
             success:
                 true,
@@ -775,7 +783,7 @@ app.post(
 
 
 /* =========================
-   ADMIN — GET ALL ORDERS
+   ADMIN — GET ORDERS
 ========================= */
 
 app.get(
@@ -786,17 +794,11 @@ app.get(
         try {
 
             const orders =
-                await Order.find()
-                .populate(
-                    "userId",
-                    "name mobile"
-                )
-                .sort({
-
-                    createdAt:
-                        -1
-
-                });
+                await Order.find({})
+                    .sort({
+                        createdAt:
+                            -1
+                    });
 
 
             res.status(200).json({
@@ -828,7 +830,7 @@ app.get(
                     false,
 
                 message:
-                    "Something went wrong while loading admin orders."
+                    "Unable to load admin orders."
 
             });
 
@@ -843,14 +845,14 @@ app.get(
 ========================= */
 
 app.patch(
-    "/api/admin/orders/:orderId/status",
+    "/api/admin/orders/:id/status",
     adminAuth,
     async (req, res) => {
 
         try {
 
             const {
-                orderId
+                id
             } = req.params;
 
 
@@ -863,7 +865,9 @@ app.patch(
 
                 "Pending",
                 "Confirmed",
+                "Processing",
                 "Shipped",
+                "Out for Delivery",
                 "Delivered",
                 "Cancelled"
 
@@ -891,7 +895,7 @@ app.patch(
 
             if (
                 !mongoose.Types.ObjectId.isValid(
-                    orderId
+                    id
                 )
             ) {
 
@@ -911,7 +915,7 @@ app.patch(
             const order =
                 await Order.findByIdAndUpdate(
 
-                    orderId,
+                    id,
 
                     {
                         status:
@@ -920,6 +924,9 @@ app.patch(
 
                     {
                         new:
+                            true,
+
+                        runValidators:
                             true
                     }
 
@@ -947,20 +954,10 @@ app.patch(
                     true,
 
                 message:
-                    "Order status updated successfully!",
+                    "Order status updated successfully.",
 
-                order: {
-
-                    id:
-                        order._id,
-
-                    orderNumber:
-                        order.orderNumber,
-
-                    status:
-                        order.status
-
-                }
+                order:
+                    order
 
             });
 
@@ -969,7 +966,7 @@ app.patch(
         catch (error) {
 
             console.error(
-                "Status Update Error:",
+                "Update Order Status Error:",
                 error.message
             );
 
@@ -980,77 +977,7 @@ app.patch(
                     false,
 
                 message:
-                    "Something went wrong while updating order status."
-
-            });
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   PRODUCT MANAGEMENT
-========================================================= */
-
-
-/* =========================
-   GET ALL ACTIVE PRODUCTS
-   CUSTOMER SIDE
-========================= */
-
-app.get(
-    "/api/products",
-    async (req, res) => {
-
-        try {
-
-            const products =
-                await Product.find({
-
-                    isActive:
-                        true
-
-                })
-                .sort({
-
-                    createdAt:
-                        -1
-
-                });
-
-
-            res.status(200).json({
-
-                success:
-                    true,
-
-                count:
-                    products.length,
-
-                products:
-                    products
-
-            });
-
-        }
-
-        catch (error) {
-
-            console.error(
-                "Products Error:",
-                error.message
-            );
-
-
-            res.status(500).json({
-
-                success:
-                    false,
-
-                message:
-                    "Unable to load products."
+                    "Unable to update order status."
 
             });
 
@@ -1061,85 +988,7 @@ app.get(
 
 
 /* =========================
-   GET SINGLE PRODUCT
-========================= */
-
-app.get(
-    "/api/products/:productId",
-    async (req, res) => {
-
-        try {
-
-            const {
-                productId
-            } = req.params;
-
-
-            const product =
-                await Product.findOne({
-
-                    productId:
-                        productId,
-
-                    isActive:
-                        true
-
-                });
-
-
-            if (!product) {
-
-                return res.status(404).json({
-
-                    success:
-                        false,
-
-                    message:
-                        "Product not found."
-
-                });
-
-            }
-
-
-            res.status(200).json({
-
-                success:
-                    true,
-
-                product:
-                    product
-
-            });
-
-        }
-
-        catch (error) {
-
-            console.error(
-                "Single Product Error:",
-                error.message
-            );
-
-
-            res.status(500).json({
-
-                success:
-                    false,
-
-                message:
-                    "Unable to load product."
-
-            });
-
-        }
-
-    }
-);
-
-
-/* =========================
-   ADMIN — GET ALL PRODUCTS
+   ADMIN — GET PRODUCTS
 ========================= */
 
 app.get(
@@ -1150,13 +999,11 @@ app.get(
         try {
 
             const products =
-                await Product.find()
-                .sort({
-
-                    createdAt:
-                        -1
-
-                });
+                await Product.find({})
+                    .sort({
+                        createdAt:
+                            -1
+                    });
 
 
             res.status(200).json({
@@ -1769,8 +1616,8 @@ mongoose.connect(
 
 
     app.listen(
-    PORT,
-    "0.0.0.0",
+        PORT,
+        "0.0.0.0",
         () => {
 
             console.log(
