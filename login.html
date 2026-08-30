@@ -644,13 +644,13 @@ async function sendOTP(){
     }
 
 
-    /* CHECK USER FROM BACKEND */
+    /* CHECK USER FROM LIVE BACKEND */
 
     try{
 
         const response =
             await fetch(
-                "http://localhost:5000/api/login",
+                "https://craftora-nef4.onrender.com/api/login",
                 {
                     method:"POST",
 
@@ -764,7 +764,7 @@ async function sendOTP(){
 
 
         message.innerText =
-            "Backend server is not running. Please start the server.";
+            "Unable to connect to Craftora server. Please try again.";
 
         message.style.display =
             "block";
