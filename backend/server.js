@@ -420,8 +420,8 @@ app.post("/api/orders", async (req, res) => {
                 total:
                     Number(total),
 
-                paymentMethod:
-                    paymentMethod || "cod",
+                    paymentMethod:
+    String(paymentMethod || "cod").toLowerCase(),
 
                 orderNumber:
                     orderNumber
