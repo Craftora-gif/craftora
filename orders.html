@@ -162,7 +162,6 @@ nav{
     margin-top:6px;
 }
 
-
 /* STATUS */
 
 .status{
@@ -182,9 +181,19 @@ nav{
     color:#1d4ed8;
 }
 
+.status.processing{
+    background:#ede9fe;
+    color:#6d28d9;
+}
+
 .status.shipped{
     background:#e0e7ff;
     color:#4338ca;
+}
+
+.status.out-for-delivery{
+    background:#ffedd5;
+    color:#c2410c;
 }
 
 .status.delivered{
@@ -196,7 +205,6 @@ nav{
     background:#fee2e2;
     color:#991b1b;
 }
-
 
 /* TRACKING */
 
@@ -214,9 +222,7 @@ nav{
 
 .tracking-line{
     display:grid;
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:8px;
 }
 
@@ -264,7 +270,6 @@ nav{
     color:#29251f;
     font-weight:bold;
 }
-
 
 /* ITEMS */
 
@@ -327,7 +332,6 @@ nav{
     color:#9b5b32;
 }
 
-
 /* FOOTER */
 
 .order-footer{
@@ -352,7 +356,6 @@ nav{
 .total span{
     color:#9b5b32;
 }
-
 
 /* EMPTY */
 
@@ -401,7 +404,6 @@ nav{
     background:#704020;
 }
 
-
 /* LOADING */
 
 .loading{
@@ -409,7 +411,6 @@ nav{
     padding:60px;
     color:#777;
 }
-
 
 /* ERROR */
 
@@ -454,6 +455,9 @@ nav{
     cursor:pointer;
 }
 
+.retry-btn:hover{
+    background:#704020;
+}
 
 /* INLINE MESSAGE */
 
@@ -469,7 +473,6 @@ nav{
     font-size:13px;
 }
 
-
 /* FOOTER */
 
 footer{
@@ -483,7 +486,6 @@ footer p{
     color:#bbb;
     margin-top:10px;
 }
-
 
 /* MOBILE */
 
@@ -664,6 +666,13 @@ footer p{
 
 <script>
 
+/* =========================
+   API
+========================= */
+
+const API_URL =
+    "https://craftora-nef4.onrender.com";
+
 
 /* =========================
    GET USER
@@ -774,7 +783,7 @@ function loadUser(){
     userArea.innerHTML = `
 
         <span class="user-name">
-            Hi, ${user.name || "User"}
+            Hi, ${escapeHTML(user.name || "User")}
         </span>
 
         <button
@@ -807,9 +816,24 @@ function logoutUser(){
         "craftoraLoginUser"
     );
 
-
     window.location.href =
         "index.html";
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(value){
+
+    return String(value || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
@@ -822,6 +846,17 @@ function formatDate(dateValue){
 
     const date =
         new Date(dateValue);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "Date unavailable";
+
+    }
 
 
     return date.toLocaleDateString(
@@ -863,7 +898,11 @@ function getStatusNumber(status){
 
         Confirmed:2,
 
+        Processing:2,
+
         Shipped:3,
+
+        "Out for Delivery":3,
 
         Delivered:4
 
@@ -913,6 +952,7 @@ function trackingHTML(status){
 
 
     let html =
+
         `<div class="tracking">
 
             <div class="tracking-title">
@@ -979,10 +1019,6 @@ function trackingHTML(status){
     `;
 
 
-    /*
-        CANCELLED
-    */
-
     if(
         status === "Cancelled"
     ){
@@ -1023,7 +1059,9 @@ function trackingHTML(status){
 
 function getOrderCacheKey(){
 
-    const user = getUser();
+    const user =
+        getUser();
+
 
     return user && user.id
         ? "craftoraOrdersCache_" + user.id
@@ -1031,24 +1069,32 @@ function getOrderCacheKey(){
 
 }
 
+
 function getCachedOrders(){
 
     try{
 
-        const key = getOrderCacheKey();
+        const key =
+            getOrderCacheKey();
+
 
         if(!key){
             return null;
         }
 
+
         const cached =
-            localStorage.getItem(key);
+            localStorage.getItem(
+                key
+            );
+
 
         return cached
             ? JSON.parse(cached)
             : null;
 
     }
+
     catch(error){
 
         return null;
@@ -1057,25 +1103,35 @@ function getCachedOrders(){
 
 }
 
-function saveCachedOrders(orders){
+
+function saveCachedOrders(
+    orders
+){
 
     try{
 
-        const key = getOrderCacheKey();
+        const key =
+            getOrderCacheKey();
+
 
         if(
             key &&
-            Array.isArray(orders)
+            Array.isArray(
+                orders
+            )
         ){
 
             localStorage.setItem(
                 key,
-                JSON.stringify(orders)
+                JSON.stringify(
+                    orders
+                )
             );
 
         }
 
     }
+
     catch(error){
 
         console.error(
@@ -1086,6 +1142,238 @@ function saveCachedOrders(orders){
     }
 
 }
+
+
+/* =========================
+   RENDER ORDERS
+========================= */
+
+function renderOrders(
+    orders,
+    container
+){
+
+    if(
+        !Array.isArray(
+            orders
+        ) ||
+        orders.length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📦
+                </div>
+
+                <h2>
+                    No Orders Yet
+                </h2>
+
+                <p>
+                    You haven't placed any orders yet.
+                </p>
+
+                <a
+                    href="shop.html"
+                    class="shop-btn"
+                >
+                    Start Shopping
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        "";
+
+
+    orders.forEach(
+        function(order){
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "order-card";
+
+
+            let itemsHTML =
+                "";
+
+
+            const items =
+                Array.isArray(
+                    order.items
+                )
+                    ? order.items
+                    : [];
+
+
+            items.forEach(
+                function(item){
+
+                    const quantity =
+                        Number(
+                            item.quantity
+                        ) || 1;
+
+
+                    const price =
+                        Number(
+                            item.price
+                        ) || 0;
+
+
+                    const itemTotal =
+                        price *
+                        quantity;
+
+
+                    itemsHTML += `
+
+                        <div class="order-item">
+
+                            <div class="item-image">
+                                ${escapeHTML(
+                                    item.image ||
+                                    "🛍️"
+                                )}
+                            </div>
+
+                            <div class="item-info">
+
+                                <h3>
+                                    ${escapeHTML(
+                                        item.name ||
+                                        "Craftora Product"
+                                    )}
+                                </h3>
+
+                                <p>
+                                    Quantity:
+                                    ${quantity}
+                                </p>
+
+                            </div>
+
+                            <div class="item-price">
+                                ₹${itemTotal.toLocaleString(
+                                    "en-IN"
+                                )}
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+
+            const status =
+                order.status ||
+                "Pending";
+
+
+            card.innerHTML = `
+
+                <div class="order-header">
+
+                    <div>
+
+                        <div class="order-id">
+                            Order #${escapeHTML(
+                                order.orderNumber ||
+                                "N/A"
+                            )}
+                        </div>
+
+                        <div class="order-date">
+                            ${formatDate(
+                                order.createdAt
+                            )}
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="status ${statusClass(
+                            status
+                        )}"
+                    >
+                        ${escapeHTML(status)}
+                    </div>
+
+                </div>
+
+
+                ${trackingHTML(status)}
+
+
+                <div class="order-items">
+
+                    ${itemsHTML}
+
+                </div>
+
+
+                <div class="order-footer">
+
+                    <div class="payment">
+
+                        Payment:
+
+                        <strong>
+                            ${String(
+                                order.paymentMethod ||
+                                "COD"
+                            ).toUpperCase()}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="total">
+
+                        Total:
+
+                        <span>
+                            ₹${Number(
+                                order.total || 0
+                            ).toLocaleString(
+                                "en-IN"
+                            )}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
 
 /* =========================
    LOAD ORDERS
@@ -1105,15 +1393,28 @@ async function loadOrders(
         );
 
 
-    if(!user || !user.id){
+    if(
+        !user ||
+        !user.id
+    ){
+
         return;
+
     }
+
+
+    /*
+        CACHE FIRST
+    */
 
     const cachedOrders =
         getCachedOrders();
 
+
     if(
-        cachedOrders &&
+        Array.isArray(
+            cachedOrders
+        ) &&
         cachedOrders.length > 0
     ){
 
@@ -1124,12 +1425,28 @@ async function loadOrders(
 
     }
 
+    else{
+
+        container.innerHTML = `
+
+            <div class="loading">
+                Checking your orders...
+            </div>
+
+        `;
+
+    }
+
+
     try{
 
         const response =
             await fetch(
-                "https://craftora-nef4.onrender.com/api/orders/" +
-                user.id,
+                API_URL +
+                "/api/orders/" +
+                encodeURIComponent(
+                    user.id
+                ),
                 {
                     method:"GET",
                     cache:"no-store"
@@ -1153,14 +1470,24 @@ async function loadOrders(
         }
 
 
+        const orders =
+            Array.isArray(
+                data.orders
+            )
+                ? data.orders
+                : [];
+
+
         saveCachedOrders(
-            data.orders || []
+            orders
         );
 
+
         renderOrders(
-            data.orders || [],
+            orders,
             container
         );
+
 
         if(
             showUpdateMessage
@@ -1171,6 +1498,9 @@ async function loadOrders(
                     "refreshMessage"
                 );
 
+
+            message.innerText =
+                "✓ Order status updated";
 
             message.style.display =
                 "block";
@@ -1188,227 +1518,7 @@ async function loadOrders(
 
         }
 
-
-        if(
-            !data.orders ||
-            data.orders.length === 0
-        ){
-
-            container.innerHTML = `
-
-                <div class="empty">
-
-                    <div class="empty-icon">
-                        📦
-                    </div>
-
-                    <h2>
-                        No Orders Yet
-                    </h2>
-
-                    <p>
-                        You haven't placed any orders yet.
-                    </p>
-
-                    <a
-                        href="shop.html"
-                        class="shop-btn"
-                    >
-                        Start Shopping
-                    </a>
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-function renderOrders(
-    orders,
-    container
-){
-
-    if(
-        !orders ||
-        orders.length === 0
-    ){
-
-        container.innerHTML = `
-            <div class="empty">
-                <div class="empty-icon">📦</div>
-                <h2>No Orders Yet</h2>
-                <p>You haven't placed any orders yet.</p>
-                <a href="shop.html" class="shop-btn">
-                    Start Shopping
-                </a>
-            </div>
-        `;
-
-        return;
-
     }
-
-        container.innerHTML =
-            "";
-
-
-        orders.forEach(
-            function(order){
-
-                const card =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                card.className =
-                    "order-card";
-
-
-                let itemsHTML =
-                    "";
-
-
-                order.items.forEach(
-                    function(item){
-
-                        const quantity =
-                            Number(
-                                item.quantity
-                            ) || 1;
-
-
-                        const price =
-                            Number(
-                                item.price
-                            ) || 0;
-
-
-                        const itemTotal =
-                            price *
-                            quantity;
-
-
-                        itemsHTML += `
-
-                            <div class="order-item">
-
-                                <div class="item-image">
-                                    ${item.image || "🛍️"}
-                                </div>
-
-                                <div class="item-info">
-
-                                    <h3>
-                                        ${item.name}
-                                    </h3>
-
-                                    <p>
-                                        Quantity:
-                                        ${quantity}
-                                    </p>
-
-                                </div>
-
-                                <div class="item-price">
-                                    ₹${itemTotal.toLocaleString("en-IN")}
-                                </div>
-
-                            </div>
-
-                        `;
-
-                    }
-                );
-
-
-                const status =
-                    order.status ||
-                    "Pending";
-
-
-                card.innerHTML = `
-
-                    <div class="order-header">
-
-                        <div>
-
-                            <div class="order-id">
-                                Order #${order.orderNumber}
-                            </div>
-
-                            <div class="order-date">
-                                ${formatDate(order.createdAt)}
-                            </div>
-
-                        </div>
-
-
-                        <div
-                            class="status ${statusClass(status)}"
-                        >
-                            ${status}
-                        </div>
-
-                    </div>
-
-
-                    ${trackingHTML(status)}
-
-
-                    <div class="order-items">
-
-                        ${itemsHTML}
-
-                    </div>
-
-
-                    <div class="order-footer">
-
-                        <div class="payment">
-
-                            Payment:
-                            <strong>
-                                ${String(
-                                    order.paymentMethod ||
-                                    "COD"
-                                ).toUpperCase()}
-                            </strong>
-
-                        </div>
-
-
-                        <div class="total">
-
-                            Total:
-                            <span>
-                                ₹${Number(
-                                    order.total || 0
-                                ).toLocaleString("en-IN")}
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                `;
-
-
-                container.appendChild(
-                    card
-                );
-
-            }
-        );
-
-
-    }
-
-}
-
 
     catch(error){
 
@@ -1417,12 +1527,18 @@ function renderOrders(
             error
         );
 
+
         if(
-            cachedOrders &&
+            Array.isArray(
+                cachedOrders
+            ) &&
             cachedOrders.length > 0
         ){
+
             return;
+
         }
+
 
         container.innerHTML = `
 
@@ -1437,7 +1553,10 @@ function renderOrders(
                 </h2>
 
                 <p>
-                    ${error.message}
+                    ${escapeHTML(
+                        error.message ||
+                        "Unable to connect to Craftora server."
+                    )}
                 </p>
 
                 <button
@@ -1457,10 +1576,11 @@ function renderOrders(
 
 
 /* =========================
-   AUTO REFRESH
+   AUTO STATUS REFRESH
 ========================= */
 
-let previousStatus = "";
+let previousStatus =
+    "";
 
 
 async function checkForStatusUpdate(){
@@ -1483,8 +1603,15 @@ async function checkForStatusUpdate(){
 
         const response =
             await fetch(
-                "https://craftora-nef4.onrender.com/api/orders/" +
-                user.id
+                API_URL +
+                "/api/orders/" +
+                encodeURIComponent(
+                    user.id
+                ),
+                {
+                    method:"GET",
+                    cache:"no-store"
+                }
             );
 
 
@@ -1501,9 +1628,16 @@ async function checkForStatusUpdate(){
             await response.json();
 
 
+        const orders =
+            Array.isArray(
+                data.orders
+            )
+                ? data.orders
+                : [];
+
+
         if(
-            !data.orders ||
-            data.orders.length === 0
+            orders.length === 0
         ){
 
             return;
@@ -1512,7 +1646,7 @@ async function checkForStatusUpdate(){
 
 
         const latestStatus =
-            data.orders
+            orders
                 .map(
                     function(order){
 
@@ -1532,7 +1666,13 @@ async function checkForStatusUpdate(){
             previousStatus !== latestStatus
         ){
 
-            loadOrders(true);
+            saveCachedOrders(
+                orders
+            );
+
+            loadOrders(
+                true
+            );
 
         }
 
@@ -1565,11 +1705,6 @@ if(
     loadUser();
 
     loadOrders();
-
-    /*
-        Check every 10 seconds
-        for admin status changes.
-    */
 
     setInterval(
         checkForStatusUpdate,
