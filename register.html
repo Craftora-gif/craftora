@@ -1,0 +1,958 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Create Account — Craftora</title>
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#faf7f2;
+    color:#29251f;
+}
+
+.topbar{
+    background:#29251f;
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-size:13px;
+}
+
+nav{
+    height:80px;
+    padding:0 6%;
+    background:white;
+    border-bottom:1px solid #eee;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+    color:#9b5b32;
+}
+
+.logo span{
+    color:#29251f;
+}
+
+.menu{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:14px;
+}
+
+.menu a:hover{
+    color:#9b5b32;
+}
+
+.nav-actions{
+    display:flex;
+    gap:15px;
+}
+
+.nav-actions a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:20px;
+}
+
+.register-section{
+    min-height:calc(100vh - 170px);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:60px 20px;
+}
+
+.register-box{
+    width:100%;
+    max-width:450px;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:10px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.08);
+}
+
+.register-box h1{
+    text-align:center;
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#777;
+    margin-bottom:30px;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+
+    font-weight:bold;
+    font-size:14px;
+}
+
+.form-group input{
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #ddd;
+    border-radius:5px;
+
+    font-size:15px;
+
+    outline:none;
+}
+
+.form-group input:focus{
+    border-color:#9b5b32;
+}
+
+.mobile-box{
+    display:flex;
+    gap:8px;
+}
+
+.country-code{
+    width:70px;
+
+    padding:14px 8px;
+
+    border:1px solid #ddd;
+    border-radius:5px;
+
+    background:#fafafa;
+
+    font-size:15px;
+
+    text-align:center;
+}
+
+.mobile-box input{
+    flex:1;
+}
+
+.otp-section{
+    display:none;
+}
+
+.otp-input{
+    text-align:center;
+
+    letter-spacing:8px;
+
+    font-size:20px !important;
+}
+
+.register-btn{
+    width:100%;
+
+    padding:15px;
+
+    border:0;
+    border-radius:5px;
+
+    background:#9b5b32;
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+}
+
+.register-btn:hover{
+    background:#704020;
+}
+
+.register-btn:disabled{
+    opacity:.7;
+    cursor:not-allowed;
+}
+
+.change-number{
+    text-align:center;
+
+    margin-top:15px;
+
+    color:#9b5b32;
+
+    font-size:14px;
+
+    cursor:pointer;
+}
+
+.message{
+    text-align:center;
+
+    margin-top:15px;
+
+    font-size:14px;
+
+    display:none;
+
+    line-height:1.6;
+}
+
+.login-link{
+    text-align:center;
+
+    margin-top:25px;
+
+    color:#777;
+
+    font-size:14px;
+}
+
+.login-link a{
+    color:#9b5b32;
+
+    text-decoration:none;
+
+    font-weight:bold;
+}
+
+footer{
+    background:#29251f;
+    color:white;
+
+    text-align:center;
+
+    padding:30px 20px;
+}
+
+footer p{
+    color:#bbb;
+
+    margin-top:8px;
+}
+
+@media(max-width:800px){
+
+    .menu{
+        display:none;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .register-box{
+        padding:25px;
+    }
+
+    .register-box h1{
+        font-size:28px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="topbar">
+
+    Free shipping on orders above ₹999
+
+</div>
+
+
+<nav>
+
+    <div class="logo">
+
+        CRAFT<span>ORA</span>
+
+    </div>
+
+
+    <ul class="menu">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Shop
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Categories
+            </a>
+        </li>
+
+        <li>
+            <a href="about.html">
+                About
+            </a>
+        </li>
+
+        <li>
+            <a href="contact.html">
+                Contact
+            </a>
+        </li>
+
+    </ul>
+
+
+    <div class="nav-actions">
+
+        <a href="wishlist.html">
+            ❤️
+        </a>
+
+        <a href="login.html">
+            👤
+        </a>
+
+        <a href="cart.html">
+            🛒
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<section class="register-section">
+
+
+    <div class="register-box">
+
+
+        <h1>
+            Create Account
+        </h1>
+
+
+        <p class="subtitle">
+            Join the Craftora family
+        </p>
+
+
+        <form
+            id="registerForm"
+            onsubmit="handleRegister(event)"
+        >
+
+
+            <div class="form-group">
+
+                <label>
+                    Full Name
+                </label>
+
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Mobile Number
+                </label>
+
+
+                <div class="mobile-box">
+
+
+                    <div class="country-code">
+
+                        +91
+
+                    </div>
+
+
+                    <input
+                        type="tel"
+                        id="mobile"
+                        placeholder="Enter 10-digit mobile number"
+                        maxlength="10"
+                        inputmode="numeric"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                class="otp-section"
+                id="otpSection"
+            >
+
+
+                <div class="form-group">
+
+
+                    <label>
+                        Enter OTP
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="otp"
+                        class="otp-input"
+                        placeholder="Enter OTP"
+                        maxlength="6"
+                        inputmode="numeric"
+                    >
+
+
+                </div>
+
+
+                <div
+                    class="change-number"
+                    onclick="changeNumber()"
+                >
+
+                    ← Change Mobile Number
+
+                </div>
+
+
+            </div>
+
+
+
+            <button
+                type="submit"
+                class="register-btn"
+                id="registerButton"
+            >
+
+                Send OTP
+
+            </button>
+
+
+        </form>
+
+
+
+        <div
+            class="message"
+            id="message"
+        >
+        </div>
+
+
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<footer>
+
+    <h3>
+        CRAFTORA
+    </h3>
+
+
+    <p>
+        Celebrating Indian craftsmanship,
+        one beautiful creation at a time.
+    </p>
+
+</footer>
+
+
+
+<script>
+
+
+let generatedOTP = "";
+
+let otpSent = false;
+
+
+
+/* =========================
+   REGISTER
+========================= */
+
+async function handleRegister(event){
+
+    event.preventDefault();
+
+
+    const name =
+        document
+        .getElementById("name")
+        .value
+        .trim();
+
+
+    const mobile =
+        document
+        .getElementById("mobile")
+        .value
+        .trim();
+
+
+
+    /* =========================
+       CHECK NAME
+    ========================= */
+
+    if(name.length < 2){
+
+        showMessage(
+            "Please enter your full name.",
+            "red"
+        );
+
+        return;
+
+    }
+
+
+
+    /* =========================
+       CHECK MOBILE
+    ========================= */
+
+    if(
+        !/^[0-9]{10}$/.test(mobile)
+    ){
+
+        showMessage(
+            "Please enter a valid 10-digit mobile number.",
+            "red"
+        );
+
+        return;
+
+    }
+
+
+
+    /* =========================
+       SEND OTP
+    ========================= */
+
+    if(!otpSent){
+
+
+        generatedOTP =
+            Math.floor(
+                100000 +
+                Math.random() * 900000
+            ).toString();
+
+
+        otpSent = true;
+
+
+        document
+        .getElementById("otpSection")
+        .style.display = "block";
+
+
+        document
+        .getElementById("registerButton")
+        .innerText = "Verify OTP";
+
+
+        document
+        .getElementById("mobile")
+        .readOnly = true;
+
+
+        showMessage(
+            "Demo OTP: " + generatedOTP,
+            "#9b5b32"
+        );
+
+
+        document
+        .getElementById("otp")
+        .focus();
+
+
+        return;
+
+    }
+
+
+
+    /* =========================
+       VERIFY OTP
+    ========================= */
+
+    const enteredOTP =
+        document
+        .getElementById("otp")
+        .value
+        .trim();
+
+
+
+    if(
+        !/^[0-9]{6}$/.test(enteredOTP)
+    ){
+
+        showMessage(
+            "Please enter the 6-digit OTP.",
+            "red"
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+        enteredOTP !== generatedOTP
+    ){
+
+        showMessage(
+            "Incorrect OTP. Please try again.",
+            "red"
+        );
+
+        return;
+
+    }
+
+
+
+    /* =========================
+       SAVE USER TO MONGODB
+    ========================= */
+
+    const button =
+        document
+        .getElementById("registerButton");
+
+
+    button.disabled = true;
+
+    button.innerText =
+        "Creating Account...";
+
+
+
+    try{
+
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/register",
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body: JSON.stringify({
+
+                        name: name,
+
+                        mobile: mobile
+
+                    })
+
+                }
+            );
+
+
+
+        const data =
+            await response.json();
+
+
+
+        /* =========================
+           BACKEND ERROR
+        ========================= */
+
+        if(!response.ok){
+
+            showMessage(
+                data.message ||
+                "Registration failed.",
+                "red"
+            );
+
+
+            button.disabled = false;
+
+
+            button.innerText =
+                "Verify OTP";
+
+
+            return;
+
+        }
+
+
+
+        /* =========================
+           SAVE USER LOCALLY
+        ========================= */
+
+        const user = {
+
+            id:
+                data.user.id,
+
+            name:
+                data.user.name,
+
+            mobile:
+                data.user.mobile
+
+        };
+
+
+        localStorage.setItem(
+            "craftoraUser",
+            JSON.stringify(user)
+        );
+
+
+        localStorage.setItem(
+            "craftoraLoggedIn",
+            "true"
+        );
+
+
+
+        /* =========================
+           SUCCESS
+        ========================= */
+
+        showMessage(
+            "Account created successfully! 🎉",
+            "green"
+        );
+
+
+        button.innerText =
+            "Account Created ✓";
+
+
+
+        setTimeout(function(){
+
+            window.location.href =
+                "login.html";
+
+        },1200);
+
+
+    }
+
+
+    catch(error){
+
+
+        console.error(
+            "Backend Error:",
+            error
+        );
+
+
+        showMessage(
+            "Backend server is not running.",
+            "red"
+        );
+
+
+        button.disabled = false;
+
+
+        button.innerText =
+            "Verify OTP";
+
+    }
+
+}
+
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(
+    text,
+    color
+){
+
+    const message =
+        document
+        .getElementById("message");
+
+
+    message.innerText =
+        text;
+
+
+    message.style.display =
+        "block";
+
+
+    message.style.color =
+        color;
+
+}
+
+
+
+/* =========================
+   CHANGE MOBILE NUMBER
+========================= */
+
+function changeNumber(){
+
+
+    generatedOTP = "";
+
+    otpSent = false;
+
+
+
+    document
+    .getElementById("mobile")
+    .readOnly = false;
+
+
+
+    document
+    .getElementById("mobile")
+    .value = "";
+
+
+
+    document
+    .getElementById("otp")
+    .value = "";
+
+
+
+    document
+    .getElementById("otpSection")
+    .style.display = "none";
+
+
+
+    document
+    .getElementById("registerButton")
+    .disabled = false;
+
+
+
+    document
+    .getElementById("registerButton")
+    .innerText =
+        "Send OTP";
+
+
+
+    document
+    .getElementById("message")
+    .style.display = "none";
+
+
+
+    document
+    .getElementById("mobile")
+    .focus();
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+```

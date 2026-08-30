@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Product — Craftora</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#faf7f2;
+    color:#29251f;
+}
+
+/* TOP BAR */
+
+.topbar{
+    background:#29251f;
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-size:13px;
+}
+
+/* NAVBAR */
+
+nav{
+    height:80px;
+    padding:0 6%;
+    background:white;
+    border-bottom:1px solid #eee;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+    color:#9b5b32;
+}
+
+.logo span{
+    color:#29251f;
+}
+
+.menu{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:14px;
+}
+
+.menu a:hover{
+    color:#9b5b32;
+}
+
+.nav-actions{
+    display:flex;
+    gap:15px;
+}
+
+.nav-actions a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:20px;
+}
+
+
+/* PRODUCT SECTION */
+
+.product-section{
+    max-width:850px;
+    margin:auto;
+
+    padding:60px 25px 80px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+
+/* PRODUCT IMAGE */
+
+.product-image{
+    width:100%;
+    max-width:700px;
+    height:500px;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e9d8c7,
+            #c69b73
+        );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:170px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.08);
+}
+
+
+/* PRODUCT DETAILS */
+
+.product-info{
+    width:100%;
+    max-width:700px;
+
+    padding:40px 10px 0;
+
+    text-align:left;
+}
+
+.category{
+    color:#9b5b32;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+}
+
+.product-info h1{
+    font-size:42px;
+
+    margin:12px 0;
+}
+
+.price{
+    color:#9b5b32;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    margin-bottom:20px;
+}
+
+.description{
+    color:#777;
+
+    line-height:1.7;
+
+    margin-bottom:30px;
+
+    font-size:16px;
+}
+
+
+/* QUANTITY */
+
+.quantity-box{
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:20px;
+}
+
+.quantity-box button{
+    width:40px;
+    height:40px;
+
+    border:1px solid #ddd;
+
+    background:white;
+
+    cursor:pointer;
+
+    font-size:20px;
+
+    border-radius:4px;
+}
+
+.quantity-box button:hover{
+    background:#f4e7d5;
+}
+
+.quantity-box span{
+    min-width:35px;
+
+    text-align:center;
+
+    font-size:18px;
+}
+
+
+/* BUTTONS */
+
+.btn{
+    width:100%;
+
+    padding:15px;
+
+    border:0;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    margin-top:10px;
+}
+
+.cart-btn{
+    background:#29251f;
+    color:white;
+}
+
+.buy-btn{
+    background:#9b5b32;
+    color:white;
+}
+
+.btn:hover{
+    opacity:.9;
+}
+
+
+/* MESSAGE */
+
+.message{
+    margin-top:15px;
+
+    text-align:center;
+
+    color:green;
+
+    display:none;
+}
+
+
+/* FOOTER */
+
+footer{
+    background:#29251f;
+
+    color:white;
+
+    text-align:center;
+
+    padding:45px 20px;
+}
+
+footer p{
+    color:#bbb;
+
+    margin-top:10px;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    nav{
+        padding:0 20px;
+    }
+
+    .menu{
+        display:none;
+    }
+
+    .product-section{
+        padding:35px 18px 60px;
+    }
+
+    .product-image{
+        height:350px;
+
+        font-size:110px;
+    }
+
+    .product-info{
+        padding-top:30px;
+    }
+
+    .product-info h1{
+        font-size:32px;
+    }
+
+    .price{
+        font-size:25px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+    Free shipping on orders above ₹999
+</div>
+
+<!-- NAVBAR -->
+
+<nav>
+
+```
+<div class="logo">
+    CRAFT<span>ORA</span>
+</div>
+
+
+<ul class="menu">
+
+    <li>
+        <a href="index.html">
+            Home
+        </a>
+    </li>
+
+    <li>
+        <a href="shop.html">
+            Shop
+        </a>
+    </li>
+
+    <li>
+        <a href="shop.html">
+            Categories
+        </a>
+    </li>
+
+    <li>
+        <a href="#">
+            About
+        </a>
+    </li>
+
+    <li>
+        <a href="#">
+            Contact
+        </a>
+    </li>
+
+</ul>
+
+
+<div class="nav-actions">
+
+    <a href="wishlist.html">
+        ❤️
+    </a>
+
+    <a href="login.html">
+        👤
+    </a>
+
+    <a href="cart.html">
+        🛒
+    </a>
+
+</div>
+```
+
+</nav>
+
+<!-- PRODUCT -->
+
+<section class="product-section">
+
+```
+<!-- PICTURE -->
+
+<div
+    class="product-image"
+    id="productImage"
+>
+    🏺
+</div>
+
+
+<!-- DETAILS -->
+
+<div class="product-info">
+
+
+    <div
+        class="category"
+        id="productCategory"
+    >
+        HANDMADE
+    </div>
+
+
+    <h1 id="productName">
+        Product
+    </h1>
+
+
+    <div
+        class="price"
+        id="productPrice"
+    >
+        ₹0
+    </div>
+
+
+    <p
+        class="description"
+        id="productDescription"
+    >
+        Beautiful handmade product crafted with care.
+    </p>
+
+
+    <!-- QUANTITY -->
+
+    <div class="quantity-box">
+
+        <button
+            onclick="changeQuantity(-1)"
+        >
+            −
+        </button>
+
+
+        <span id="quantity">
+            1
+        </span>
+
+
+        <button
+            onclick="changeQuantity(1)"
+        >
+            +
+        </button>
+
+    </div>
+
+
+    <!-- CART -->
+
+    <button
+        class="btn cart-btn"
+        onclick="addToCart()"
+    >
+        🛒 Add to Cart
+    </button>
+
+
+    <!-- BUY -->
+
+    <button
+        class="btn buy-btn"
+        onclick="buyNow()"
+    >
+        ⚡ Buy Now
+    </button>
+
+
+    <div
+        class="message"
+        id="message"
+    ></div>
+
+
+</div>
+```
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+```
+<h3>
+    CRAFTORA
+</h3>
+
+<p>
+    Celebrating Indian craftsmanship,
+    one beautiful creation at a time.
+</p>
+```
+
+</footer>
+
+<script>
+
+
+/*
+    QUANTITY
+*/
+
+let quantity = 1;
+
+
+/*
+    ALL 20 PRODUCTS
+*/
+
+const products = {
+
+    vase:{
+        name:"Handmade Vase",
+        price:1599,
+        image:"🏺",
+        category:"HOME DECOR",
+        description:
+        "Beautiful handmade vase crafted by skilled Indian artisans. Perfect for adding a traditional touch to your home."
+    },
+
+    basket:{
+        name:"Artisan Basket",
+        price:899,
+        image:"🧺",
+        category:"HANDICRAFT",
+        description:
+        "Beautiful artisan basket made with traditional craftsmanship. Perfect for storage and home decoration."
+    },
+
+    diya:{
+        name:"Brass Diya Set",
+        price:1299,
+        image:"🪔",
+        category:"TRADITIONAL CRAFT",
+        description:
+        "Elegant brass diya set inspired by Indian traditions. Perfect for festivals, पूजा and home decoration."
+    },
+
+    artwork:{
+        name:"Traditional Artwork",
+        price:2499,
+        image:"🎨",
+        category:"ARTWORK",
+        description:
+        "Beautiful traditional artwork created by talented Indian artisans to bring culture and creativity to your home."
+    },
+
+    cushion:{
+        name:"Handwoven Cushion",
+        price:699,
+        image:"🧵",
+        category:"HOME DECOR",
+        description:
+        "Comfortable handwoven cushion made with traditional Indian textile craftsmanship."
+    },
+
+    necklace:{
+        name:"Handmade Necklace",
+        price:1799,
+        image:"📿",
+        category:"JEWELLERY",
+        description:
+        "Beautiful handmade necklace designed with traditional Indian craftsmanship and attention to detail."
+    },
+
+    painting:{
+        name:"Handmade Painting",
+        price:2999,
+        image:"🖼️",
+        category:"ARTWORK",
+        description:
+        "Unique handmade painting created by Indian artists. A beautiful addition to your collection."
+    },
+
+    dupatta:{
+        name:"Traditional Dupatta",
+        price:1199,
+        image:"🧣",
+        category:"TEXTILES",
+        description:
+        "Beautiful traditional dupatta inspired by Indian textile craftsmanship and cultural designs."
+    },
+
+    wooden:{
+        name:"Wooden Craft",
+        price:1599,
+        image:"🪵",
+        category:"HANDICRAFT",
+        description:
+        "Beautiful handmade wooden craft created by skilled Indian artisans. Perfect for traditional home decoration."
+    },
+
+    jute:{
+        name:"Handmade Jute Bag",
+        price:799,
+        image:"👜",
+        category:"TEXTILES",
+        description:
+        "Eco-friendly handmade jute bag crafted with natural materials. Stylish, useful and perfect for everyday use."
+    },
+
+    candle:{
+        name:"Decorative Candle Set",
+        price:599,
+        image:"🕯️",
+        category:"HOME DECOR",
+        description:
+        "Beautiful decorative candle set designed to add warmth and elegance to your home."
+    },
+
+    lantern:{
+        name:"Handcrafted Lantern",
+        price:1899,
+        image:"🏮",
+        category:"HOME DECOR",
+        description:
+        "Elegant handcrafted lantern inspired by traditional Indian designs. Perfect for creating a warm atmosphere."
+    },
+
+    wall:{
+        name:"Decorative Wall Hanging",
+        price:1299,
+        image:"🪷",
+        category:"WALL DECOR",
+        description:
+        "Beautiful decorative wall hanging handcrafted by Indian artisans to give your walls a traditional look."
+    },
+
+    wallart:{
+        name:"Handmade Wall Art",
+        price:1899,
+        image:"🧿",
+        category:"ARTWORK",
+        description:
+        "Unique handmade wall art created with traditional Indian artistic techniques."
+    },
+
+    pot:{
+        name:"Terracotta Pot",
+        price:999,
+        image:"🏺",
+        category:"POTTERY",
+        description:
+        "Traditional terracotta pot handmade by skilled artisans using natural clay and traditional methods."
+    },
+
+    rug:{
+        name:"Handwoven Rug",
+        price:2499,
+        image:"🧶",
+        category:"TEXTILES",
+        description:
+        "Beautiful handwoven rug made with traditional Indian textile craftsmanship."
+    },
+
+    bowl:{
+        name:"Ceramic Bowl Set",
+        price:1099,
+        image:"🥣",
+        category:"POTTERY",
+        description:
+        "Elegant ceramic bowl set designed and crafted with care. Perfect for everyday use and decoration."
+    },
+
+    mirror:{
+        name:"Handmade Mirror",
+        price:2199,
+        image:"🪞",
+        category:"HOME DECOR",
+        description:
+        "Beautiful handmade mirror with a unique artisan-inspired design. Perfect for adding character to your home."
+    },
+
+    toy:{
+        name:"Handmade Toy",
+        price:899,
+        image:"🧸",
+        category:"HANDICRAFT",
+        description:
+        "Charming handmade toy crafted by Indian artisans using traditional craftsmanship."
+    },
+
+    floral:{
+        name:"Floral Decor Set",
+        price:1499,
+        image:"🌸",
+        category:"HOME DECOR",
+        description:
+        "Beautiful floral decor set designed to bring a fresh and elegant traditional touch to your home."
+    }
+
+};
+
+
+/*
+    GET PRODUCT KEY
+*/
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const productKey =
+    params.get("product");
+
+
+/*
+    CHECK PRODUCT
+*/
+
+if(
+    !productKey ||
+    !products[productKey]
+){
+
+    window.location.href =
+        "shop.html";
+
+}
+
+
+/*
+    CURRENT PRODUCT
+*/
+
+const product =
+    products[productKey];
+
+
+/*
+    SHOW PRODUCT
+*/
+
+document.getElementById(
+    "productName"
+).innerText =
+    product.name;
+
+
+document.getElementById(
+    "productPrice"
+).innerText =
+    "₹" +
+    product.price.toLocaleString("en-IN");
+
+
+document.getElementById(
+    "productImage"
+).innerText =
+    product.image;
+
+
+document.getElementById(
+    "productCategory"
+).innerText =
+    product.category;
+
+
+document.getElementById(
+    "productDescription"
+).innerText =
+    product.description;
+
+
+/*
+    CHANGE QUANTITY
+*/
+
+function changeQuantity(change){
+
+    quantity += change;
+
+    if(quantity < 1){
+        quantity = 1;
+    }
+
+    document.getElementById(
+        "quantity"
+    ).innerText =
+        quantity;
+
+}
+
+
+/*
+    ADD TO CART
+*/
+
+function addToCart(){
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem(
+                "craftoraCart"
+            )
+        ) || [];
+
+
+    let existing =
+        cart.find(function(item){
+
+            return item.name === product.name;
+
+        });
+
+
+    if(existing){
+
+        existing.quantity += quantity;
+
+    }else{
+
+        cart.push({
+
+            id:productKey,
+
+            name:product.name,
+
+            price:product.price,
+
+            image:product.image,
+
+            quantity:quantity
+
+        });
+
+    }
+
+
+    localStorage.setItem(
+        "craftoraCart",
+        JSON.stringify(cart)
+    );
+
+
+    let message =
+        document.getElementById(
+            "message"
+        );
+
+
+    message.innerText =
+        product.name +
+        " added to cart! 🛒";
+
+
+    message.style.display =
+        "block";
+
+
+    message.style.color =
+        "green";
+
+}
+
+
+/*
+    BUY NOW
+*/
+
+function buyNow(){
+
+    const directBuy = {
+
+        id:productKey,
+
+        name:product.name,
+
+        price:product.price,
+
+        image:product.image,
+
+        quantity:quantity
+
+    };
+
+
+    localStorage.setItem(
+        "craftoraBuyNow",
+        JSON.stringify([
+            directBuy
+        ])
+    );
+
+
+    window.location.href =
+        "checkout.html";
+
+}
+
+</script>
+
+</body>
+</html>

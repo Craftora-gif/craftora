@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cart — Craftora</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#faf7f2;
+    color:#29251f;
+}
+
+/* TOP BAR */
+
+.topbar{
+    background:#29251f;
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-size:13px;
+}
+
+/* NAVBAR */
+
+nav{
+    height:80px;
+    padding:0 6%;
+    background:white;
+    border-bottom:1px solid #eee;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+    color:#9b5b32;
+}
+
+.logo span{
+    color:#29251f;
+}
+
+.menu{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:14px;
+}
+
+.menu a:hover{
+    color:#9b5b32;
+}
+
+.nav-actions{
+    display:flex;
+    gap:15px;
+}
+
+.nav-actions a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:20px;
+}
+
+/* HEADER */
+
+.header{
+    text-align:center;
+    padding:60px 20px 35px;
+}
+
+.header small{
+    color:#9b5b32;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.header h1{
+    font-size:45px;
+    margin:15px 0;
+}
+
+.header p{
+    color:#777;
+}
+
+/* CART */
+
+.cart-container{
+    max-width:1100px;
+    margin:auto;
+    padding:0 25px 80px;
+
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+}
+
+/* ITEMS */
+
+.cart-items{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.cart-item{
+    background:white;
+    border-radius:8px;
+    padding:20px;
+
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.cart-image{
+    width:100px;
+    height:100px;
+
+    flex-shrink:0;
+
+    background:linear-gradient(
+        135deg,
+        #e9d8c7,
+        #c69b73
+    );
+
+    border-radius:7px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:45px;
+}
+
+.cart-info{
+    flex:1;
+}
+
+.cart-info h3{
+    margin-bottom:8px;
+}
+
+.cart-price{
+    color:#9b5b32;
+    font-weight:bold;
+}
+
+/* QUANTITY */
+
+.quantity{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:15px;
+}
+
+.quantity button{
+    width:32px;
+    height:32px;
+
+    border:1px solid #ddd;
+    background:white;
+
+    cursor:pointer;
+
+    font-size:17px;
+}
+
+.quantity button:hover{
+    background:#f4e7d5;
+}
+
+.quantity span{
+    min-width:20px;
+    text-align:center;
+}
+
+/* REMOVE */
+
+.remove{
+    border:0;
+    background:none;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    color:#777;
+}
+
+.remove:hover{
+    color:#9b5b32;
+}
+
+/* SUMMARY */
+
+.summary{
+    background:white;
+    border-radius:8px;
+    padding:25px;
+
+    height:max-content;
+
+    position:sticky;
+    top:20px;
+}
+
+.summary h2{
+    margin-bottom:25px;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+
+    padding:12px 0;
+
+    border-bottom:1px solid #eee;
+}
+
+.summary-row.total{
+    border-bottom:0;
+
+    font-size:20px;
+    font-weight:bold;
+
+    padding-top:20px;
+}
+
+.total-price{
+    color:#9b5b32;
+}
+
+.checkout-btn{
+    display:block;
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:20px;
+
+    background:#9b5b32;
+    color:white;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    border-radius:5px;
+}
+
+.checkout-btn:hover{
+    background:#704020;
+}
+
+/* EMPTY */
+
+.empty{
+    grid-column:1 / -1;
+
+    background:white;
+    border-radius:10px;
+
+    text-align:center;
+
+    padding:70px 20px;
+}
+
+.empty h2{
+    margin-bottom:15px;
+}
+
+.empty p{
+    color:#777;
+    margin-bottom:25px;
+}
+
+.shop-btn{
+    display:inline-block;
+
+    padding:13px 25px;
+
+    background:#9b5b32;
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:5px;
+}
+
+.shop-btn:hover{
+    background:#704020;
+}
+
+/* FOOTER */
+
+footer{
+    background:#29251f;
+    color:white;
+
+    text-align:center;
+
+    padding:45px 20px;
+}
+
+footer p{
+    color:#bbb;
+    margin-top:10px;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .menu{
+        display:none;
+    }
+
+    .cart-container{
+        grid-template-columns:1fr;
+    }
+
+    .summary{
+        position:static;
+    }
+
+}
+
+@media(max-width:550px){
+
+    .cart-item{
+        align-items:flex-start;
+    }
+
+    .cart-image{
+        width:75px;
+        height:75px;
+        font-size:35px;
+    }
+
+    .cart-item{
+        gap:12px;
+    }
+
+    .header h1{
+        font-size:36px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+    Free shipping on orders above ₹999
+</div>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        CRAFT<span>ORA</span>
+    </div>
+
+    <ul class="menu">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Shop
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Categories
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                About
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                Contact
+            </a>
+        </li>
+
+    </ul>
+
+    <div class="nav-actions">
+
+        <a href="wishlist.html">
+            ❤️
+        </a>
+
+        <a href="login.html">
+            👤
+        </a>
+
+        <a href="cart.html">
+            🛒
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- HEADER -->
+
+<section class="header">
+
+    <small>
+        YOUR SHOPPING BAG
+    </small>
+
+    <h1>
+        My Cart 🛒
+    </h1>
+
+    <p>
+        Review your selected handmade products.
+    </p>
+
+</section>
+
+
+<!-- CART -->
+
+<section class="cart-container">
+
+    <div
+        class="cart-items"
+        id="cartItems"
+    >
+    </div>
+
+
+    <div
+        class="summary"
+        id="summary"
+    >
+
+        <h2>
+            Order Summary
+        </h2>
+
+        <div class="summary-row">
+
+            <span>
+                Subtotal
+            </span>
+
+            <span id="subtotal">
+                ₹0
+            </span>
+
+        </div>
+
+        <div class="summary-row">
+
+            <span>
+                Shipping
+            </span>
+
+            <span id="shipping">
+                ₹0
+            </span>
+
+        </div>
+
+        <div class="summary-row total">
+
+            <span>
+                Total
+            </span>
+
+            <span
+                class="total-price"
+                id="total"
+            >
+                ₹0
+            </span>
+
+        </div>
+
+        <a
+            href="checkout.html"
+            class="checkout-btn"
+            onclick="goToCheckout(event)"
+        >
+            Proceed to Checkout
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>
+        CRAFTORA
+    </h3>
+
+    <p>
+        Celebrating Indian craftsmanship,
+        one beautiful creation at a time.
+    </p>
+
+</footer>
+
+
+<script>
+
+
+/* GET CART */
+
+function getCart(){
+
+    return JSON.parse(
+        localStorage.getItem(
+            "craftoraCart"
+        )
+    ) || [];
+
+}
+
+
+/* SAVE CART */
+
+function saveCart(cart){
+
+    localStorage.setItem(
+        "craftoraCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+/* SHOW CART */
+
+function showCart(){
+
+    let cart = getCart();
+
+    let container =
+        document.getElementById(
+            "cartItems"
+        );
+
+    let summary =
+        document.getElementById(
+            "summary"
+        );
+
+
+    container.innerHTML = "";
+
+
+    /* EMPTY CART */
+
+    if(cart.length === 0){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <h2>
+                    Your cart is empty 🛒
+                </h2>
+
+                <p>
+                    Looks like you haven't
+                    added anything yet.
+                </p>
+
+                <a
+                    href="shop.html"
+                    class="shop-btn"
+                >
+                    Continue Shopping
+                </a>
+
+            </div>
+
+        `;
+
+        summary.style.display = "none";
+
+        return;
+
+    }
+
+
+    summary.style.display = "block";
+
+
+    let subtotal = 0;
+
+
+    cart.forEach(function(item,index){
+
+        let itemTotal =
+            item.price *
+            item.quantity;
+
+
+        subtotal += itemTotal;
+
+
+        let card =
+            document.createElement(
+                "div"
+            );
+
+
+        card.className =
+            "cart-item";
+
+
+        card.innerHTML = `
+
+            <div class="cart-image">
+                ${item.image}
+            </div>
+
+            <div class="cart-info">
+
+                <h3>
+                    ${item.name}
+                </h3>
+
+                <p class="cart-price">
+                    ₹${item.price.toLocaleString("en-IN")}
+                </p>
+
+                <div class="quantity">
+
+                    <button
+                        onclick="changeQuantity(${index},-1)"
+                    >
+                        −
+                    </button>
+
+                    <span>
+                        ${item.quantity}
+                    </span>
+
+                    <button
+                        onclick="changeQuantity(${index},1)"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+            <strong>
+                ₹${itemTotal.toLocaleString("en-IN")}
+            </strong>
+
+            <button
+                class="remove"
+                onclick="removeItem(${index})"
+                title="Remove item"
+            >
+                ✕
+            </button>
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+
+    let shipping =
+        subtotal >= 999
+        ? 0
+        : 99;
+
+
+    let total =
+        subtotal + shipping;
+
+
+    document.getElementById(
+        "subtotal"
+    ).innerText =
+        "₹" +
+        subtotal.toLocaleString("en-IN");
+
+
+    document.getElementById(
+        "shipping"
+    ).innerText =
+        shipping === 0
+        ? "FREE"
+        : "₹" + shipping;
+
+
+    document.getElementById(
+        "total"
+    ).innerText =
+        "₹" +
+        total.toLocaleString("en-IN");
+
+}
+
+
+/* CHANGE QUANTITY */
+
+function changeQuantity(index,change){
+
+    let cart = getCart();
+
+
+    if(!cart[index]){
+        return;
+    }
+
+
+    cart[index].quantity += change;
+
+
+    if(cart[index].quantity <= 0){
+
+        cart.splice(index,1);
+
+    }
+
+
+    saveCart(cart);
+
+    showCart();
+
+}
+
+
+/* REMOVE ITEM */
+
+function removeItem(index){
+
+    let cart = getCart();
+
+
+    if(!cart[index]){
+        return;
+    }
+
+
+    cart.splice(index,1);
+
+
+    saveCart(cart);
+
+    showCart();
+
+}
+
+
+/* PROCEED TO CHECKOUT */
+
+function goToCheckout(event){
+
+    let cart = getCart();
+
+
+    if(cart.length === 0){
+
+        event.preventDefault();
+
+        alert(
+            "Your cart is empty 🛒"
+        );
+
+        return;
+
+    }
+
+
+    /*
+        Clear Buy Now mode.
+
+        This makes checkout use
+        the complete cart.
+    */
+
+    localStorage.removeItem(
+        "craftoraBuyNow"
+    );
+
+}
+
+
+/* START */
+
+showCart();
+
+</script>
+
+
+</body>
+</html>

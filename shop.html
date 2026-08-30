@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Shop — Craftora</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#faf7f2;
+    color:#29251f;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+    background:#29251f;
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-size:13px;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav{
+    width:100%;
+    min-height:80px;
+
+    padding:0 5%;
+
+    background:white;
+    border-bottom:1px solid #eee;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+    color:#9b5b32;
+    white-space:nowrap;
+}
+
+.logo span{
+    color:#29251f;
+}
+
+.menu{
+    display:flex;
+    gap:22px;
+    list-style:none;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:14px;
+}
+
+.menu a:hover{
+    color:#9b5b32;
+}
+
+.nav-actions{
+    display:flex;
+    gap:7px;
+    align-items:center;
+}
+
+.nav-action{
+    display:flex;
+    align-items:center;
+    gap:5px;
+
+    padding:8px 10px;
+
+    border:1px solid #eadfd4;
+    border-radius:20px;
+
+    background:white;
+
+    color:#29251f;
+
+    text-decoration:none;
+
+    font-size:12px;
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    transition:.25s;
+}
+
+.nav-action:hover{
+    color:#9b5b32;
+    background:#faf3ec;
+    transform:translateY(-2px);
+}
+
+.wishlist-icon{
+    color:#e53935;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.shop-header{
+    text-align:center;
+    padding:60px 20px 40px;
+}
+
+.shop-header small{
+    color:#9b5b32;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.shop-header h1{
+    font-size:45px;
+    margin:15px 0;
+}
+
+.shop-header p{
+    color:#777;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box{
+    max-width:600px;
+
+    margin:
+        0 auto 45px;
+
+    display:flex;
+
+    padding:0 20px;
+}
+
+.search-box input{
+    flex:1;
+
+    min-width:0;
+
+    padding:15px;
+
+    border:1px solid #ddd;
+
+    border-radius:5px 0 0 5px;
+
+    font-size:15px;
+
+    outline:none;
+}
+
+.search-box input:focus{
+    border-color:#9b5b32;
+}
+
+.search-box button{
+    padding:0 22px;
+
+    border:0;
+
+    background:#9b5b32;
+
+    color:white;
+
+    border-radius:0 5px 5px 0;
+
+    cursor:pointer;
+
+    font-size:18px;
+}
+
+
+/* =========================
+   SHOP
+========================= */
+
+.shop-container{
+    width:100%;
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:
+        0 25px 80px;
+}
+
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.products{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:25px;
+}
+
+.product{
+    min-width:0;
+
+    background:white;
+
+    border-radius:8px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    transition:.3s;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0,0,0,.04);
+}
+
+.product:hover{
+    transform:translateY(-7px);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,.09);
+}
+
+
+/* =========================
+   WISHLIST
+========================= */
+
+.wishlist{
+    position:absolute;
+
+    top:15px;
+    right:15px;
+
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    border:0;
+
+    background:white;
+
+    cursor:pointer;
+
+    font-size:21px;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,0,0,.12);
+
+    z-index:2;
+
+    transition:.2s;
+}
+
+.wishlist:hover{
+    transform:scale(1.08);
+}
+
+.wishlist.active{
+    color:#e53935;
+
+    background:#fff5f5;
+
+    animation:
+        wishlistPop .35s ease;
+}
+
+@keyframes wishlistPop{
+
+    0%{
+        transform:scale(.7);
+    }
+
+    60%{
+        transform:scale(1.25);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+.product-image{
+    width:100%;
+    height:250px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e9d8c7,
+            #c69b73
+        );
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:80px;
+
+    cursor:pointer;
+
+    overflow:hidden;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+
+/* =========================
+   INFO
+========================= */
+
+.product-info{
+    padding:20px;
+}
+
+.product-info h3{
+    margin-bottom:8px;
+
+    font-size:18px;
+
+    word-break:break-word;
+}
+
+.price{
+    color:#9b5b32;
+
+    font-weight:bold;
+
+    font-size:18px;
+
+    margin-bottom:15px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.product-buttons{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:8px;
+}
+
+.cart-btn,
+.buy-btn{
+    width:100%;
+
+    padding:11px;
+
+    border:0;
+
+    border-radius:5px;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    transition:.2s;
+}
+
+.cart-btn{
+    background:#9b5b32;
+}
+
+.cart-btn:hover{
+    background:#704020;
+}
+
+.buy-btn{
+    background:#29251f;
+}
+
+.buy-btn:hover{
+    background:#111;
+}
+
+.cart-btn:active,
+.buy-btn:active{
+    transform:scale(.95);
+}
+
+.cart-btn.added{
+    background:#3f7d3f;
+
+    animation:
+        cartAdded .45s ease;
+}
+
+@keyframes cartAdded{
+
+    0%{
+        transform:scale(.9);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading-products{
+    grid-column:1/-1;
+
+    background:white;
+
+    border-radius:10px;
+
+    padding:60px 20px;
+
+    text-align:center;
+
+    color:#777;
+}
+
+.loading-products span{
+    display:block;
+
+    font-size:45px;
+
+    margin-bottom:15px;
+}
+
+
+/* =========================
+   NO RESULT
+========================= */
+
+.no-result{
+    display:none;
+
+    text-align:center;
+
+    padding:60px;
+
+    color:#777;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#29251f;
+
+    color:white;
+
+    padding:45px 7%;
+
+    display:grid;
+
+    grid-template-columns:
+        2fr 1fr 1fr 1fr;
+
+    gap:40px;
+}
+
+footer h3{
+    margin-bottom:15px;
+}
+
+footer p,
+footer a{
+    color:#bbb;
+
+    line-height:2;
+
+    text-decoration:none;
+}
+
+footer a:hover{
+    color:#fff;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:950px){
+
+    .products{
+        grid-template-columns:
+            repeat(3,minmax(0,1fr));
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:750px){
+
+    nav{
+        min-height:70px;
+
+        padding:
+            8px 10px;
+    }
+
+    .menu{
+        display:none;
+    }
+
+    .nav-actions{
+        gap:4px;
+
+        overflow:hidden;
+    }
+
+    .nav-action{
+        padding:
+            7px 8px;
+
+        font-size:10px;
+    }
+
+    .products{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+        gap:15px;
+    }
+
+    footer{
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media(max-width:500px){
+
+    .logo{
+        font-size:20px;
+    }
+
+    .nav-action{
+        padding:
+            7px 6px;
+
+        font-size:9px;
+    }
+
+    .shop-header{
+        padding:
+            45px 15px 30px;
+    }
+
+    .shop-header h1{
+        font-size:36px;
+    }
+
+    .products{
+        grid-template-columns:1fr;
+    }
+
+    .product-buttons{
+        grid-template-columns:1fr;
+    }
+
+    footer{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+    Free shipping on orders above ₹999
+</div>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+
+    <div class="logo">
+        CRAFT<span>ORA</span>
+    </div>
+
+
+    <ul class="menu">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Shop
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Categories
+            </a>
+        </li>
+
+        <li>
+            <a href="about.html">
+                About
+            </a>
+        </li>
+
+        <li>
+            <a href="contact.html">
+                Contact
+            </a>
+        </li>
+
+    </ul>
+
+
+    <div class="nav-actions">
+
+
+        <a
+            href="wishlist.html"
+            class="nav-action"
+        >
+            <span class="wishlist-icon">
+                ❤️
+            </span>
+
+            Wishlist
+        </a>
+
+
+        <a
+            href="orders.html"
+            class="nav-action"
+        >
+            📦 My Orders
+        </a>
+
+
+        <a
+            href="login.html"
+            class="nav-action"
+        >
+            👤 Account
+        </a>
+
+
+        <a
+            href="cart.html"
+            class="nav-action"
+        >
+            🛒 Cart
+        </a>
+
+
+    </div>
+
+</nav>
+
+
+<!-- HEADER -->
+
+<section class="shop-header">
+
+    <small>
+        CRAFTORA COLLECTION
+    </small>
+
+
+    <h1>
+        Shop All Products
+    </h1>
+
+
+    <p>
+        Discover handmade creations
+        crafted with love by Indian artisans.
+    </p>
+
+</section>
+
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search products..."
+        oninput="searchProducts()"
+    >
+
+
+    <button
+        type="button"
+        onclick="searchProducts()"
+    >
+        🔎
+    </button>
+
+</div>
+
+
+<!-- PRODUCTS -->
+
+<section class="shop-container">
+
+
+    <div
+        class="products"
+        id="products"
+    >
+
+        <!--
+            IMPORTANT:
+
+            Original products are inserted
+            immediately by JavaScript.
+
+            API does NOT block the page.
+        -->
+
+    </div>
+
+
+    <div
+        class="no-result"
+        id="noResult"
+    >
+        No products found.
+    </div>
+
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+
+    <div>
+
+        <h3>
+            CRAFTORA
+        </h3>
+
+        <p>
+            Celebrating Indian craftsmanship,
+            one beautiful creation at a time.
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <h3>
+            Shop
+        </h3>
+
+        <p>
+            <a href="shop.html">
+                All Products
+            </a>
+        </p>
+
+        <p>
+            <a href="shop.html">
+                Home Decor
+            </a>
+        </p>
+
+        <p>
+            <a href="shop.html">
+                Jewellery
+            </a>
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <h3>
+            Company
+        </h3>
+
+        <p>
+            <a href="about.html">
+                About Us
+            </a>
+        </p>
+
+        <p>
+            <a href="#">
+                Our Artisans
+            </a>
+        </p>
+
+        <p>
+            <a href="contact.html">
+                Contact
+            </a>
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <h3>
+            Help
+        </h3>
+
+        <p>
+            <a href="#">
+                Shipping
+            </a>
+        </p>
+
+        <p>
+            <a href="#">
+                Returns
+            </a>
+        </p>
+
+        <p>
+            <a href="#">
+                FAQ
+            </a>
+        </p>
+
+    </div>
+
+
+</footer>
+
+
+<script>
+
+
+/* ==================================================
+   CRAFTORA SHOP
+================================================== */
+
+
+/* =========================
+   ORIGINAL 20 PRODUCTS
+========================= */
+
+const defaultProducts = [
+
+    {
+        name:"Handmade Vase",
+        price:1599,
+        image:"🏺",
+        productId:"vase",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Artisan Basket",
+        price:899,
+        image:"🧺",
+        productId:"basket",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Brass Diya Set",
+        price:1299,
+        image:"🪔",
+        productId:"diya",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Traditional Artwork",
+        price:2499,
+        image:"🎨",
+        productId:"artwork",
+        category:"Art & Craft"
+    },
+
+    {
+        name:"Handwoven Cushion",
+        price:699,
+        image:"🧵",
+        productId:"cushion",
+        category:"Textiles"
+    },
+
+    {
+        name:"Handmade Necklace",
+        price:1799,
+        image:"📿",
+        productId:"necklace",
+        category:"Jewellery"
+    },
+
+    {
+        name:"Handmade Painting",
+        price:2999,
+        image:"🖼️",
+        productId:"painting",
+        category:"Art & Craft"
+    },
+
+    {
+        name:"Traditional Dupatta",
+        price:1199,
+        image:"🧣",
+        productId:"dupatta",
+        category:"Textiles"
+    },
+
+    {
+        name:"Wooden Craft",
+        price:1599,
+        image:"🪵",
+        productId:"wooden",
+        category:"Art & Craft"
+    },
+
+    {
+        name:"Handmade Jute Bag",
+        price:799,
+        image:"👜",
+        productId:"jute",
+        category:"Textiles"
+    },
+
+    {
+        name:"Decorative Candle Set",
+        price:599,
+        image:"🕯️",
+        productId:"candle",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Handcrafted Lantern",
+        price:1899,
+        image:"🏮",
+        productId:"lantern",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Decorative Wall Hanging",
+        price:1299,
+        image:"🪷",
+        productId:"wall",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Handmade Wall Art",
+        price:1899,
+        image:"🧿",
+        productId:"wallart",
+        category:"Art & Craft"
+    },
+
+    {
+        name:"Terracotta Pot",
+        price:999,
+        image:"🏺",
+        productId:"pot",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Handwoven Rug",
+        price:2499,
+        image:"🧶",
+        productId:"rug",
+        category:"Textiles"
+    },
+
+    {
+        name:"Ceramic Bowl Set",
+        price:1099,
+        image:"🥣",
+        productId:"bowl",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Handmade Mirror",
+        price:2199,
+        image:"🪞",
+        productId:"mirror",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Handmade Toy",
+        price:899,
+        image:"🧸",
+        productId:"toy",
+        category:"Art & Craft"
+    },
+
+    {
+        name:"Floral Decor Set",
+        price:1499,
+        image:"🌸",
+        productId:"floral",
+        category:"Home Decor"
+    }
+
+];
+
+
+/* =========================
+   ALL PRODUCTS
+========================= */
+
+let allProducts = [
+    ...defaultProducts
+];
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* =========================
+   ESCAPE JS
+========================= */
+
+function escapeJS(value){
+
+    return String(value)
+
+        .replaceAll(
+            "\\",
+            "\\\\"
+        )
+
+        .replaceAll(
+            "'",
+            "\\'"
+        )
+
+        .replaceAll(
+            "\n",
+            "\\n"
+        )
+
+        .replaceAll(
+            "\r",
+            "\\r"
+        );
+
+}
+
+
+/* =========================
+   CART
+========================= */
+
+function getCart(){
+
+    return JSON.parse(
+        localStorage.getItem(
+            "craftoraCart"
+        )
+    ) || [];
+
+}
+
+
+function addToCart(
+    button,
+    name,
+    price,
+    image
+){
+
+    let cart =
+        getCart();
+
+
+    const existing =
+        cart.find(
+            function(item){
+
+                return item.name ===
+                    name;
+
+            }
+        );
+
+
+    if(existing){
+
+        existing.quantity++;
+
+    }
+    else{
+
+        cart.push({
+
+            name:name,
+
+            price:Number(price),
+
+            image:image,
+
+            quantity:1
+
+        });
+
+    }
+
+
+    localStorage.setItem(
+        "craftoraCart",
+        JSON.stringify(
+            cart
+        )
+    );
+
+
+    const oldText =
+        button.innerHTML;
+
+
+    button.innerHTML =
+        "✓ Added";
+
+
+    button.classList.add(
+        "added"
+    );
+
+
+    setTimeout(
+        function(){
+
+            button.innerHTML =
+                oldText;
+
+            button.classList.remove(
+                "added"
+            );
+
+        },
+        1200
+    );
+
+}
+
+
+/* =========================
+   BUY NOW
+========================= */
+
+function buyNow(
+    name,
+    price,
+    image
+){
+
+    const item = {
+
+        name:name,
+
+        price:Number(price),
+
+        image:image,
+
+        quantity:1
+
+    };
+
+
+    localStorage.setItem(
+        "craftoraBuyNow",
+        JSON.stringify([
+            item
+        ])
+    );
+
+
+    window.location.href =
+        "checkout.html";
+
+}
+
+
+/* =========================
+   WISHLIST
+========================= */
+
+function getWishlist(){
+
+    return JSON.parse(
+        localStorage.getItem(
+            "craftoraWishlist"
+        )
+    ) || [];
+
+}
+
+
+function toggleWishlist(
+    event,
+    name
+){
+
+    event.stopPropagation();
+
+
+    let wishlist =
+        getWishlist();
+
+
+    const index =
+        wishlist.indexOf(
+            name
+        );
+
+
+    const safeName =
+        name.replaceAll(
+            " ",
+            "-"
+        );
+
+
+    const button =
+        document.getElementById(
+            "wish-" +
+            safeName
+        );
+
+
+    if(index === -1){
+
+        wishlist.push(
+            name
+        );
+
+
+        if(button){
+
+            button.innerText =
+                "❤️";
+
+            button.classList.add(
+                "active"
+            );
+
+        }
+
+    }
+    else{
+
+        wishlist.splice(
+            index,
+            1
+        );
+
+
+        if(button){
+
+            button.innerText =
+                "♡";
+
+            button.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+
+
+    localStorage.setItem(
+        "craftoraWishlist",
+        JSON.stringify(
+            wishlist
+        )
+    );
+
+}
+
+
+function loadWishlist(){
+
+    const wishlist =
+        getWishlist();
+
+
+    wishlist.forEach(
+        function(name){
+
+            const safeName =
+                name.replaceAll(
+                    " ",
+                    "-"
+                );
+
+
+            const button =
+                document.getElementById(
+                    "wish-" +
+                    safeName
+                );
+
+
+            if(button){
+
+                button.innerText =
+                    "❤️";
+
+                button.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================
+   OPEN PRODUCT
+========================= */
+
+function openProduct(
+    productId
+){
+
+    window.location.href =
+        "product.html?product=" +
+        encodeURIComponent(
+            productId
+        );
+
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+function getImageHTML(
+    product
+){
+
+    const image =
+        product.image ||
+        "🛍️";
+
+
+    const isImage =
+        typeof image === "string" &&
+        (
+            image.startsWith(
+                "http://"
+            ) ||
+            image.startsWith(
+                "https://"
+            ) ||
+            image.startsWith(
+                "images/"
+            ) ||
+            image.startsWith(
+                "./"
+            ) ||
+            /\.(jpg|jpeg|png|webp|gif)$/i.test(
+                image
+            )
+        );
+
+
+    if(isImage){
+
+        return `
+
+            <img
+                src="${escapeHTML(image)}"
+                alt="${escapeHTML(
+                    product.name
+                )}"
+                onerror="
+                    this.style.display='none';
+                    this.parentElement.innerHTML='🛍️';
+                "
+            >
+
+        `;
+
+    }
+
+
+    return escapeHTML(
+        image
+    );
+
+}
+
+
+/* =========================
+   CREATE CARD
+========================= */
+
+function createProductCard(
+    product
+){
+
+    const card =
+        document.createElement(
+            "div"
+        );
+
+
+    card.className =
+        "product";
+
+
+    const name =
+        product.name ||
+        "Craftora Product";
+
+
+    const price =
+        Number(
+            product.price || 0
+        );
+
+
+    const image =
+        product.image ||
+        "🛍️";
+
+
+    const safeName =
+        name.replaceAll(
+            " ",
+            "-"
+        );
+
+
+    const productId =
+        product.productId ||
+        product._id ||
+        safeName;
+
+
+    card.innerHTML = `
+
+        <button
+            class="wishlist"
+            onclick="
+                toggleWishlist(
+                    event,
+                    '${escapeJS(name)}'
+                )
+            "
+            id="wish-${escapeHTML(
+                safeName
+            )}"
+            title="Add to Wishlist"
+        >
+            ♡
+        </button>
+
+
+        <div
+            class="product-image"
+            onclick="
+                openProduct(
+                    '${escapeJS(
+                        productId
+                    )}'
+                )
+            "
+            title="View Product"
+        >
+
+            ${getImageHTML(
+                product
+            )}
+
+        </div>
+
+
+        <div class="product-info">
+
+            <h3>
+                ${escapeHTML(name)}
+            </h3>
+
+
+            <p class="price">
+                ₹${price.toLocaleString(
+                    "en-IN"
+                )}
+            </p>
+
+
+            <div class="product-buttons">
+
+
+                <button
+                    class="cart-btn"
+                    onclick="
+                        addToCart(
+                            this,
+                            '${escapeJS(name)}',
+                            ${price},
+                            '${escapeJS(image)}'
+                        )
+                    "
+                >
+                    🛒 Cart
+                </button>
+
+
+                <button
+                    class="buy-btn"
+                    onclick="
+                        buyNow(
+                            '${escapeJS(name)}',
+                            ${price},
+                            '${escapeJS(image)}'
+                        )
+                    "
+                >
+                    ⚡ Buy
+                </button>
+
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    return card;
+
+}
+
+
+/* =========================
+   RENDER
+========================= */
+
+function renderProducts(
+    products
+){
+
+    const container =
+        document.getElementById(
+            "products"
+        );
+
+
+    const noResult =
+        document.getElementById(
+            "noResult"
+        );
+
+
+    container.innerHTML =
+        "";
+
+
+    if(
+        products.length === 0
+    ){
+
+        noResult.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    noResult.style.display =
+        "none";
+
+
+    products.forEach(
+        function(product){
+
+            container.appendChild(
+                createProductCard(
+                    product
+                )
+            );
+
+        }
+    );
+
+
+    loadWishlist();
+
+}
+
+
+/* ==================================================
+   IMPORTANT SPEED FIX
+================================================== */
+
+/*
+    FIRST:
+    Immediately show the 20 local products.
+
+    User does NOT wait for MongoDB.
+*/
+
+renderProducts(
+    allProducts
+);
+
+
+/*
+    THEN:
+    Ask backend for new/admin products
+    in the background.
+*/
+
+async function loadProductsFromServer(){
+
+    try{
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/products",
+                {
+                    method:"GET",
+
+                    cache:"no-store"
+                }
+            );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "API request failed"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        /*
+            Support both:
+
+            [
+                ...
+            ]
+
+            AND
+
+            {
+                products:[...]
+            }
+        */
+
+        const databaseProducts =
+            Array.isArray(data)
+                ? data
+                : (
+                    Array.isArray(
+                        data.products
+                    )
+                        ? data.products
+                        : []
+                );
+
+
+        /*
+            Merge database products.
+
+            Existing product name:
+            update it.
+
+            New product:
+            add it.
+        */
+
+        databaseProducts.forEach(
+            function(dbProduct){
+
+                if(
+                    !dbProduct ||
+                    !dbProduct.name
+                ){
+
+                    return;
+
+                }
+
+
+                const index =
+                    allProducts.findIndex(
+                        function(item){
+
+                            return (
+                                String(
+                                    item.name
+                                )
+                                .trim()
+                                .toLowerCase()
+                                ===
+                                String(
+                                    dbProduct.name
+                                )
+                                .trim()
+                                .toLowerCase()
+                            );
+
+                        }
+                    );
+
+
+                if(index !== -1){
+
+                    allProducts[index] = {
+
+                        ...allProducts[index],
+
+                        ...dbProduct
+
+                    };
+
+                }
+                else{
+
+                    allProducts.push({
+
+                        name:
+                            dbProduct.name,
+
+                        price:
+                            Number(
+                                dbProduct.price ||
+                                0
+                            ),
+
+                        image:
+                            dbProduct.image ||
+                            "🛍️",
+
+                        productId:
+                            dbProduct.productId ||
+                            dbProduct._id ||
+                            dbProduct.name
+                                .replaceAll(
+                                    " ",
+                                    "-"
+                                )
+                                .toLowerCase(),
+
+                        category:
+                            dbProduct.category ||
+                            ""
+
+                    });
+
+                }
+
+            }
+        );
+
+
+        /*
+            Re-render only if
+            database gave products.
+        */
+
+        if(
+            databaseProducts.length > 0
+        ){
+
+            renderProducts(
+                allProducts
+            );
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "Shop API Error:",
+            error
+        );
+
+
+        /*
+            IMPORTANT:
+
+            Do NOT show an error.
+
+            Local 20 products are
+            already visible.
+        */
+
+    }
+
+}
+
+
+/*
+    Start background API loading.
+*/
+
+loadProductsFromServer();
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchProducts(){
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const filtered =
+        allProducts.filter(
+            function(product){
+
+                return (
+
+                    String(
+                        product.name ||
+                        ""
+                    )
+                    .toLowerCase()
+                    .includes(
+                        search
+                    )
+
+                    ||
+
+                    String(
+                        product.category ||
+                        ""
+                    )
+                    .toLowerCase()
+                    .includes(
+                        search
+                    )
+
+                );
+
+            }
+        );
+
+
+    renderProducts(
+        filtered
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

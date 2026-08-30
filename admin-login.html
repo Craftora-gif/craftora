@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Admin Login — Craftora</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+
+    font-family:Arial,sans-serif;
+
+    background:#faf7f2;
+
+    color:#29251f;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.login-container{
+    width:100%;
+
+    max-width:430px;
+
+    padding:20px;
+}
+
+.login-box{
+    background:white;
+
+    padding:40px 35px;
+
+    border-radius:10px;
+
+    box-shadow:
+        0 10px 35px
+        rgba(0,0,0,.08);
+}
+
+.logo{
+    text-align:center;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    color:#9b5b32;
+}
+
+.logo span{
+    color:#29251f;
+}
+
+.admin-title{
+    text-align:center;
+
+    margin-top:10px;
+
+    color:#777;
+
+    font-size:14px;
+
+    letter-spacing:1px;
+}
+
+.divider{
+    height:1px;
+
+    background:#eee;
+
+    margin:30px 0;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+}
+
+.form-group input{
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #ddd;
+
+    border-radius:5px;
+
+    font-size:15px;
+
+    outline:none;
+}
+
+.form-group input:focus{
+    border-color:#9b5b32;
+}
+
+.login-btn{
+    width:100%;
+
+    padding:15px;
+
+    border:0;
+
+    border-radius:5px;
+
+    background:#9b5b32;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.login-btn:hover{
+    background:#704020;
+}
+
+.login-btn:disabled{
+    opacity:.6;
+
+    cursor:not-allowed;
+}
+
+.error{
+    display:none;
+
+    margin-bottom:20px;
+
+    padding:12px;
+
+    border-radius:5px;
+
+    background:#fff0f0;
+
+    color:#b00020;
+
+    font-size:14px;
+
+    text-align:center;
+}
+
+.success{
+    display:none;
+
+    margin-bottom:20px;
+
+    padding:12px;
+
+    border-radius:5px;
+
+    background:#edf9f0;
+
+    color:#176b2c;
+
+    font-size:14px;
+
+    text-align:center;
+}
+
+.back-link{
+    display:block;
+
+    margin-top:22px;
+
+    text-align:center;
+
+    color:#777;
+
+    text-decoration:none;
+
+    font-size:13px;
+}
+
+.back-link:hover{
+    color:#9b5b32;
+}
+
+.security-note{
+    margin-top:25px;
+
+    padding:12px;
+
+    background:#faf7f2;
+
+    border-radius:5px;
+
+    color:#777;
+
+    font-size:12px;
+
+    line-height:1.6;
+
+    text-align:center;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="login-container">
+
+    <div class="login-box">
+
+
+        <div class="logo">
+            CRAFT<span>ORA</span>
+        </div>
+
+
+        <div class="admin-title">
+            ADMINISTRATOR LOGIN
+        </div>
+
+
+        <div class="divider"></div>
+
+
+        <div
+            class="error"
+            id="errorMessage"
+        ></div>
+
+
+        <div
+            class="success"
+            id="successMessage"
+        ></div>
+
+
+        <form
+            id="adminLoginForm"
+        >
+
+
+            <div class="form-group">
+
+                <label>
+                    Admin Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter admin username"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Admin Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter admin password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-btn"
+                id="loginButton"
+            >
+                Login to Admin Panel
+            </button>
+
+
+        </form>
+
+
+        <a
+            href="index.html"
+            class="back-link"
+        >
+            ← Back to Craftora
+        </a>
+
+
+        <div class="security-note">
+            🔐 This area is restricted to Craftora administrators.
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+/* =========================
+   ADMIN LOGIN
+========================= */
+
+document
+    .getElementById("adminLoginForm")
+    .addEventListener(
+        "submit",
+        async function(event){
+
+            event.preventDefault();
+
+
+            const username =
+                document
+                .getElementById("username")
+                .value
+                .trim();
+
+
+            const password =
+                document
+                .getElementById("password")
+                .value;
+
+
+            const errorMessage =
+                document.getElementById(
+                    "errorMessage"
+                );
+
+
+            const successMessage =
+                document.getElementById(
+                    "successMessage"
+                );
+
+
+            const loginButton =
+                document.getElementById(
+                    "loginButton"
+                );
+
+
+            errorMessage.style.display =
+                "none";
+
+            successMessage.style.display =
+                "none";
+
+
+            loginButton.disabled =
+                true;
+
+            loginButton.innerText =
+                "Checking...";
+
+
+            try{
+
+                const response =
+                    await fetch(
+                        "http://localhost:5000/api/admin/login",
+                        {
+
+                            method:"POST",
+
+                            headers:{
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    username:
+                                        username,
+
+                                    password:
+                                        password
+
+                                })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if(
+                    !response.ok
+                ){
+
+                    throw new Error(
+                        data.message ||
+                        "Invalid admin credentials."
+                    );
+
+                }
+
+
+                /*
+                    SAVE ADMIN LOGIN
+                */
+
+                sessionStorage.setItem(
+                    "craftoraAdminLoggedIn",
+                    "true"
+                );
+
+
+                /*
+                    SAVE SECURITY TOKEN
+                */
+
+                sessionStorage.setItem(
+                    "craftoraAdminToken",
+                    data.token
+                );
+
+
+                successMessage.innerText =
+                    "Admin login successful!";
+
+                successMessage.style.display =
+                    "block";
+
+
+                loginButton.innerText =
+                    "Login Successful";
+
+
+                /*
+                    OPEN ADMIN PANEL
+                */
+
+                setTimeout(
+                    function(){
+
+                        window.location.href =
+                            "admin.html";
+
+                    },
+                    700
+                );
+
+
+            }
+
+            catch(error){
+
+                console.error(
+                    "Admin Login Error:",
+                    error
+                );
+
+
+                errorMessage.innerText =
+                    error.message ||
+                    "Unable to login.";
+
+                errorMessage.style.display =
+                    "block";
+
+
+                loginButton.disabled =
+                    false;
+
+                loginButton.innerText =
+                    "Login to Admin Panel";
+
+            }
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>

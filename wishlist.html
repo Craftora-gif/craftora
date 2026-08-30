@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Wishlist — Craftora</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#faf7f2;
+    color:#29251f;
+}
+
+.topbar{
+    background:#29251f;
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-size:13px;
+}
+
+nav{
+    width:100%;
+    min-height:80px;
+    padding:0 5%;
+    background:white;
+    border-bottom:1px solid #eee;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+    color:#9b5b32;
+    white-space:nowrap;
+}
+
+.logo span{
+    color:#29251f;
+}
+
+.menu{
+    display:flex;
+    gap:22px;
+    list-style:none;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:14px;
+}
+
+.menu a:hover{
+    color:#9b5b32;
+}
+
+.nav-actions{
+    display:flex;
+    gap:7px;
+    align-items:center;
+}
+
+.nav-action{
+    display:flex;
+    align-items:center;
+    gap:5px;
+
+    padding:8px 10px;
+
+    border:1px solid #eadfd4;
+    border-radius:20px;
+
+    background:white;
+    color:#29251f;
+
+    text-decoration:none;
+
+    font-size:12px;
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    transition:.25s;
+}
+
+.nav-action:hover{
+    color:#9b5b32;
+    background:#faf3ec;
+    transform:translateY(-2px);
+}
+
+.wishlist-icon{
+    color:#e53935;
+}
+
+.header{
+    text-align:center;
+    padding:60px 20px 35px;
+}
+
+.header small{
+    color:#9b5b32;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.header h1{
+    font-size:45px;
+    margin:15px 0;
+}
+
+.header p{
+    color:#777;
+}
+
+.wishlist-container{
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+    padding:0 25px 80px;
+}
+
+.wishlist-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:20px;
+}
+
+.product-card{
+    background:white;
+    border-radius:8px;
+    overflow:hidden;
+    position:relative;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.04);
+
+    transition:.3s;
+}
+
+.product-card:hover{
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 15px 30px rgba(0,0,0,.08);
+}
+
+.product-image{
+    height:220px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e9d8c7,
+            #c69b73
+        );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:80px;
+
+    overflow:hidden;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.product-info{
+    padding:20px;
+}
+
+.product-info h3{
+    margin-bottom:8px;
+    font-size:18px;
+}
+
+.price{
+    color:#9b5b32;
+    font-weight:bold;
+    font-size:18px;
+    margin-bottom:15px;
+}
+
+.buttons{
+    display:flex;
+    gap:8px;
+}
+
+.view-btn,
+.remove-btn{
+    flex:1;
+
+    padding:10px;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+    font-size:13px;
+}
+
+.view-btn{
+    background:#9b5b32;
+    color:white;
+    border:1px solid #9b5b32;
+
+    text-decoration:none;
+    text-align:center;
+}
+
+.view-btn:hover{
+    background:#704020;
+}
+
+.remove-btn{
+    background:white;
+    color:#9b5b32;
+    border:1px solid #9b5b32;
+}
+
+.remove-btn:hover{
+    background:#f4e7d5;
+}
+
+.empty{
+    grid-column:1/-1;
+
+    background:white;
+
+    border-radius:10px;
+
+    text-align:center;
+
+    padding:70px 20px;
+}
+
+.empty-icon{
+    font-size:65px;
+    margin-bottom:20px;
+}
+
+.empty h2{
+    margin-bottom:15px;
+}
+
+.empty p{
+    color:#777;
+    margin-bottom:25px;
+}
+
+.shop-btn{
+    display:inline-block;
+
+    padding:13px 25px;
+
+    background:#9b5b32;
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:5px;
+}
+
+footer{
+    background:#29251f;
+    color:white;
+    text-align:center;
+    padding:45px 20px;
+}
+
+footer p{
+    color:#bbb;
+    margin-top:10px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .wishlist-grid{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+
+}
+
+@media(max-width:750px){
+
+    nav{
+        min-height:70px;
+        padding:8px 10px;
+    }
+
+    .menu{
+        display:none;
+    }
+
+    .nav-actions{
+        gap:4px;
+        overflow:hidden;
+    }
+
+    .nav-action{
+        padding:7px 8px;
+        font-size:10px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .wishlist-grid{
+        grid-template-columns:1fr;
+    }
+
+    .header h1{
+        font-size:36px;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="topbar">
+    Free shipping on orders above ₹999
+</div>
+
+
+<nav>
+
+
+    <div class="logo">
+        CRAFT<span>ORA</span>
+    </div>
+
+
+    <ul class="menu">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Shop
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Categories
+            </a>
+        </li>
+
+        <li>
+            <a href="about.html">
+                About
+            </a>
+        </li>
+
+        <li>
+            <a href="contact.html">
+                Contact
+            </a>
+        </li>
+
+    </ul>
+
+
+    <div class="nav-actions">
+
+        <a
+            href="wishlist.html"
+            class="nav-action"
+        >
+            <span class="wishlist-icon">
+                ❤️
+            </span>
+
+            Wishlist
+        </a>
+
+
+        <a
+            href="orders.html"
+            class="nav-action"
+        >
+            📦 My Orders
+        </a>
+
+
+        <a
+            href="login.html"
+            class="nav-action"
+        >
+            👤 Account
+        </a>
+
+
+        <a
+            href="cart.html"
+            class="nav-action"
+        >
+            🛒 Cart
+        </a>
+
+    </div>
+
+</nav>
+
+
+<section class="header">
+
+    <small>
+        YOUR SAVED PRODUCTS
+    </small>
+
+    <h1>
+        My Wishlist ❤️
+    </h1>
+
+    <p>
+        Your favourite handmade products in one place.
+    </p>
+
+</section>
+
+
+<section class="wishlist-container">
+
+    <div
+        class="wishlist-grid"
+        id="wishlistGrid"
+    ></div>
+
+</section>
+
+
+<footer>
+
+    <h3>
+        CRAFTORA
+    </h3>
+
+    <p>
+        Celebrating Indian craftsmanship,
+        one beautiful creation at a time.
+    </p>
+
+</footer>
+
+
+<script>
+
+
+/* =========================
+   DATABASE PRODUCTS
+========================= */
+
+let databaseProducts = {};
+
+
+/* =========================
+   ORIGINAL PRODUCTS
+========================= */
+
+const products = {
+
+    "Handmade Vase":{
+        price:1599,
+        image:"🏺",
+        id:"vase"
+    },
+
+    "Artisan Basket":{
+        price:899,
+        image:"🧺",
+        id:"basket"
+    },
+
+    "Brass Diya Set":{
+        price:1299,
+        image:"🪔",
+        id:"diya"
+    },
+
+    "Traditional Artwork":{
+        price:2499,
+        image:"🎨",
+        id:"artwork"
+    },
+
+    "Handwoven Cushion":{
+        price:699,
+        image:"🧵",
+        id:"cushion"
+    },
+
+    "Handmade Necklace":{
+        price:1799,
+        image:"📿",
+        id:"necklace"
+    },
+
+    "Handmade Painting":{
+        price:2999,
+        image:"🖼️",
+        id:"painting"
+    },
+
+    "Traditional Dupatta":{
+        price:1199,
+        image:"🧣",
+        id:"dupatta"
+    },
+
+    "Wooden Craft":{
+        price:1599,
+        image:"🪵",
+        id:"wooden"
+    },
+
+    "Handmade Jute Bag":{
+        price:799,
+        image:"👜",
+        id:"jute"
+    },
+
+    "Decorative Candle Set":{
+        price:599,
+        image:"🕯️",
+        id:"candle"
+    },
+
+    "Handcrafted Lantern":{
+        price:1899,
+        image:"🏮",
+        id:"lantern"
+    },
+
+    "Decorative Wall Hanging":{
+        price:1299,
+        image:"🪷",
+        id:"wall"
+    },
+
+    "Handmade Wall Art":{
+        price:1899,
+        image:"🧿",
+        id:"wallart"
+    },
+
+    "Terracotta Pot":{
+        price:999,
+        image:"🏺",
+        id:"pot"
+    },
+
+    "Handwoven Rug":{
+        price:2499,
+        image:"🧶",
+        id:"rug"
+    },
+
+    "Ceramic Bowl Set":{
+        price:1099,
+        image:"🥣",
+        id:"bowl"
+    },
+
+    "Handmade Mirror":{
+        price:2199,
+        image:"🪞",
+        id:"mirror"
+    },
+
+    "Handmade Toy":{
+        price:899,
+        image:"🧸",
+        id:"toy"
+    },
+
+    "Floral Decor Set":{
+        price:1499,
+        image:"🌸",
+        id:"floral"
+    }
+
+};
+
+
+/* =========================
+   GET WISHLIST
+========================= */
+
+function getWishlist(){
+
+    return JSON.parse(
+        localStorage.getItem(
+            "craftoraWishlist"
+        )
+    ) || [];
+
+}
+
+
+/* =========================
+   SAVE WISHLIST
+========================= */
+
+function saveWishlist(
+    wishlist
+){
+
+    localStorage.setItem(
+        "craftoraWishlist",
+        JSON.stringify(
+            wishlist
+        )
+    );
+
+}
+
+
+/* =========================
+   SHOW WISHLIST
+========================= */
+
+function showWishlist(){
+
+    const wishlist =
+        getWishlist();
+
+
+    const grid =
+        document.getElementById(
+            "wishlistGrid"
+        );
+
+
+    grid.innerHTML =
+        "";
+
+
+    if(
+        wishlist.length === 0
+    ){
+
+        grid.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    ♡
+                </div>
+
+                <h2>
+                    Your wishlist is empty
+                </h2>
+
+                <p>
+                    Save products you love
+                    and find them here later.
+                </p>
+
+                <a
+                    href="shop.html"
+                    class="shop-btn"
+                >
+                    Explore Products
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    wishlist.forEach(
+        function(productName){
+
+            const product =
+                products[productName];
+
+
+            /*
+                Product may come from
+                MongoDB/admin.
+            */
+
+            const dbProduct =
+                databaseProducts[
+                    productName
+                ];
+
+
+            const finalProduct =
+                product ||
+                dbProduct;
+
+
+            if(!finalProduct){
+
+                /*
+                    Don't delete it from wishlist.
+                    It may become available after
+                    database sync.
+                */
+
+                return;
+
+            }
+
+
+            const price =
+                Number(
+                    finalProduct.price ||
+                    0
+                );
+
+
+            const image =
+                finalProduct.image ||
+                "🛍️";
+
+
+            const id =
+                finalProduct.id ||
+                finalProduct.productId ||
+                finalProduct._id ||
+                productName
+                    .replaceAll(
+                        " ",
+                        "-"
+                    )
+                    .toLowerCase();
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "product-card";
+
+
+            const isImage =
+                typeof image === "string" &&
+                (
+                    image.startsWith("http") ||
+                    image.startsWith("images/") ||
+                    image.startsWith("./") ||
+                    /\.(jpg|jpeg|png|webp|gif)$/i.test(
+                        image
+                    )
+                );
+
+
+            const imageHTML =
+                isImage
+
+                ?
+
+                `
+                    <img
+                        src="${image}"
+                        alt="${productName}"
+                    >
+                `
+
+                :
+
+                image;
+
+
+            card.innerHTML = `
+
+                <div class="product-image">
+                    ${imageHTML}
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        ${productName}
+                    </h3>
+
+
+                    <div class="price">
+                        ₹${price.toLocaleString(
+                            "en-IN"
+                        )}
+                    </div>
+
+
+                    <div class="buttons">
+
+                        <a
+                            href="product.html?product=${encodeURIComponent(
+                                id
+                            )}"
+                            class="view-btn"
+                        >
+                            View Product
+                        </a>
+
+
+                        <button
+                            class="remove-btn"
+                            onclick="
+                                removeFromWishlist(
+                                    '${productName
+                                        .replaceAll(
+                                            "\\",
+                                            "\\\\"
+                                        )
+                                        .replaceAll(
+                                            "'",
+                                            "\\'"
+                                        )}'
+                                )
+                            "
+                        >
+                            Remove
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            grid.appendChild(
+                card
+            );
+
+        }
+    );
+
+
+    /*
+        If wishlist has products but
+        database product has not loaded yet,
+        show a small message instead of
+        looking broken.
+    */
+
+    if(
+        grid.children.length === 0 &&
+        wishlist.length > 0
+    ){
+
+        grid.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    🛍️
+                </div>
+
+                <h2>
+                    Loading your products...
+                </h2>
+
+                <p>
+                    Your saved products are being
+                    synced.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   REMOVE
+========================= */
+
+function removeFromWishlist(
+    productName
+){
+
+    let wishlist =
+        getWishlist();
+
+
+    wishlist =
+        wishlist.filter(
+            function(item){
+
+                return item !==
+                    productName;
+
+            }
+        );
+
+
+    saveWishlist(
+        wishlist
+    );
+
+
+    showWishlist();
+
+}
+
+
+/* =========================
+   LOAD DATABASE PRODUCTS
+   BACKGROUND ONLY
+========================= */
+
+async function loadDatabaseProducts(){
+
+    try{
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/products",
+                {
+                    method:"GET",
+                    cache:"no-store"
+                }
+            );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Unable to load products"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const list =
+            Array.isArray(data)
+                ? data
+                : (
+                    Array.isArray(
+                        data.products
+                    )
+                        ? data.products
+                        : []
+                );
+
+
+        list.forEach(
+            function(item){
+
+                if(
+                    !item ||
+                    !item.name
+                ){
+
+                    return;
+
+                }
+
+
+                databaseProducts[
+                    item.name
+                ] = {
+
+                    price:
+                        Number(
+                            item.price ||
+                            0
+                        ),
+
+                    image:
+                        item.image ||
+                        "🛍️",
+
+                    id:
+                        item.productId ||
+                        item._id ||
+                        item.name
+                            .replaceAll(
+                                " ",
+                                "-"
+                            )
+                            .toLowerCase()
+
+                };
+
+            }
+        );
+
+
+    }
+    catch(error){
+
+        console.error(
+            "Wishlist Product Sync Error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+/*
+    IMPORTANT:
+
+    Wishlist first renders from
+    localStorage.
+
+    MongoDB is loaded afterwards.
+*/
+
+showWishlist();
+
+
+loadDatabaseProducts()
+    .then(
+        function(){
+
+            showWishlist();
+
+        }
+    )
+    .catch(
+        function(error){
+
+            console.error(
+                error
+            );
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>

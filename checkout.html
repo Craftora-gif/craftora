@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Checkout — Craftora</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#faf7f2;
+    color:#29251f;
+}
+
+.topbar{
+    background:#29251f;
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-size:13px;
+}
+
+nav{
+    height:80px;
+    padding:0 6%;
+    background:white;
+    border-bottom:1px solid #eee;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+    color:#9b5b32;
+}
+
+.logo span{
+    color:#29251f;
+}
+
+.menu{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:14px;
+}
+
+.menu a:hover{
+    color:#9b5b32;
+}
+
+.nav-actions{
+    display:flex;
+    gap:15px;
+}
+
+.nav-actions a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:20px;
+}
+
+.header{
+    text-align:center;
+    padding:55px 20px 35px;
+}
+
+.header small{
+    color:#9b5b32;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.header h1{
+    font-size:45px;
+    margin:15px 0;
+}
+
+.header p{
+    color:#777;
+}
+
+.checkout{
+    max-width:1150px;
+    margin:auto;
+    padding:0 25px 80px;
+
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:30px;
+}
+
+.box{
+    background:white;
+    padding:30px;
+    border-radius:8px;
+}
+
+.box h2{
+    margin-bottom:25px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    font-weight:bold;
+    font-size:14px;
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group textarea{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:5px;
+    font-size:15px;
+    outline:none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+    border-color:#9b5b32;
+}
+
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.payment-option{
+    border:1px solid #ddd;
+    border-radius:6px;
+    padding:15px;
+    margin-bottom:10px;
+    cursor:pointer;
+}
+
+.payment-option:hover{
+    border-color:#9b5b32;
+}
+
+.order-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 0;
+    border-bottom:1px solid #eee;
+}
+
+.order-image{
+    width:55px;
+    height:55px;
+    border-radius:6px;
+
+    background:linear-gradient(
+        135deg,
+        #e9d8c7,
+        #c69b73
+    );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:25px;
+}
+
+.order-info{
+    flex:1;
+}
+
+.order-info h4{
+    margin-bottom:5px;
+}
+
+.order-info p{
+    color:#777;
+    font-size:13px;
+}
+
+.order-price{
+    font-weight:bold;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #eee;
+}
+
+.summary-row.total{
+    border-bottom:0;
+    font-size:20px;
+    font-weight:bold;
+    padding-top:20px;
+}
+
+.total-price{
+    color:#9b5b32;
+}
+
+.place-order{
+    width:100%;
+    margin-top:20px;
+    padding:16px;
+    border:0;
+    border-radius:5px;
+    background:#9b5b32;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.place-order:hover{
+    background:#704020;
+}
+
+.place-order:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.empty{
+    grid-column:1 / -1;
+
+    max-width:700px;
+    margin:70px auto;
+
+    background:white;
+    border-radius:10px;
+    padding:60px 20px;
+
+    text-align:center;
+}
+
+.empty h2{
+    margin-bottom:15px;
+}
+
+.empty p{
+    color:#777;
+    margin-bottom:25px;
+}
+
+.shop-btn{
+    display:inline-block;
+    padding:13px 25px;
+    background:#9b5b32;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+.login-required{
+    grid-column:1 / -1;
+
+    max-width:650px;
+    margin:70px auto;
+
+    background:white;
+    border-radius:10px;
+    padding:60px 25px;
+
+    text-align:center;
+}
+
+.login-required .icon{
+    font-size:60px;
+    margin-bottom:20px;
+}
+
+.login-required h2{
+    margin-bottom:12px;
+}
+
+.login-required p{
+    color:#777;
+    margin-bottom:25px;
+    line-height:1.7;
+}
+
+.login-btn{
+    display:inline-block;
+    padding:13px 28px;
+    background:#9b5b32;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+.success{
+    display:none;
+    text-align:center;
+    padding:40px 20px;
+}
+
+.success-icon{
+    font-size:65px;
+    margin-bottom:20px;
+}
+
+.success h2{
+    margin-bottom:12px;
+}
+
+.success p{
+    color:#777;
+    line-height:1.7;
+}
+
+.success a{
+    display:inline-block;
+    margin-top:25px;
+    padding:13px 25px;
+    background:#9b5b32;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+.buy-mode{
+    display:inline-block;
+    background:#f4e7d5;
+    color:#9b5b32;
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.cart-mode{
+    display:inline-block;
+    background:#eee;
+    color:#29251f;
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.error-message{
+    display:none;
+    margin-top:15px;
+    padding:12px;
+    border-radius:5px;
+    background:#fff0f0;
+    color:#b00020;
+    font-size:14px;
+    text-align:center;
+}
+
+footer{
+    background:#29251f;
+    color:white;
+    text-align:center;
+    padding:45px 20px;
+}
+
+footer p{
+    color:#bbb;
+    margin-top:10px;
+}
+
+@media(max-width:800px){
+
+    .menu{
+        display:none;
+    }
+
+    .checkout{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:550px){
+
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+    .header h1{
+        font-size:36px;
+    }
+
+    .box{
+        padding:20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="topbar">
+    Free shipping on orders above ₹999
+</div>
+
+
+<nav>
+
+    <div class="logo">
+        CRAFT<span>ORA</span>
+    </div>
+
+
+    <ul class="menu">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Shop
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Categories
+            </a>
+        </li>
+
+        <li>
+            <a href="about.html">
+                About
+            </a>
+        </li>
+
+        <li>
+            <a href="contact.html">
+                Contact
+            </a>
+        </li>
+
+    </ul>
+
+
+    <div class="nav-actions">
+
+        <a href="wishlist.html">
+            ❤️
+        </a>
+
+        <a href="login.html">
+            👤
+        </a>
+
+        <a href="cart.html">
+            🛒
+        </a>
+
+    </div>
+
+</nav>
+
+
+<section class="header">
+
+    <small>
+        SECURE CHECKOUT
+    </small>
+
+    <h1>
+        Checkout 💳
+    </h1>
+
+    <p>
+        Complete your order securely.
+    </p>
+
+</section>
+
+
+<section
+    class="checkout"
+    id="checkoutArea"
+>
+
+    <div class="box">
+
+        <h2>
+            Delivery Information
+        </h2>
+
+
+        <form
+            id="checkoutForm"
+            onsubmit="placeOrder(event)"
+        >
+
+            <div class="form-group">
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Phone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter phone number"
+                        maxlength="10"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Address
+                </label>
+
+                <textarea
+                    id="address"
+                    rows="4"
+                    placeholder="House No., Street, Area"
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        City
+                    </label>
+
+                    <input
+                        type="text"
+                        id="city"
+                        placeholder="City"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        PIN Code
+                    </label>
+
+                    <input
+                        type="text"
+                        id="pincode"
+                        placeholder="6-digit PIN"
+                        maxlength="6"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <h2 style="margin-top:25px;">
+                Payment Method
+            </h2>
+
+
+            <div class="payment-option">
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="payment"
+                        value="cod"
+                        checked
+                    >
+
+                    💵 Cash on Delivery
+
+                </label>
+
+            </div>
+
+
+            <div class="payment-option">
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="payment"
+                        value="upi"
+                    >
+
+                    📱 UPI
+
+                </label>
+
+            </div>
+
+
+            <div class="payment-option">
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="payment"
+                        value="card"
+                    >
+
+                    💳 Credit / Debit Card
+
+                </label>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="place-order"
+                id="placeOrderButton"
+            >
+                Place Order
+            </button>
+
+
+            <div
+                class="error-message"
+                id="errorMessage"
+            ></div>
+
+        </form>
+
+
+        <div
+            class="success"
+            id="success"
+        >
+        </div>
+
+    </div>
+
+
+    <div class="box">
+
+        <h2>
+            Your Order
+        </h2>
+
+        <div id="checkoutMode"></div>
+
+        <div id="orderItems"></div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Subtotal
+            </span>
+
+            <span id="subtotal">
+                ₹0
+            </span>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Shipping
+            </span>
+
+            <span id="shipping">
+                ₹0
+            </span>
+
+        </div>
+
+
+        <div class="summary-row total">
+
+            <span>
+                Total
+            </span>
+
+            <span
+                class="total-price"
+                id="total"
+            >
+                ₹0
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <h3>
+        CRAFTORA
+    </h3>
+
+    <p>
+        Celebrating Indian craftsmanship,
+        one beautiful creation at a time.
+    </p>
+
+</footer>
+
+
+<script>
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let checkoutType = "cart";
+
+let checkoutItems = [];
+
+let currentSubtotal = 0;
+
+let currentShipping = 0;
+
+let currentTotal = 0;
+
+
+/* =========================
+   LOGIN CHECK
+========================= */
+
+function getLoggedUser(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                "craftoraUser"
+            )
+        ) || null;
+
+    }catch(error){
+
+        return null;
+
+    }
+
+}
+
+
+function checkLogin(){
+
+    const loggedIn =
+        localStorage.getItem(
+            "craftoraLoggedIn"
+        );
+
+    const user =
+        getLoggedUser();
+
+
+    if(
+        loggedIn !== "true" ||
+        !user ||
+        !user.id
+    ){
+
+        document.getElementById(
+            "checkoutArea"
+        ).innerHTML = `
+
+            <div class="login-required">
+
+                <div class="icon">
+                    🔐
+                </div>
+
+                <h2>
+                    Login Required
+                </h2>
+
+                <p>
+                    Please login to your Craftora account
+                    before proceeding to checkout.
+                </p>
+
+                <a
+                    href="login.html"
+                    class="login-btn"
+                >
+                    Login to Continue
+                </a>
+
+            </div>
+
+        `;
+
+        return false;
+
+    }
+
+    return true;
+
+}
+
+
+/* =========================
+   FILL USER DATA
+========================= */
+
+function fillUserData(){
+
+    const user =
+        getLoggedUser();
+
+
+    if(!user){
+        return;
+    }
+
+
+    const nameInput =
+        document.getElementById(
+            "name"
+        );
+
+    const phoneInput =
+        document.getElementById(
+            "phone"
+        );
+
+
+    if(
+        nameInput &&
+        user.name
+    ){
+
+        nameInput.value =
+            user.name;
+
+    }
+
+
+    if(
+        phoneInput &&
+        user.mobile
+    ){
+
+        phoneInput.value =
+            user.mobile;
+
+    }
+
+}
+
+
+/* =========================
+   GET CART
+========================= */
+
+function getCart(){
+
+    return JSON.parse(
+        localStorage.getItem(
+            "craftoraCart"
+        )
+    ) || [];
+
+}
+
+
+/* =========================
+   GET BUY NOW
+========================= */
+
+function getBuyNow(){
+
+    /*
+        Current Buy Now
+    */
+
+    const directBuy =
+        JSON.parse(
+            sessionStorage.getItem(
+                "craftoraDirectBuy"
+            )
+        );
+
+
+    if(directBuy){
+
+        return [directBuy];
+
+    }
+
+
+    /*
+        Old Buy Now support
+    */
+
+    const oldBuy =
+        JSON.parse(
+            localStorage.getItem(
+                "craftoraBuyNow"
+            )
+        );
+
+
+    if(
+        Array.isArray(oldBuy) &&
+        oldBuy.length > 0
+    ){
+
+        return oldBuy;
+
+    }
+
+
+    return [];
+
+}
+
+
+/* =========================
+   SHOW ORDER
+========================= */
+
+function showOrder(){
+
+    const buyNow =
+        getBuyNow();
+
+
+    if(
+        buyNow &&
+        buyNow.length > 0
+    ){
+
+        checkoutItems =
+            buyNow;
+
+        checkoutType =
+            "buy";
+
+    }else{
+
+        checkoutItems =
+            getCart();
+
+        checkoutType =
+            "cart";
+
+    }
+
+
+    if(
+        checkoutItems.length === 0
+    ){
+
+        document.getElementById(
+            "checkoutArea"
+        ).innerHTML = `
+
+            <div class="empty">
+
+                <h2>
+                    Your cart is empty 🛒
+                </h2>
+
+                <p>
+                    Add some products before
+                    proceeding to checkout.
+                </p>
+
+                <a
+                    href="shop.html"
+                    class="shop-btn"
+                >
+                    Go to Shop
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const mode =
+        document.getElementById(
+            "checkoutMode"
+        );
+
+
+    if(
+        checkoutType === "buy"
+    ){
+
+        mode.innerHTML = `
+
+            <div class="buy-mode">
+                ⚡ BUY NOW — Selected Product
+            </div>
+
+        `;
+
+    }else{
+
+        mode.innerHTML = `
+
+            <div class="cart-mode">
+                🛒 CART ORDER
+            </div>
+
+        `;
+
+    }
+
+
+    const container =
+        document.getElementById(
+            "orderItems"
+        );
+
+
+    container.innerHTML =
+        "";
+
+
+    currentSubtotal =
+        0;
+
+
+    checkoutItems.forEach(
+        function(item){
+
+            const quantity =
+                Number(item.quantity) || 1;
+
+
+            const price =
+                Number(item.price) || 0;
+
+
+            const itemTotal =
+                price * quantity;
+
+
+            currentSubtotal +=
+                itemTotal;
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "order-item";
+
+
+            div.innerHTML = `
+
+                <div class="order-image">
+                    ${item.image || "🛍️"}
+                </div>
+
+                <div class="order-info">
+
+                    <h4>
+                        ${item.name}
+                    </h4>
+
+                    <p>
+                        Quantity:
+                        ${quantity}
+                    </p>
+
+                </div>
+
+                <div class="order-price">
+                    ₹${itemTotal.toLocaleString("en-IN")}
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                div
+            );
+
+        }
+    );
+
+
+    currentShipping =
+        currentSubtotal >= 999
+        ? 0
+        : 99;
+
+
+    currentTotal =
+        currentSubtotal +
+        currentShipping;
+
+
+    document.getElementById(
+        "subtotal"
+    ).innerText =
+        "₹" +
+        currentSubtotal.toLocaleString(
+            "en-IN"
+        );
+
+
+    document.getElementById(
+        "shipping"
+    ).innerText =
+        currentShipping === 0
+        ? "FREE"
+        : "₹" +
+          currentShipping.toLocaleString(
+              "en-IN"
+          );
+
+
+    document.getElementById(
+        "total"
+    ).innerText =
+        "₹" +
+        currentTotal.toLocaleString(
+            "en-IN"
+        );
+
+}
+
+
+/* =========================
+   PLACE ORDER
+========================= */
+
+async function placeOrder(event){
+
+    event.preventDefault();
+
+
+    const user =
+        getLoggedUser();
+
+
+    if(
+        !user ||
+        !user.id
+    ){
+
+        alert(
+            "Please login before placing an order."
+        );
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    const name =
+        document.getElementById(
+            "name"
+        ).value.trim();
+
+
+    const email =
+        document.getElementById(
+            "email"
+        ).value.trim();
+
+
+    const phone =
+        document.getElementById(
+            "phone"
+        ).value.trim();
+
+
+    const address =
+        document.getElementById(
+            "address"
+        ).value.trim();
+
+
+    const city =
+        document.getElementById(
+            "city"
+        ).value.trim();
+
+
+    const pincode =
+        document.getElementById(
+            "pincode"
+        ).value.trim();
+
+
+    const payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        );
+
+
+    const errorMessage =
+        document.getElementById(
+            "errorMessage"
+        );
+
+
+    const placeButton =
+        document.getElementById(
+            "placeOrderButton"
+        );
+
+
+    errorMessage.style.display =
+        "none";
+
+
+    /* PIN CHECK */
+
+    if(
+        pincode.length !== 6 ||
+        isNaN(pincode)
+    ){
+
+        errorMessage.innerText =
+            "Please enter a valid 6-digit PIN code.";
+
+        errorMessage.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    /* PHONE CHECK */
+
+    if(
+        phone.length !== 10 ||
+        isNaN(phone)
+    ){
+
+        errorMessage.innerText =
+            "Please enter a valid 10-digit phone number.";
+
+        errorMessage.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    if(
+        !payment
+    ){
+
+        errorMessage.innerText =
+            "Please select a payment method.";
+
+        errorMessage.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    if(
+        checkoutItems.length === 0
+    ){
+
+        errorMessage.innerText =
+            "Your order is empty.";
+
+        errorMessage.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    const orderNumber =
+        "CR" +
+        Date.now()
+        .toString()
+        .slice(-6);
+
+
+    const orderData = {
+
+        userId:
+            user.id,
+
+        customer: {
+
+            name:
+                name,
+
+            email:
+                email,
+
+            phone:
+                phone,
+
+            address:
+                address,
+
+            city:
+                city,
+
+            pincode:
+                pincode
+
+        },
+
+        items:
+            checkoutItems.map(
+                function(item){
+
+                    return {
+
+                        name:
+                            item.name,
+
+                        price:
+                            Number(item.price),
+
+                        image:
+                            item.image || "",
+
+                        quantity:
+                            Number(item.quantity) || 1
+
+                    };
+
+                }
+            ),
+
+        subtotal:
+            currentSubtotal,
+
+        shipping:
+            currentShipping,
+
+        total:
+            currentTotal,
+
+        paymentMethod:
+            payment.value,
+
+        orderNumber:
+            orderNumber
+
+    };
+
+
+    /* DISABLE BUTTON */
+
+    placeButton.disabled =
+        true;
+
+    placeButton.innerText =
+        "Placing Order...";
+
+
+    try{
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/orders",
+                {
+
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            orderData
+                        )
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            !response.ok
+        ){
+
+            throw new Error(
+                data.message ||
+                "Unable to place order."
+            );
+
+        }
+
+
+        /*
+            ONLY CLEAR DATA
+            AFTER SERVER SUCCESS
+        */
+
+        if(
+            checkoutType === "buy"
+        ){
+
+            sessionStorage.removeItem(
+                "craftoraDirectBuy"
+            );
+
+            localStorage.removeItem(
+                "craftoraBuyNow"
+            );
+
+        }else{
+
+            localStorage.removeItem(
+                "craftoraCart"
+            );
+
+        }
+
+
+        localStorage.setItem(
+            "craftoraLastOrder",
+            data.order.orderNumber
+        );
+
+
+        /* HIDE FORM */
+
+        document.getElementById(
+            "checkoutForm"
+        ).style.display =
+            "none";
+
+
+        /* SUCCESS */
+
+        const success =
+            document.getElementById(
+                "success"
+            );
+
+
+        success.style.display =
+            "block";
+
+
+        success.innerHTML = `
+
+            <div class="success-icon">
+                ✅
+            </div>
+
+            <h2>
+                Order Placed Successfully!
+            </h2>
+
+            <p>
+                Thank you, ${name}!
+            </p>
+
+            <p>
+                Your Order ID is:
+                <strong>
+                    ${data.order.orderNumber}
+                </strong>
+            </p>
+
+            <p>
+                Order Status:
+                <strong>
+                    ${data.order.status}
+                </strong>
+            </p>
+
+            <a href="index.html">
+                Continue Shopping
+            </a>
+
+        `;
+
+
+    }catch(error){
+
+        console.error(
+            "Order Error:",
+            error
+        );
+
+
+        errorMessage.innerText =
+            error.message ||
+            "Something went wrong while placing your order.";
+
+        errorMessage.style.display =
+            "block";
+
+
+        placeButton.disabled =
+            false;
+
+        placeButton.innerText =
+            "Place Order";
+
+    }
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+if(
+    checkLogin()
+){
+
+    fillUserData();
+
+    showOrder();
+
+}
+
+</script>
+
+
+</body>
+
+</html>

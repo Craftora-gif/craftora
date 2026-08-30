@@ -1,0 +1,2096 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Products — Craftora Admin</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f2ed;
+    color:#29251f;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.admin-header{
+    background:#29251f;
+    color:white;
+
+    padding:20px 5%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:20px;
+}
+
+.admin-logo{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.admin-logo span{
+    color:#d99c63;
+}
+
+.header-actions{
+    display:flex;
+    gap:10px;
+}
+
+.header-btn{
+    text-decoration:none;
+
+    color:white;
+
+    border:1px solid #aaa;
+
+    background:transparent;
+
+    padding:9px 14px;
+
+    border-radius:5px;
+
+    font-size:13px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.header-btn:hover{
+    background:white;
+    color:#29251f;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    max-width:1250px;
+
+    margin:auto;
+
+    padding:45px 20px 80px;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.page-title{
+    margin-bottom:30px;
+}
+
+.page-title small{
+    color:#9b5b32;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+}
+
+.page-title h1{
+    font-size:40px;
+
+    margin:12px 0;
+}
+
+.page-title p{
+    color:#777;
+}
+
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+    background:white;
+
+    padding:18px;
+
+    border-radius:9px;
+
+    margin-bottom:25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0,0,0,.05);
+}
+
+.search-box{
+    flex:1;
+
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+
+    padding:12px 15px;
+
+    border:1px solid #ddd;
+
+    border-radius:6px;
+
+    outline:none;
+
+    font-size:14px;
+}
+
+.search-box input:focus{
+    border-color:#9b5b32;
+}
+
+.add-btn{
+    border:0;
+
+    background:#9b5b32;
+
+    color:white;
+
+    padding:12px 20px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.2s;
+}
+
+.add-btn:hover{
+    background:#704020;
+
+    transform:translateY(-1px);
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message{
+    display:none;
+
+    padding:13px 16px;
+
+    border-radius:6px;
+
+    margin-bottom:20px;
+
+    font-size:14px;
+
+    font-weight:bold;
+}
+
+.message.success{
+    display:block;
+
+    background:#e8f5e9;
+
+    color:#2e7d32;
+
+    border:1px solid #c8e6c9;
+}
+
+.message.error{
+    display:block;
+
+    background:#ffebee;
+
+    color:#c62828;
+
+    border:1px solid #ffcdd2;
+}
+
+
+/* =========================
+   PRODUCTS GRID
+========================= */
+
+.products{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+
+/* =========================
+   PRODUCT CARD
+========================= */
+
+.product-card{
+    background:white;
+
+    border-radius:9px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0,0,0,.05);
+
+    transition:.25s;
+}
+
+.product-card:hover{
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 12px 28px
+        rgba(0,0,0,.08);
+}
+
+
+/* PRODUCT IMAGE */
+
+.product-image{
+    height:210px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e9d8c7,
+            #c69b73
+        );
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:75px;
+}
+
+
+/* PRODUCT CONTENT */
+
+.product-content{
+    padding:20px;
+}
+
+.product-content h2{
+    font-size:19px;
+
+    margin-bottom:7px;
+}
+
+.category{
+    display:inline-block;
+
+    background:#f4e7d5;
+
+    color:#9b5b32;
+
+    padding:5px 9px;
+
+    border-radius:20px;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    margin-bottom:13px;
+}
+
+.description{
+    color:#777;
+
+    font-size:13px;
+
+    line-height:1.5;
+
+    min-height:40px;
+
+    margin-bottom:15px;
+}
+
+.product-meta{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:10px;
+
+    margin-bottom:17px;
+}
+
+.meta-box{
+    background:#faf7f2;
+
+    padding:10px;
+
+    border-radius:5px;
+}
+
+.meta-box small{
+    display:block;
+
+    color:#888;
+
+    font-size:10px;
+
+    margin-bottom:4px;
+}
+
+.meta-box strong{
+    font-size:15px;
+
+    color:#9b5b32;
+}
+
+
+/* ACTIONS */
+
+.actions{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:8px;
+}
+
+.edit-btn,
+.delete-btn{
+    padding:10px;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+    font-weight:bold;
+}
+
+.edit-btn{
+    background:white;
+
+    border:1px solid #9b5b32;
+
+    color:#9b5b32;
+}
+
+.edit-btn:hover{
+    background:#f4e7d5;
+}
+
+.delete-btn{
+    background:#fff;
+
+    border:1px solid #c62828;
+
+    color:#c62828;
+}
+
+.delete-btn:hover{
+    background:#ffebee;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.55);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:100;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+
+    max-width:600px;
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    background:white;
+
+    border-radius:10px;
+
+    padding:30px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.25);
+}
+
+.modal-header{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:25px;
+}
+
+.modal-header h2{
+    font-size:25px;
+}
+
+.close-btn{
+    border:0;
+
+    background:#f5f2ed;
+
+    width:35px;
+
+    height:35px;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:20px;
+
+    color:#555;
+}
+
+.close-btn:hover{
+    background:#eee;
+}
+
+
+/* FORM */
+
+.form-group{
+    margin-bottom:17px;
+}
+
+.form-group label{
+    display:block;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    width:100%;
+
+    padding:11px 12px;
+
+    border:1px solid #ddd;
+
+    border-radius:5px;
+
+    outline:none;
+
+    font-family:Arial,sans-serif;
+
+    font-size:14px;
+}
+
+.form-group textarea{
+    resize:vertical;
+
+    min-height:85px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+    border-color:#9b5b32;
+}
+
+.form-row{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:15px;
+}
+
+.form-actions{
+    display:flex;
+
+    gap:10px;
+
+    margin-top:25px;
+}
+
+.save-btn{
+    flex:1;
+
+    border:0;
+
+    background:#9b5b32;
+
+    color:white;
+
+    padding:13px;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+.save-btn:hover{
+    background:#704020;
+}
+
+.cancel-btn{
+    flex:1;
+
+    border:1px solid #ccc;
+
+    background:white;
+
+    color:#555;
+
+    padding:13px;
+
+    border-radius:5px;
+
+    cursor:pointer;
+}
+
+.cancel-btn:hover{
+    background:#f5f2ed;
+}
+
+
+/* EMPTY */
+
+.empty{
+    background:white;
+
+    padding:70px 25px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+    grid-column:1/-1;
+}
+
+.empty-icon{
+    font-size:60px;
+
+    margin-bottom:15px;
+}
+
+.empty h2{
+    margin-bottom:10px;
+}
+
+.empty p{
+    color:#777;
+}
+
+
+/* LOADING */
+
+.loading{
+    background:white;
+
+    padding:60px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+    color:#777;
+
+    grid-column:1/-1;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .products{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    .admin-header{
+        align-items:flex-start;
+
+        flex-direction:column;
+    }
+
+    .header-actions{
+        width:100%;
+    }
+
+    .header-btn{
+        flex:1;
+
+        text-align:center;
+    }
+
+    .toolbar{
+        align-items:stretch;
+
+        flex-direction:column;
+    }
+
+    .products{
+        grid-template-columns:1fr;
+    }
+
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+    .modal-box{
+        padding:22px;
+    }
+
+    .page-title h1{
+        font-size:32px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="admin-header">
+
+    <div class="admin-logo">
+        CRAFT<span>ORA</span> ADMIN
+    </div>
+
+
+    <div class="header-actions">
+
+        <a
+            href="admin.html"
+            class="header-btn"
+        >
+            ← Orders
+        </a>
+
+
+        <a
+            href="index.html"
+            class="header-btn"
+        >
+            Website
+        </a>
+
+
+        <button
+            class="header-btn"
+            onclick="adminLogout()"
+        >
+            Logout
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="container">
+
+
+    <div class="page-title">
+
+        <small>
+            ADMIN DASHBOARD
+        </small>
+
+        <h1>
+            Products 🛍️
+        </h1>
+
+        <p>
+            Add, edit and manage your Craftora products.
+        </p>
+
+    </div>
+
+
+    <!-- TOOLBAR -->
+
+    <div class="toolbar">
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search products..."
+                oninput="filterProducts()"
+            >
+
+        </div>
+
+
+        <button
+            class="add-btn"
+            onclick="openAddModal()"
+        >
+            + Add Product
+        </button>
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    <div
+        id="message"
+        class="message"
+    ></div>
+
+
+    <!-- PRODUCTS -->
+
+    <div
+        class="products"
+        id="productsContainer"
+    >
+
+        <div class="loading">
+            Loading products...
+        </div>
+
+    </div>
+
+
+</main>
+
+
+<!-- =========================
+     PRODUCT MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="productModal"
+>
+
+
+    <div class="modal-box">
+
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Add Product
+            </h2>
+
+
+            <button
+                class="close-btn"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form
+            id="productForm"
+            onsubmit="saveProduct(event)"
+        >
+
+
+            <div class="form-group">
+
+                <label>
+                    Product Name *
+                </label>
+
+                <input
+                    type="text"
+                    id="productName"
+                    placeholder="e.g. Handmade Vase"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Price (₹) *
+                    </label>
+
+                    <input
+                        type="number"
+                        id="productPrice"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Stock *
+                    </label>
+
+                    <input
+                        type="number"
+                        id="productStock"
+                        min="0"
+                        value="0"
+                        required
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Product ID *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="productId"
+                        placeholder="e.g. handmade-vase"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Category
+                    </label>
+
+                    <select
+                        id="productCategory"
+                    >
+
+                        <option value="Home Decor">
+                            Home Decor
+                        </option>
+
+                        <option value="Textiles">
+                            Textiles
+                        </option>
+
+                        <option value="Jewellery">
+                            Jewellery
+                        </option>
+
+                        <option value="Art & Craft">
+                            Art & Craft
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Product Image / Emoji
+                </label>
+
+                <input
+                    type="text"
+                    id="productImage"
+                    placeholder="e.g. 🏺"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    id="productDescription"
+                    placeholder="Write a short product description..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    onclick="closeModal()"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                    id="saveButton"
+                >
+                    Add Product
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let allProducts = [];
+
+let editingProductId = null;
+
+
+/* =========================
+   ADMIN TOKEN
+========================= */
+
+function getAdminToken(){
+
+    return sessionStorage.getItem(
+        "craftoraAdminToken"
+    );
+
+}
+
+
+/* =========================
+   CHECK LOGIN
+========================= */
+
+function checkAdminLogin(){
+
+    const token =
+        getAdminToken();
+
+
+    if(!token){
+
+        window.location.href =
+            "admin-login.html";
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(
+    text,
+    type = "success"
+){
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    message.innerText =
+        text;
+
+
+    message.className =
+        "message " +
+        type;
+
+
+    setTimeout(
+        function(){
+
+            message.className =
+                "message";
+
+            message.innerText =
+                "";
+
+        },
+        2500
+    );
+
+}
+
+
+/* =========================
+   LOAD PRODUCTS
+========================= */
+
+async function loadProducts(){
+
+    const container =
+        document.getElementById(
+            "productsContainer"
+        );
+
+
+    const token =
+        getAdminToken();
+
+
+    try{
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/admin/products",
+                {
+
+                    method:"GET",
+
+                    headers:{
+
+                        "Authorization":
+                            "Bearer " + token
+
+                    }
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            response.status === 401
+        ){
+
+            sessionStorage.removeItem(
+                "craftoraAdminToken"
+            );
+
+            window.location.href =
+                "admin-login.html";
+
+            return;
+
+        }
+
+
+        if(
+            !response.ok
+        ){
+
+            throw new Error(
+                data.message ||
+                "Unable to load products."
+            );
+
+        }
+
+
+        allProducts =
+            data.products || [];
+
+
+        renderProducts(
+            allProducts
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    ⚠️
+                </div>
+
+                <h2>
+                    Unable to Load Products
+                </h2>
+
+                <p>
+                    ${error.message}
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   RENDER PRODUCTS
+========================= */
+
+function renderProducts(
+    products
+){
+
+    const container =
+        document.getElementById(
+            "productsContainer"
+        );
+
+
+    if(
+        products.length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    🛍️
+                </div>
+
+                <h2>
+                    No Products Yet
+                </h2>
+
+                <p>
+                    Click "Add Product" to create your first product.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        "";
+
+
+    products.forEach(
+        function(product){
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "product-card";
+
+
+            card.innerHTML = `
+
+                <div class="product-image">
+
+                    ${product.image || "🛍️"}
+
+                </div>
+
+
+                <div class="product-content">
+
+                    <span class="category">
+                        ${product.category || "Other"}
+                    </span>
+
+
+                    <h2>
+                        ${product.name}
+                    </h2>
+
+
+                    <p class="description">
+                        ${product.description || "No description available."}
+                    </p>
+
+
+                    <div class="product-meta">
+
+
+                        <div class="meta-box">
+
+                            <small>
+                                PRICE
+                            </small>
+
+                            <strong>
+                                ₹${Number(
+                                    product.price || 0
+                                ).toLocaleString("en-IN")}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="meta-box">
+
+                            <small>
+                                STOCK
+                            </small>
+
+                            <strong>
+                                ${product.stock || 0}
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="actions">
+
+                        <button
+                            class="edit-btn"
+                            onclick="openEditModal('${product._id}')"
+                        >
+                            ✏️ Edit
+                        </button>
+
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteProduct('${product._id}')"
+                        >
+                            🗑️ Delete
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function filterProducts(){
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const filtered =
+        allProducts.filter(
+            function(product){
+
+                return (
+
+                    product.name
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    (
+                        product.category ||
+                        ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    (
+                        product.productId ||
+                        ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                );
+
+            }
+        );
+
+
+    renderProducts(
+        filtered
+    );
+
+}
+
+
+/* =========================
+   OPEN ADD MODAL
+========================= */
+
+function openAddModal(){
+
+    editingProductId =
+        null;
+
+
+    document.getElementById(
+        "modalTitle"
+    ).innerText =
+        "Add Product";
+
+
+    document.getElementById(
+        "saveButton"
+    ).innerText =
+        "Add Product";
+
+
+    document.getElementById(
+        "productForm"
+    ).reset();
+
+
+    document.getElementById(
+        "productStock"
+    ).value =
+        "0";
+
+
+    document.getElementById(
+        "productModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================
+   OPEN EDIT MODAL
+========================= */
+
+function openEditModal(
+    id
+){
+
+    const product =
+        allProducts.find(
+            function(item){
+
+                return item._id === id;
+
+            }
+        );
+
+
+    if(!product){
+        return;
+    }
+
+
+    editingProductId =
+        id;
+
+
+    document.getElementById(
+        "modalTitle"
+    ).innerText =
+        "Edit Product";
+
+
+    document.getElementById(
+        "saveButton"
+    ).innerText =
+        "Save Changes";
+
+
+    document.getElementById(
+        "productName"
+    ).value =
+        product.name || "";
+
+
+    document.getElementById(
+        "productPrice"
+    ).value =
+        product.price || 0;
+
+
+    document.getElementById(
+        "productStock"
+    ).value =
+        product.stock || 0;
+
+
+    document.getElementById(
+        "productId"
+    ).value =
+        product.productId || "";
+
+
+    document.getElementById(
+        "productCategory"
+    ).value =
+        product.category || "Other";
+
+
+    document.getElementById(
+        "productImage"
+    ).value =
+        product.image || "";
+
+
+    document.getElementById(
+        "productDescription"
+    ).value =
+        product.description || "";
+
+
+    document.getElementById(
+        "productModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================
+   CLOSE MODAL
+========================= */
+
+function closeModal(){
+
+    document.getElementById(
+        "productModal"
+    ).classList.remove(
+        "show"
+    );
+
+
+    editingProductId =
+        null;
+
+}
+
+
+/* =========================
+   SAVE PRODUCT
+========================= */
+
+async function saveProduct(
+    event
+){
+
+    event.preventDefault();
+
+
+    const token =
+        getAdminToken();
+
+
+    const productData = {
+
+        name:
+            document.getElementById(
+                "productName"
+            ).value.trim(),
+
+        price:
+            Number(
+                document.getElementById(
+                    "productPrice"
+                ).value
+            ),
+
+        stock:
+            Number(
+                document.getElementById(
+                    "productStock"
+                ).value
+            ),
+
+        productId:
+            document.getElementById(
+                "productId"
+            ).value.trim(),
+
+        category:
+            document.getElementById(
+                "productCategory"
+            ).value,
+
+        image:
+            document.getElementById(
+                "productImage"
+            ).value.trim(),
+
+        description:
+            document.getElementById(
+                "productDescription"
+            ).value.trim()
+
+    };
+
+
+    const saveButton =
+        document.getElementById(
+            "saveButton"
+        );
+
+
+    saveButton.disabled =
+        true;
+
+
+    saveButton.innerText =
+        "Saving...";
+
+
+    try{
+
+        let url =
+            "http://localhost:5000/api/admin/products";
+
+
+        let method =
+            "POST";
+
+
+        if(
+            editingProductId
+        ){
+
+            url +=
+                "/" +
+                editingProductId;
+
+            method =
+                "PUT";
+
+        }
+
+
+        const response =
+            await fetch(
+                url,
+                {
+
+                    method:
+                        method,
+
+                    headers:{
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Authorization":
+                            "Bearer " + token
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            productData
+                        )
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            response.status === 401
+        ){
+
+            sessionStorage.removeItem(
+                "craftoraAdminToken"
+            );
+
+            window.location.href =
+                "admin-login.html";
+
+            return;
+
+        }
+
+
+        if(
+            !response.ok
+        ){
+
+            throw new Error(
+                data.message ||
+                "Unable to save product."
+            );
+
+        }
+
+
+        closeModal();
+
+
+        showMessage(
+            editingProductId
+                ? "✓ Product updated successfully."
+                : "✓ Product added successfully.",
+            "success"
+        );
+
+
+        await loadProducts();
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+
+        showMessage(
+            error.message,
+            "error"
+        );
+
+    }
+
+    finally{
+
+        saveButton.disabled =
+            false;
+
+
+        saveButton.innerText =
+            editingProductId
+                ? "Save Changes"
+                : "Add Product";
+
+    }
+
+}
+
+
+/* =========================
+   DELETE PRODUCT
+========================= */
+
+async function deleteProduct(
+    id
+){
+
+    const token =
+        getAdminToken();
+
+
+    /*
+        No alert / OK popup.
+        We use inline confirmation instead.
+    */
+
+    const card =
+        document.querySelector(
+            `[onclick="deleteProduct('${id}')"]`
+        );
+
+
+    if(!card){
+        return;
+    }
+
+
+    const button =
+        card;
+
+
+    if(
+        button.dataset.confirming !== "true"
+    ){
+
+        button.dataset.confirming =
+            "true";
+
+        button.innerText =
+            "Confirm Delete";
+
+        button.style.background =
+            "#c62828";
+
+        button.style.color =
+            "white";
+
+
+        setTimeout(
+            function(){
+
+                if(
+                    button.dataset.confirming ===
+                    "true"
+                ){
+
+                    button.dataset.confirming =
+                        "false";
+
+                    button.innerText =
+                        "🗑️ Delete";
+
+                    button.style.background =
+                        "";
+
+                    button.style.color =
+                        "";
+
+                }
+
+            },
+            3000
+        );
+
+
+        return;
+
+    }
+
+
+    button.disabled =
+        true;
+
+
+    button.innerText =
+        "Deleting...";
+
+
+    try{
+
+        const response =
+            await fetch(
+
+                "http://localhost:5000/api/admin/products/" +
+                id,
+
+                {
+
+                    method:"DELETE",
+
+                    headers:{
+
+                        "Authorization":
+                            "Bearer " + token
+
+                    }
+
+                }
+
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            response.status === 401
+        ){
+
+            sessionStorage.removeItem(
+                "craftoraAdminToken"
+            );
+
+            window.location.href =
+                "admin-login.html";
+
+            return;
+
+        }
+
+
+        if(
+            !response.ok
+        ){
+
+            throw new Error(
+                data.message ||
+                "Unable to delete product."
+            );
+
+        }
+
+
+        showMessage(
+            "✓ Product removed successfully.",
+            "success"
+        );
+
+
+        await loadProducts();
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+
+        showMessage(
+            error.message,
+            "error"
+        );
+
+
+        button.disabled =
+            false;
+
+        button.dataset.confirming =
+            "false";
+
+        button.innerText =
+            "🗑️ Delete";
+
+    }
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+async function adminLogout(){
+
+    const token =
+        getAdminToken();
+
+
+    try{
+
+        if(token){
+
+            await fetch(
+                "http://localhost:5000/api/admin/logout",
+                {
+
+                    method:"POST",
+
+                    headers:{
+
+                        "Authorization":
+                            "Bearer " + token
+
+                    }
+
+                }
+            );
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+    }
+
+
+    sessionStorage.removeItem(
+        "craftoraAdminToken"
+    );
+
+
+    sessionStorage.removeItem(
+        "craftoraAdminLoggedIn"
+    );
+
+
+    window.location.href =
+        "admin-login.html";
+
+}
+
+
+/* =========================
+   CLOSE MODAL ON OUTSIDE
+========================= */
+
+document.getElementById(
+    "productModal"
+)
+.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target === this
+        ){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   START
+========================= */
+
+if(
+    checkAdminLogin()
+){
+
+    loadProducts();
+
+}
+
+</script>
+
+
+</body>
+
+</html>

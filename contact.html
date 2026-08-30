@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contact Us — Craftora</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#faf7f2;
+    color:#29251f;
+}
+
+
+/* TOP BAR */
+
+.topbar{
+    background:#29251f;
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-size:13px;
+}
+
+
+/* NAVBAR */
+
+nav{
+    height:80px;
+    padding:0 6%;
+
+    background:white;
+    border-bottom:1px solid #eee;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+    color:#9b5b32;
+}
+
+.logo span{
+    color:#29251f;
+}
+
+.menu{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:14px;
+}
+
+.menu a:hover{
+    color:#9b5b32;
+}
+
+.nav-actions{
+    display:flex;
+    gap:15px;
+}
+
+.nav-actions a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:20px;
+}
+
+
+/* HEADER */
+
+.contact-header{
+    text-align:center;
+    padding:70px 20px 50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4e7d5,
+            #ead6c0
+        );
+}
+
+.contact-header small{
+    color:#9b5b32;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.contact-header h1{
+    font-size:50px;
+    margin:18px 0;
+}
+
+.contact-header p{
+    color:#665e55;
+    line-height:1.7;
+}
+
+
+/* CONTACT AREA */
+
+.contact-section{
+    max-width:1100px;
+    margin:auto;
+    padding:70px 25px 90px;
+
+    display:grid;
+    grid-template-columns:1fr 1.4fr;
+
+    gap:30px;
+}
+
+
+/* LEFT INFO */
+
+.contact-info{
+    background:#29251f;
+    color:white;
+
+    padding:40px;
+
+    border-radius:10px;
+}
+
+.contact-info h2{
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.contact-info > p{
+    color:#ccc;
+    line-height:1.7;
+    margin-bottom:35px;
+}
+
+.contact-item{
+    display:flex;
+    gap:15px;
+    margin-bottom:28px;
+}
+
+.contact-icon{
+    width:45px;
+    height:45px;
+
+    background:#9b5b32;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:20px;
+
+    flex-shrink:0;
+}
+
+.contact-item h3{
+    margin-bottom:5px;
+    font-size:16px;
+}
+
+.contact-item p{
+    color:#bbb;
+    line-height:1.6;
+    font-size:14px;
+}
+
+
+/* FORM */
+
+.contact-form{
+    background:white;
+
+    padding:40px;
+
+    border-radius:10px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0,0,0,.04);
+}
+
+.contact-form h2{
+    font-size:30px;
+    margin-bottom:25px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group textarea{
+    width:100%;
+
+    padding:13px;
+
+    border:1px solid #ddd;
+
+    border-radius:5px;
+
+    font-size:15px;
+
+    font-family:Arial,sans-serif;
+
+    outline:none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+    border-color:#9b5b32;
+}
+
+.form-row{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+}
+
+.send-btn{
+    width:100%;
+
+    padding:15px;
+
+    border:0;
+
+    border-radius:5px;
+
+    background:#9b5b32;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    margin-top:5px;
+}
+
+.send-btn:hover{
+    background:#704020;
+}
+
+
+/* SUCCESS */
+
+.success-message{
+    display:none;
+
+    margin-top:20px;
+
+    padding:15px;
+
+    border-radius:5px;
+
+    background:#e8f5e9;
+
+    color:green;
+
+    text-align:center;
+
+    line-height:1.6;
+}
+
+
+/* FAQ */
+
+.faq{
+    max-width:900px;
+
+    margin:0 auto 90px;
+
+    padding:0 25px;
+}
+
+.faq-title{
+    text-align:center;
+
+    margin-bottom:35px;
+}
+
+.faq-title h2{
+    font-size:35px;
+
+    margin-bottom:10px;
+}
+
+.faq-title p{
+    color:#777;
+}
+
+.faq-item{
+    background:white;
+
+    border-radius:7px;
+
+    padding:20px 25px;
+
+    margin-bottom:12px;
+
+    box-shadow:
+        0 3px 15px
+        rgba(0,0,0,.04);
+}
+
+.faq-item h3{
+    font-size:16px;
+
+    margin-bottom:8px;
+}
+
+.faq-item p{
+    color:#777;
+
+    line-height:1.7;
+
+    font-size:14px;
+}
+
+
+/* FOOTER */
+
+footer{
+    background:#29251f;
+
+    color:white;
+
+    text-align:center;
+
+    padding:50px 20px;
+}
+
+footer h3{
+    margin-bottom:12px;
+}
+
+footer p{
+    color:#bbb;
+
+    margin-top:10px;
+}
+
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .menu{
+        display:none;
+    }
+
+    .contact-section{
+        grid-template-columns:1fr;
+    }
+
+    .contact-header h1{
+        font-size:42px;
+    }
+
+}
+
+@media(max-width:550px){
+
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+    .contact-header h1{
+        font-size:36px;
+    }
+
+    .contact-info,
+    .contact-form{
+        padding:25px;
+    }
+
+    .faq{
+        padding:0 20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+    Free shipping on orders above ₹999
+</div>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        CRAFT<span>ORA</span>
+    </div>
+
+
+    <ul class="menu">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Shop
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Categories
+            </a>
+        </li>
+
+        <li>
+            <a href="about.html">
+                About
+            </a>
+        </li>
+
+        <li>
+            <a href="contact.html">
+                Contact
+            </a>
+        </li>
+
+    </ul>
+
+
+    <div class="nav-actions">
+
+        <a href="wishlist.html">
+            ❤️
+        </a>
+
+        <a href="login.html">
+            👤
+        </a>
+
+        <a href="cart.html">
+            🛒
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- HEADER -->
+
+<section class="contact-header">
+
+    <small>
+        GET IN TOUCH
+    </small>
+
+    <h1>
+        Contact Us
+    </h1>
+
+    <p>
+        Have a question or need help?
+        We're here to help.
+    </p>
+
+</section>
+
+
+<!-- CONTACT SECTION -->
+
+<section class="contact-section">
+
+
+    <!-- CONTACT INFORMATION -->
+
+    <div class="contact-info">
+
+        <h2>
+            Let's Talk
+        </h2>
+
+        <p>
+            Whether you have a question about our products,
+            your order, or anything else, feel free to reach
+            out to us.
+        </p>
+
+
+        <div class="contact-item">
+
+            <div class="contact-icon">
+                📧
+            </div>
+
+            <div>
+
+                <h3>
+                    Email
+                </h3>
+
+                <p>
+                    support@craftora.com
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="contact-item">
+
+            <div class="contact-icon">
+                📞
+            </div>
+
+            <div>
+
+                <h3>
+                    Phone
+                </h3>
+
+                <p>
+                    +91 98765 43210
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="contact-item">
+
+            <div class="contact-icon">
+                📍
+            </div>
+
+            <div>
+
+                <h3>
+                    Address
+                </h3>
+
+                <p>
+                    Craftora Studio<br>
+                    India
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="contact-item">
+
+            <div class="contact-icon">
+                🕐
+            </div>
+
+            <div>
+
+                <h3>
+                    Working Hours
+                </h3>
+
+                <p>
+                    Monday – Saturday<br>
+                    10:00 AM – 6:00 PM
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONTACT FORM -->
+
+    <div class="contact-form">
+
+        <h2>
+            Send us a Message
+        </h2>
+
+
+        <form
+            id="contactForm"
+            onsubmit="sendMessage(event)"
+        >
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Your Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="contactName"
+                        placeholder="Enter your name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="contactEmail"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Phone
+                </label>
+
+                <input
+                    type="tel"
+                    id="contactPhone"
+                    placeholder="Enter your phone number"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Subject
+                </label>
+
+                <input
+                    type="text"
+                    id="contactSubject"
+                    placeholder="What is this about?"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Message
+                </label>
+
+                <textarea
+                    id="contactMessage"
+                    rows="6"
+                    placeholder="Write your message..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="send-btn"
+            >
+                📤 Send Message
+            </button>
+
+
+        </form>
+
+
+        <div
+            class="success-message"
+            id="successMessage"
+        >
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section class="faq">
+
+    <div class="faq-title">
+
+        <h2>
+            Frequently Asked Questions
+        </h2>
+
+        <p>
+            Quick answers to common questions.
+        </p>
+
+    </div>
+
+
+    <div class="faq-item">
+
+        <h3>
+            How can I track my order?
+        </h3>
+
+        <p>
+            Once your order is placed, you will receive
+            your order information. Order tracking can be
+            added when shipping integration is connected.
+        </p>
+
+    </div>
+
+
+    <div class="faq-item">
+
+        <h3>
+            How long does delivery take?
+        </h3>
+
+        <p>
+            Delivery time may vary depending on your
+            location and the product.
+        </p>
+
+    </div>
+
+
+    <div class="faq-item">
+
+        <h3>
+            Can I return a product?
+        </h3>
+
+        <p>
+            Return policies depend on the product and
+            order. Please contact us for assistance.
+        </p>
+
+    </div>
+
+
+    <div class="faq-item">
+
+        <h3>
+            Do you offer Cash on Delivery?
+        </h3>
+
+        <p>
+            Yes. Cash on Delivery is currently available
+            as a payment option during checkout.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>
+        CRAFTORA
+    </h3>
+
+    <p>
+        Celebrating Indian craftsmanship,
+        one beautiful creation at a time.
+    </p>
+
+</footer>
+
+
+<script>
+
+function sendMessage(event){
+
+    event.preventDefault();
+
+
+    const name =
+        document.getElementById(
+            "contactName"
+        ).value.trim();
+
+
+    const message =
+        document.getElementById(
+            "contactMessage"
+        ).value.trim();
+
+
+    const success =
+        document.getElementById(
+            "successMessage"
+        );
+
+
+    /*
+        Abhi form ko backend/email
+        service se connect nahi kiya gaya hai.
+
+        Filhaal message successfully
+        submit hone ka demo response.
+    */
+
+
+    success.innerHTML = `
+        ✅ Thank you, ${name}!<br>
+        Your message has been received.
+        We'll get back to you soon.
+    `;
+
+
+    success.style.display =
+        "block";
+
+
+    document.getElementById(
+        "contactForm"
+    ).reset();
+
+}
+
+</script>
+
+
+</body>
+
+</html>

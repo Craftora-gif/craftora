@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>My Orders — Craftora</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#faf7f2;
+    color:#29251f;
+}
+
+.topbar{
+    background:#29251f;
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-size:13px;
+}
+
+nav{
+    height:80px;
+    padding:0 6%;
+    background:white;
+    border-bottom:1px solid #eee;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+    color:#9b5b32;
+}
+
+.logo span{
+    color:#29251f;
+}
+
+.menu{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:14px;
+}
+
+.menu a:hover{
+    color:#9b5b32;
+}
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.nav-actions a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:20px;
+}
+
+.user-name{
+    font-size:14px;
+    font-weight:bold;
+    color:#9b5b32;
+}
+
+.logout-btn{
+    border:1px solid #9b5b32;
+    background:white;
+    color:#9b5b32;
+
+    padding:7px 12px;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+    font-size:12px;
+}
+
+.logout-btn:hover{
+    background:#9b5b32;
+    color:white;
+}
+
+.header{
+    text-align:center;
+    padding:60px 20px 40px;
+}
+
+.header small{
+    color:#9b5b32;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.header h1{
+    font-size:45px;
+    margin:15px 0;
+}
+
+.header p{
+    color:#777;
+}
+
+.orders-container{
+    max-width:1000px;
+    margin:auto;
+    padding:0 20px 80px;
+}
+
+.order-card{
+    background:white;
+    border-radius:10px;
+    margin-bottom:25px;
+    overflow:hidden;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0,0,0,.05);
+}
+
+.order-header{
+    padding:20px 25px;
+
+    border-bottom:1px solid #eee;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:20px;
+}
+
+.order-id{
+    font-weight:bold;
+    font-size:16px;
+}
+
+.order-date{
+    color:#777;
+    font-size:13px;
+    margin-top:6px;
+}
+
+
+/* STATUS */
+
+.status{
+    padding:8px 14px;
+    border-radius:20px;
+
+    font-size:12px;
+    font-weight:bold;
+}
+
+.status.pending{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.status.confirmed{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+.status.shipped{
+    background:#e0e7ff;
+    color:#4338ca;
+}
+
+.status.delivered{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.status.cancelled{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+
+/* TRACKING */
+
+.tracking{
+    padding:22px 25px;
+    border-bottom:1px solid #eee;
+}
+
+.tracking-title{
+    font-size:13px;
+    font-weight:bold;
+
+    margin-bottom:18px;
+
+    color:#555;
+}
+
+.tracking-line{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:8px;
+}
+
+.track-step{
+    text-align:center;
+    position:relative;
+}
+
+.track-dot{
+    width:28px;
+    height:28px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#ddd;
+    color:#777;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:12px;
+    font-weight:bold;
+}
+
+.track-step.active
+.track-dot{
+    background:#9b5b32;
+    color:white;
+}
+
+.track-step.completed
+.track-dot{
+    background:#6f8f72;
+    color:white;
+}
+
+.track-label{
+    margin-top:8px;
+
+    font-size:11px;
+
+    color:#888;
+}
+
+.track-step.active
+.track-label,
+
+.track-step.completed
+.track-label{
+    color:#29251f;
+    font-weight:bold;
+}
+
+
+/* ITEMS */
+
+.order-items{
+    padding:10px 25px;
+}
+
+.order-item{
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:15px 0;
+
+    border-bottom:1px solid #eee;
+}
+
+.order-item:last-child{
+    border-bottom:0;
+}
+
+.item-image{
+    width:65px;
+    height:65px;
+
+    flex-shrink:0;
+
+    border-radius:7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e9d8c7,
+            #c69b73
+        );
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:30px;
+
+    overflow:hidden;
+}
+
+.item-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.item-info{
+    flex:1;
+}
+
+.item-info h3{
+    font-size:16px;
+    margin-bottom:6px;
+}
+
+.item-info p{
+    color:#777;
+    font-size:13px;
+}
+
+.item-price{
+    font-weight:bold;
+    color:#9b5b32;
+}
+
+
+/* FOOTER */
+
+.order-footer{
+    background:#faf7f2;
+
+    padding:18px 25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.payment{
+    color:#777;
+    font-size:13px;
+}
+
+.total{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.total span{
+    color:#9b5b32;
+}
+
+
+/* EMPTY */
+
+.empty{
+    background:white;
+
+    max-width:650px;
+
+    margin:30px auto 80px;
+
+    padding:70px 25px;
+
+    border-radius:10px;
+
+    text-align:center;
+}
+
+.empty-icon{
+    font-size:65px;
+
+    margin-bottom:20px;
+}
+
+.empty h2{
+    margin-bottom:12px;
+}
+
+.empty p{
+    color:#777;
+
+    line-height:1.7;
+
+    margin-bottom:25px;
+}
+
+.shop-btn{
+    display:inline-block;
+
+    padding:13px 28px;
+
+    background:#9b5b32;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:5px;
+}
+
+.shop-btn:hover{
+    background:#704020;
+}
+
+
+/* ERROR */
+
+.error{
+    background:white;
+
+    max-width:650px;
+
+    margin:30px auto 80px;
+
+    padding:50px 25px;
+
+    border-radius:10px;
+
+    text-align:center;
+}
+
+.error-icon{
+    font-size:55px;
+
+    margin-bottom:15px;
+}
+
+.error h2{
+    margin-bottom:10px;
+}
+
+.error p{
+    color:#777;
+
+    margin-bottom:20px;
+}
+
+.retry-btn{
+    padding:12px 25px;
+
+    background:#9b5b32;
+
+    color:white;
+
+    border:0;
+
+    border-radius:5px;
+
+    cursor:pointer;
+}
+
+
+/* REFRESH MESSAGE */
+
+.refresh-message{
+    display:none;
+
+    text-align:center;
+
+    margin:0 auto 20px;
+
+    color:#2e7d32;
+
+    font-size:13px;
+}
+
+
+/* FOOTER */
+
+footer{
+    background:#29251f;
+
+    color:white;
+
+    text-align:center;
+
+    padding:45px 20px;
+}
+
+footer p{
+    color:#bbb;
+
+    margin-top:10px;
+}
+
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .menu{
+        display:none;
+    }
+
+    .user-name{
+        display:none;
+    }
+
+    .order-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .tracking{
+        padding:20px 18px;
+    }
+
+}
+
+@media(max-width:550px){
+
+    .header h1{
+        font-size:35px;
+    }
+
+    .order-items{
+        padding:10px 18px;
+    }
+
+    .order-footer{
+        padding:18px;
+
+        gap:12px;
+
+        align-items:flex-start;
+
+        flex-direction:column;
+    }
+
+    .tracking-line{
+        gap:3px;
+    }
+
+    .track-label{
+        font-size:9px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="topbar">
+    Free shipping on orders above ₹999
+</div>
+
+
+<nav>
+
+    <div class="logo">
+        CRAFT<span>ORA</span>
+    </div>
+
+
+    <ul class="menu">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Shop
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Categories
+            </a>
+        </li>
+
+        <li>
+            <a href="about.html">
+                About
+            </a>
+        </li>
+
+        <li>
+            <a href="contact.html">
+                Contact
+            </a>
+        </li>
+
+    </ul>
+
+
+    <div class="nav-actions">
+
+        <a href="wishlist.html">
+            ❤️
+        </a>
+
+
+        <div id="userArea">
+
+            <a href="login.html">
+                👤
+            </a>
+
+        </div>
+
+
+        <a href="cart.html">
+            🛒
+        </a>
+
+    </div>
+
+</nav>
+
+
+<section class="header">
+
+    <small>
+        CRAFTORA ACCOUNT
+    </small>
+
+    <h1>
+        My Orders 📦
+    </h1>
+
+    <p>
+        Track your Craftora orders in real time.
+    </p>
+
+</section>
+
+
+<div
+    class="refresh-message"
+    id="refreshMessage"
+>
+    ✓ Order status updated
+</div>
+
+
+<div
+    class="orders-container"
+    id="ordersContainer"
+>
+</div>
+
+
+<footer>
+
+    <h3>
+        CRAFTORA
+    </h3>
+
+    <p>
+        Celebrating Indian craftsmanship,
+        one beautiful creation at a time.
+    </p>
+
+</footer>
+<script>
+
+/* =========================
+   GET USER
+========================= */
+
+function getUser(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                "craftoraUser"
+            )
+        ) || null;
+
+    }
+    catch(error){
+
+        return null;
+
+    }
+
+}
+
+
+/* =========================
+   LOGIN CHECK
+========================= */
+
+function checkLogin(){
+
+    const loggedIn =
+        localStorage.getItem(
+            "craftoraLoggedIn"
+        );
+
+    const user =
+        getUser();
+
+
+    if(
+        loggedIn !== "true" ||
+        !user ||
+        !user.id
+    ){
+
+        document.getElementById(
+            "ordersContainer"
+        ).innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    🔐
+                </div>
+
+                <h2>
+                    Login Required
+                </h2>
+
+                <p>
+                    Please login to view your orders.
+                </p>
+
+                <a
+                    href="login.html"
+                    class="shop-btn"
+                >
+                    Login
+                </a>
+
+            </div>
+
+        `;
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =========================
+   USER NAV
+========================= */
+
+function loadUser(){
+
+    const user =
+        getUser();
+
+
+    if(!user){
+        return;
+    }
+
+
+    const userArea =
+        document.getElementById(
+            "userArea"
+        );
+
+
+    userArea.innerHTML = `
+
+        <span class="user-name">
+            Hi, ${user.name || "User"}
+        </span>
+
+        <button
+            class="logout-btn"
+            onclick="logoutUser()"
+        >
+            Logout
+        </button>
+
+    `;
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logoutUser(){
+
+    localStorage.removeItem(
+        "craftoraUser"
+    );
+
+    localStorage.removeItem(
+        "craftoraLoggedIn"
+    );
+
+    localStorage.removeItem(
+        "craftoraLoginUser"
+    );
+
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/* =========================
+   FORMAT DATE
+========================= */
+
+function formatDate(
+    dateValue
+){
+
+    if(!dateValue){
+        return "—";
+    }
+
+
+    const date =
+        new Date(
+            dateValue
+        );
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "—";
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =========================
+   STATUS CLASS
+========================= */
+
+function statusClass(
+    status
+){
+
+    return String(
+        status ||
+        "Pending"
+    )
+    .toLowerCase()
+    .replace(
+        /\s+/g,
+        "-"
+    );
+
+}
+
+
+/* =========================
+   STATUS NUMBER
+========================= */
+
+function getStatusNumber(
+    status
+){
+
+    const value =
+        String(
+            status ||
+            "Pending"
+        )
+        .toLowerCase();
+
+
+    if(
+        value.includes(
+            "deliver"
+        )
+    ){
+
+        return 4;
+
+    }
+
+
+    if(
+        value.includes(
+            "ship"
+        )
+    ){
+
+        return 3;
+
+    }
+
+
+    if(
+        value.includes(
+            "confirm"
+        )
+    ){
+
+        return 2;
+
+    }
+
+
+    return 1;
+
+}
+
+
+/* =========================
+   TRACKING
+========================= */
+
+function trackingHTML(
+    status
+){
+
+    if(
+        String(status)
+            .toLowerCase()
+            .includes("cancel")
+    ){
+
+        return `
+
+            <div class="tracking">
+
+                <div class="tracking-title">
+                    ORDER STATUS
+                </div>
+
+                <div
+                    style="
+                        color:#991b1b;
+                        font-weight:bold;
+                        font-size:14px;
+                    "
+                >
+                    ❌ This order has been cancelled.
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    const current =
+        getStatusNumber(
+            status
+        );
+
+
+    const steps = [
+
+        {
+            number:1,
+            label:"Pending"
+        },
+
+        {
+            number:2,
+            label:"Confirmed"
+        },
+
+        {
+            number:3,
+            label:"Shipped"
+        },
+
+        {
+            number:4,
+            label:"Delivered"
+        }
+
+    ];
+
+
+    let html = `
+
+        <div class="tracking">
+
+            <div class="tracking-title">
+                ORDER TRACKING
+            </div>
+
+            <div class="tracking-line">
+
+    `;
+
+
+    steps.forEach(
+        function(step){
+
+            let className =
+                "";
+
+
+            if(
+                current >
+                step.number
+            ){
+
+                className =
+                    "completed";
+
+            }
+            else if(
+                current ===
+                step.number
+            ){
+
+                className =
+                    "active";
+
+            }
+
+
+            html += `
+
+                <div
+                    class="track-step ${className}"
+                >
+
+                    <div
+                        class="track-dot"
+                    >
+                        ${step.number}
+                    </div>
+
+                    <div
+                        class="track-label"
+                    >
+                        ${step.label}
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    return html;
+
+}
+
+
+/* =========================
+   CACHE
+========================= */
+
+function getOrderCacheKey(){
+
+    const user =
+        getUser();
+
+
+    if(
+        !user ||
+        !user.id
+    ){
+
+        return null;
+
+    }
+
+
+    return (
+        "craftoraOrders_" +
+        user.id
+    );
+
+}
+
+
+function getCachedOrders(){
+
+    try{
+
+        const key =
+            getOrderCacheKey();
+
+
+        if(!key){
+            return null;
+        }
+
+
+        const saved =
+            localStorage.getItem(
+                key
+            );
+
+
+        if(!saved){
+            return null;
+        }
+
+
+        const orders =
+            JSON.parse(
+                saved
+            );
+
+
+        return Array.isArray(
+            orders
+        )
+            ? orders
+            : null;
+
+    }
+    catch(error){
+
+        return null;
+
+    }
+
+}
+
+
+function saveCachedOrders(
+    orders
+){
+
+    try{
+
+        const key =
+            getOrderCacheKey();
+
+
+        if(
+            key &&
+            Array.isArray(orders)
+        ){
+
+            localStorage.setItem(
+                key,
+                JSON.stringify(
+                    orders
+                )
+            );
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "Order cache error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================
+   RENDER ORDERS
+========================= */
+
+function renderOrders(
+    orders
+){
+
+    const container =
+        document.getElementById(
+            "ordersContainer"
+        );
+
+
+    if(
+        !orders ||
+        orders.length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📦
+                </div>
+
+                <h2>
+                    No Orders Yet
+                </h2>
+
+                <p>
+                    You haven't placed any orders yet.
+                </p>
+
+                <a
+                    href="shop.html"
+                    class="shop-btn"
+                >
+                    Start Shopping
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        "";
+
+
+    orders.forEach(
+        function(order){
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "order-card";
+
+
+            let itemsHTML =
+                "";
+
+
+            (
+                order.items ||
+                []
+            ).forEach(
+                function(item){
+
+                    const quantity =
+                        Number(
+                            item.quantity
+                        ) || 1;
+
+
+                    const price =
+                        Number(
+                            item.price
+                        ) || 0;
+
+
+                    const itemTotal =
+                        price *
+                        quantity;
+
+
+                    const image =
+                        item.image ||
+                        "🛍️";
+
+
+                    const isImage =
+                        typeof image ===
+                            "string" &&
+                        (
+                            image.startsWith(
+                                "http"
+                            ) ||
+                            image.startsWith(
+                                "images/"
+                            ) ||
+                            image.startsWith(
+                                "./"
+                            ) ||
+                            /\.(jpg|jpeg|png|webp|gif)$/i
+                                .test(
+                                    image
+                                )
+                        );
+
+
+                    const imageHTML =
+                        isImage
+
+                        ?
+
+                        `
+                            <img
+                                src="${image}"
+                                alt="${
+                                    item.name ||
+                                    "Product"
+                                }"
+                            >
+                        `
+
+                        :
+
+                        image;
+
+
+                    itemsHTML += `
+
+                        <div class="order-item">
+
+                            <div class="item-image">
+                                ${imageHTML}
+                            </div>
+
+                            <div class="item-info">
+
+                                <h3>
+                                    ${
+                                        item.name ||
+                                        "Craftora Product"
+                                    }
+                                </h3>
+
+                                <p>
+                                    Quantity:
+                                    ${quantity}
+                                </p>
+
+                            </div>
+
+                            <div class="item-price">
+                                ₹${itemTotal.toLocaleString(
+                                    "en-IN"
+                                )}
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+
+            const status =
+                order.status ||
+                "Pending";
+
+
+            const orderNumber =
+                order.orderNumber ||
+                order._id ||
+                "—";
+
+
+            const total =
+                Number(
+                    order.total
+                ) || 0;
+
+
+            card.innerHTML = `
+
+                <div class="order-header">
+
+                    <div>
+
+                        <div class="order-id">
+                            Order #${orderNumber}
+                        </div>
+
+                        <div class="order-date">
+                            ${formatDate(
+                                order.createdAt
+                            )}
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="
+                            status
+                            ${statusClass(status)}
+                        "
+                    >
+                        ${status}
+                    </div>
+
+                </div>
+
+
+                ${trackingHTML(
+                    status
+                )}
+
+
+                <div class="order-items">
+
+                    ${itemsHTML}
+
+                </div>
+
+
+                <div class="order-footer">
+
+                    <div class="payment">
+
+                        Payment:
+
+                        <strong>
+                            ${
+                                String(
+                                    order.paymentMethod ||
+                                    "COD"
+                                ).toUpperCase()
+                            }
+                        </strong>
+
+                    </div>
+
+
+                    <div class="total">
+
+                        Total:
+
+                        <span>
+                            ₹${total.toLocaleString(
+                                "en-IN"
+                            )}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
+   LOAD ORDERS
+========================= */
+
+async function loadOrders(){
+
+    const container =
+        document.getElementById(
+            "ordersContainer"
+        );
+
+
+    const user =
+        getUser();
+
+
+    if(
+        !user ||
+        !user.id
+    ){
+
+        return;
+
+    }
+
+
+    /*
+        IMPORTANT:
+
+        Cached orders ko API se pehle
+        turant show karo.
+    */
+
+    const cachedOrders =
+        getCachedOrders();
+
+
+    if(
+        cachedOrders &&
+        cachedOrders.length > 0
+    ){
+
+        renderOrders(
+            cachedOrders
+        );
+
+    }
+
+
+    /*
+        Agar cache nahi hai to
+        loading ki jagah temporary
+        blank nahi rakhenge.
+    */
+
+    if(
+        !cachedOrders ||
+        cachedOrders.length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div class="loading">
+                Checking your orders...
+            </div>
+
+        `;
+
+    }
+
+
+    try{
+
+        const controller =
+            new AbortController();
+
+
+        const timeout =
+            setTimeout(
+                function(){
+
+                    controller.abort();
+
+                },
+                5000
+            );
+
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/orders/" +
+                user.id,
+                {
+                    method:"GET",
+                    cache:"no-store",
+                    signal:
+                        controller.signal
+                }
+            );
+
+
+        clearTimeout(
+            timeout
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            !response.ok
+        ){
+
+            throw new Error(
+                data.message ||
+                "Unable to load orders."
+            );
+
+        }
+
+
+        const orders =
+            Array.isArray(
+                data.orders
+            )
+                ? data.orders
+                : [];
+
+
+        saveCachedOrders(
+            orders
+        );
+
+
+        renderOrders(
+            orders
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Orders Error:",
+            error
+        );
+
+
+        /*
+            Cache available hai to
+            wahi orders screen par rahenge.
+        */
+
+        if(
+            cachedOrders &&
+            cachedOrders.length > 0
+        ){
+
+            return;
+
+        }
+
+
+        /*
+            API slow/offline ho to
+            5 second se zyada loading nahi.
+        */
+
+        container.innerHTML = `
+
+            <div class="error">
+
+                <div class="error-icon">
+                    📦
+                </div>
+
+                <h2>
+                    Orders Couldn't Be Loaded
+                </h2>
+
+                <p>
+                    Please make sure Craftora
+                    server is running.
+                </p>
+
+                <button
+                    class="retry-btn"
+                    onclick="loadOrders()"
+                >
+                    Try Again
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   STATUS CHECK
+========================= */
+
+let previousStatus =
+    "";
+
+
+async function checkForStatusUpdate(){
+
+    const user =
+        getUser();
+
+
+    if(
+        !user ||
+        !user.id
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/orders/" +
+                user.id,
+                {
+                    method:"GET",
+                    cache:"no-store"
+                }
+            );
+
+
+        if(
+            !response.ok
+        ){
+
+            return;
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const orders =
+            Array.isArray(
+                data.orders
+            )
+                ? data.orders
+                : [];
+
+
+        if(
+            orders.length === 0
+        ){
+
+            return;
+
+        }
+
+
+        const latestStatus =
+            orders
+                .map(
+                    function(order){
+
+                        return (
+                            order.orderNumber +
+                            "-" +
+                            order.status
+                        );
+
+                    }
+                )
+                .join("|");
+
+
+        /*
+            Sirf status badalne par
+            page update hoga.
+        */
+
+        if(
+            previousStatus &&
+            previousStatus !==
+                latestStatus
+        ){
+
+            saveCachedOrders(
+                orders
+            );
+
+
+            renderOrders(
+                orders
+            );
+
+
+            const message =
+                document.getElementById(
+                    "refreshMessage"
+                );
+
+
+            message.style.display =
+                "block";
+
+
+            setTimeout(
+                function(){
+
+                    message.style.display =
+                        "none";
+
+                },
+                1800
+            );
+
+        }
+
+
+        previousStatus =
+            latestStatus;
+
+    }
+    catch(error){
+
+        console.error(
+            "Status Check Error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+if(
+    checkLogin()
+){
+
+    loadUser();
+
+    loadOrders();
+
+
+    /*
+        Admin se status change hone par
+        30 seconds mein check karega.
+    */
+
+    setInterval(
+        checkForStatusUpdate,
+        30000
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>

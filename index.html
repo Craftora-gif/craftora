@@ -1,0 +1,2564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Craftora — Handmade with Love</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#faf7f2;
+    color:#29251f;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+    width:100%;
+    background:#29251f;
+    color:#fff;
+    text-align:center;
+    padding:10px;
+    font-size:13px;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav{
+    width:100%;
+    min-height:80px;
+
+    padding:0 5%;
+
+    background:#fff;
+    border-bottom:1px solid #eee;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:20px;
+
+    position:relative;
+    z-index:20;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:800;
+    letter-spacing:1.5px;
+    color:#9b5b32;
+    white-space:nowrap;
+    flex-shrink:0;
+}
+
+.logo span{
+    color:#29251f;
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+.menu{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    list-style:none;
+}
+
+.menu a{
+    position:relative;
+
+    color:#29251f;
+    text-decoration:none;
+
+    font-size:13px;
+    font-weight:600;
+
+    padding:10px 2px;
+
+    transition:.25s;
+}
+
+.menu a::after{
+    content:"";
+
+    position:absolute;
+    left:0;
+    bottom:3px;
+
+    width:0;
+    height:2px;
+
+    background:#9b5b32;
+
+    transition:.25s;
+}
+
+.menu a:hover{
+    color:#9b5b32;
+}
+
+.menu a:hover::after{
+    width:100%;
+}
+
+
+/* =========================
+   NAV ACTIONS
+========================= */
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+
+    gap:8px;
+
+    flex-shrink:0;
+}
+
+.nav-action{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:6px;
+
+    min-height:40px;
+
+    padding:7px 11px;
+
+    border:1px solid #eadfd4;
+    border-radius:22px;
+
+    background:#fff;
+
+    color:#29251f;
+
+    text-decoration:none;
+
+    font-size:13px;
+    font-weight:600;
+
+    white-space:nowrap;
+
+    box-shadow:
+        0 4px 14px rgba(41,37,31,.07);
+
+    transition:.25s;
+}
+
+.nav-action:hover{
+    transform:translateY(-2px);
+
+    color:#9b5b32;
+
+    background:#faf3ec;
+
+    border-color:#c99a72;
+}
+
+.nav-action-icon{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:18px;
+    line-height:1;
+}
+
+.nav-action-label{
+    white-space:nowrap;
+}
+
+
+/* =========================
+   WISHLIST
+========================= */
+
+.wishlist-nav .nav-action-icon{
+    color:#e53935;
+
+    animation:
+        heartBeat 2.2s ease-in-out infinite;
+}
+
+@keyframes heartBeat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    15%{
+        transform:scale(1.15);
+    }
+
+    30%{
+        transform:scale(1);
+    }
+
+    45%{
+        transform:scale(1.1);
+    }
+
+    60%{
+        transform:scale(1);
+    }
+
+}
+
+
+/* =========================
+   USER AREA
+========================= */
+
+.user-area{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-shrink:0;
+}
+
+.user-name{
+    color:#9b5b32;
+    font-size:13px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.logout-btn{
+    padding:7px 12px;
+
+    border:1px solid #9b5b32;
+    border-radius:20px;
+
+    background:#fff;
+    color:#9b5b32;
+
+    cursor:pointer;
+
+    font-size:12px;
+
+    white-space:nowrap;
+
+    transition:.25s;
+}
+
+.logout-btn:hover{
+    background:#9b5b32;
+    color:#fff;
+}
+
+
+/* Mobile account button */
+
+.mobile-account{
+    display:none;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    width:100%;
+    min-height:600px;
+
+    display:flex;
+    align-items:center;
+
+    padding:70px 8%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #f4e7d5,
+            #f7eee4 55%,
+            #ead6c0
+        );
+}
+
+.hero-text{
+    width:50%;
+    min-width:0;
+}
+
+.hero-text small{
+    color:#9b5b32;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.hero-text h1{
+    margin:20px 0;
+
+    font-size:
+        clamp(45px,6vw,75px);
+
+    line-height:1;
+}
+
+.hero-text p{
+    max-width:500px;
+
+    margin-bottom:30px;
+
+    color:#665e55;
+
+    line-height:1.8;
+}
+
+.btn{
+    display:inline-block;
+
+    padding:15px 30px;
+
+    background:#9b5b32;
+    color:#fff;
+
+    text-decoration:none;
+
+    border-radius:5px;
+
+    transition:.25s;
+}
+
+.btn:hover{
+    background:#704020;
+    transform:translateY(-2px);
+}
+
+
+/* =========================
+   HERO ART
+========================= */
+
+.hero-art{
+    width:50%;
+    min-width:0;
+
+    height:450px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.circle{
+    width:360px;
+    height:360px;
+
+    max-width:80vw;
+    max-height:80vw;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #d99c63,
+            #9b5b32 55%,
+            #57331e
+        );
+
+    box-shadow:
+        0 30px 60px
+        rgba(70,40,20,.25);
+
+    animation:
+        float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-18px);
+    }
+
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section{
+    width:100%;
+    padding:80px 7%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-title h2{
+    margin-bottom:10px;
+    font-size:38px;
+}
+
+.section-title p{
+    color:#777;
+}
+
+
+/* =========================
+   CATEGORIES
+========================= */
+
+.categories{
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:20px;
+}
+
+.category{
+    min-width:0;
+
+    height:220px;
+
+    display:flex;
+    align-items:flex-end;
+
+    padding:25px;
+
+    border-radius:8px;
+
+    background:#ead8c3;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.category:nth-child(2){
+    background:#d9e1d0;
+}
+
+.category:nth-child(3){
+    background:#e3c8c0;
+}
+
+.category:nth-child(4){
+    background:#d7d0e0;
+}
+
+.category:hover{
+    transform:translateY(-8px);
+
+    box-shadow:
+        0 15px 30px rgba(0,0,0,.08);
+}
+
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.products{
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:25px;
+}
+
+.product{
+    min-width:0;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:#fff;
+
+    border-radius:8px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.04);
+
+    transition:.3s;
+}
+
+.product:hover{
+    transform:translateY(-7px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.09);
+}
+
+
+/* =========================
+   WISHLIST CARD
+========================= */
+
+.wishlist{
+    position:absolute;
+
+    top:12px;
+    right:12px;
+
+    width:40px;
+    height:40px;
+
+    border:1px solid #eee;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    z-index:5;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.12);
+
+    transition:.2s;
+}
+
+.wishlist:hover{
+    transform:scale(1.08);
+}
+
+.wishlist.active{
+    color:#e53935;
+
+    background:#fff5f5;
+
+    animation:
+        wishlistPop .35s ease;
+}
+
+@keyframes wishlistPop{
+
+    0%{
+        transform:scale(.7);
+    }
+
+    60%{
+        transform:scale(1.25);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+
+/* =========================
+   PRODUCT IMAGE
+========================= */
+
+.product-image{
+    width:100%;
+    height:230px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e9d8c7,
+            #c69b73
+        );
+
+    font-size:75px;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    transition:.3s;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+.product:hover .product-image{
+    transform:scale(1.03);
+}
+
+
+/* =========================
+   PRODUCT INFO
+========================= */
+
+.product-info{
+    padding:18px;
+
+    min-width:0;
+}
+
+.product-info h3{
+    margin-bottom:7px;
+
+    font-size:18px;
+
+    word-break:break-word;
+}
+
+.price{
+    margin-bottom:15px;
+
+    color:#9b5b32;
+
+    font-size:18px;
+
+    font-weight:bold;
+}
+
+
+/* =========================
+   PRODUCT BUTTONS
+========================= */
+
+.product-buttons{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:8px;
+}
+
+.cart-btn,
+.buy-btn{
+    min-width:0;
+
+    padding:11px 5px;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+    transition:.2s;
+}
+
+.cart-btn{
+    border:1px solid #9b5b32;
+
+    background:#9b5b32;
+
+    color:#fff;
+}
+
+.cart-btn:hover{
+    background:#704020;
+}
+
+.cart-btn.added{
+    background:#3f7d3f;
+    border-color:#3f7d3f;
+}
+
+.buy-btn{
+    border:1px solid #9b5b32;
+
+    background:#fff;
+
+    color:#9b5b32;
+}
+
+.buy-btn:hover{
+    background:#f4e7d5;
+}
+
+
+/* =========================
+   VIEW ALL
+========================= */
+
+.view-all{
+    margin-top:45px;
+    text-align:center;
+}
+
+.view-all a{
+    display:inline-block;
+
+    padding:14px 30px;
+
+    border:1px solid #9b5b32;
+
+    border-radius:5px;
+
+    color:#9b5b32;
+
+    text-decoration:none;
+
+    transition:.25s;
+}
+
+.view-all a:hover{
+    background:#9b5b32;
+    color:#fff;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:
+        2fr 1fr 1fr 1fr;
+
+    gap:40px;
+
+    padding:60px 7%;
+
+    background:#29251f;
+
+    color:#fff;
+}
+
+footer h3{
+    margin-bottom:20px;
+}
+
+footer p,
+footer a{
+    color:#bbb;
+
+    line-height:2;
+
+    text-decoration:none;
+}
+
+footer a:hover{
+    color:#fff;
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media(max-width:1100px){
+
+    .menu{
+        gap:12px;
+    }
+
+    .menu a{
+        font-size:12px;
+    }
+
+    .products{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media(max-width:800px){
+
+    html,
+    body{
+        width:100%;
+        max-width:100%;
+        overflow-x:hidden;
+    }
+
+
+    nav{
+        width:100%;
+
+        min-height:70px;
+
+        padding:
+            8px 10px;
+
+        gap:8px;
+
+        overflow:hidden;
+    }
+
+
+    .logo{
+        font-size:21px;
+        letter-spacing:1px;
+    }
+
+
+    .menu{
+        display:none;
+    }
+
+
+    .nav-actions{
+        flex:1;
+
+        min-width:0;
+
+        justify-content:flex-end;
+
+        gap:4px;
+
+        overflow:hidden;
+    }
+
+
+    .nav-action{
+        min-width:0;
+
+        min-height:38px;
+
+        padding:
+            7px 8px;
+
+        gap:4px;
+
+        font-size:10px;
+
+        flex-shrink:1;
+    }
+
+
+    .nav-action-icon{
+        font-size:16px;
+        flex-shrink:0;
+    }
+
+
+    .nav-action-label{
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+
+
+    /*
+       Logged-in name/logout hide on mobile.
+       Clean Account button is shown instead.
+    */
+
+    .user-name,
+    .logout-btn{
+        display:none;
+    }
+
+
+    .mobile-account{
+        display:flex;
+    }
+
+
+    .hero{
+        width:100%;
+
+        min-height:auto;
+
+        padding:
+            55px 20px
+            60px;
+
+        flex-direction:column;
+
+        text-align:center;
+    }
+
+
+    .hero-text{
+        width:100%;
+        max-width:100%;
+    }
+
+
+    .hero-text h1{
+        font-size:
+            clamp(
+                40px,
+                11vw,
+                58px
+            );
+
+        line-height:1.05;
+    }
+
+
+    .hero-text p{
+        width:100%;
+        max-width:500px;
+
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+
+    .hero-art{
+        width:100%;
+
+        height:320px;
+
+        margin-top:20px;
+    }
+
+
+    .circle{
+        width:260px;
+        height:260px;
+
+        max-width:70vw;
+        max-height:70vw;
+    }
+
+
+    .section{
+        width:100%;
+
+        padding:
+            60px 18px;
+    }
+
+
+    .section-title h2{
+        font-size:32px;
+    }
+
+
+    .categories{
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:15px;
+    }
+
+
+    .category{
+        height:180px;
+        padding:18px;
+    }
+
+
+    .products{
+        width:100%;
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+        gap:15px;
+    }
+
+
+    .product-image{
+        height:200px;
+    }
+
+
+    .product-info{
+        padding:14px;
+    }
+
+
+    .product-info h3{
+        font-size:16px;
+    }
+
+
+    .price{
+        font-size:16px;
+    }
+
+
+    .product-buttons{
+        grid-template-columns:1fr;
+    }
+
+
+    footer{
+        width:100%;
+
+        grid-template-columns:
+            1fr 1fr;
+
+        padding:
+            50px 20px;
+    }
+
+}
+
+
+/* ==================================================
+   SMALL MOBILE
+================================================== */
+
+@media(max-width:520px){
+
+    nav{
+        padding:
+            8px 7px;
+
+        gap:5px;
+    }
+
+
+    .logo{
+        font-size:18px;
+    }
+
+
+    .nav-actions{
+        gap:3px;
+    }
+
+
+    .nav-action{
+        padding:
+            7px 6px;
+
+        border-radius:18px;
+
+        font-size:9px;
+    }
+
+
+    .nav-action-icon{
+        font-size:15px;
+    }
+
+
+    .hero{
+        padding:
+            45px 15px
+            50px;
+    }
+
+
+    .hero-text small{
+        font-size:11px;
+        letter-spacing:1.5px;
+    }
+
+
+    .hero-text h1{
+        font-size:
+            clamp(
+                36px,
+                10vw,
+                48px
+            );
+    }
+
+
+    .hero-text p{
+        font-size:14px;
+    }
+
+
+    .circle{
+        width:220px;
+        height:220px;
+    }
+
+
+    .categories{
+        grid-template-columns:1fr;
+    }
+
+
+    .category{
+        height:160px;
+    }
+
+
+    .products{
+        grid-template-columns:1fr;
+    }
+
+
+    .product-image{
+        height:230px;
+    }
+
+
+    footer{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+    Free shipping on orders above ₹999
+</div>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+
+    <div class="logo">
+        CRAFT<span>ORA</span>
+    </div>
+
+
+    <ul class="menu">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Shop
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Categories
+            </a>
+        </li>
+
+        <li>
+            <a href="about.html">
+                About
+            </a>
+        </li>
+
+        <li>
+            <a href="contact.html">
+                Contact
+            </a>
+        </li>
+
+    </ul>
+
+
+    <div class="nav-actions">
+
+
+        <!-- WISHLIST -->
+
+        <a
+            href="wishlist.html"
+            class="nav-action wishlist-nav"
+        >
+
+            <span class="nav-action-icon">
+                ❤️
+            </span>
+
+            <span class="nav-action-label">
+                Wishlist
+            </span>
+
+        </a>
+
+
+        <!-- MY ORDERS -->
+
+        <a
+            href="orders.html"
+            class="nav-action orders-nav"
+        >
+
+            <span class="nav-action-icon">
+                📦
+            </span>
+
+            <span class="nav-action-label">
+                My Orders
+            </span>
+
+        </a>
+
+
+        <!-- USER AREA -->
+
+        <div
+            id="userArea"
+            class="user-area"
+        >
+
+            <a
+                href="login.html"
+                class="nav-action account-nav"
+            >
+
+                <span class="nav-action-icon">
+                    👤
+                </span>
+
+                <span class="nav-action-label">
+                    Account
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- CART -->
+
+        <a
+            href="cart.html"
+            class="nav-action cart-nav"
+        >
+
+            <span class="nav-action-icon">
+                🛒
+            </span>
+
+            <span class="nav-action-label">
+                Cart
+            </span>
+
+        </a>
+
+
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+
+    <div class="hero-text">
+
+        <small>
+            HANDMADE • AUTHENTIC • TIMELESS
+        </small>
+
+
+        <h1>
+            Art that tells a story.
+        </h1>
+
+
+        <p>
+            Discover beautiful handmade crafts,
+            traditional art and timeless creations
+            made by talented artisans.
+        </p>
+
+
+        <a
+            href="shop.html"
+            class="btn"
+        >
+            Explore Collection
+        </a>
+
+    </div>
+
+
+    <div class="hero-art">
+
+        <div class="circle"></div>
+
+    </div>
+
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section class="section">
+
+
+    <div class="section-title">
+
+        <h2>
+            Shop by Category
+        </h2>
+
+        <p>
+            Discover something beautiful
+            for every corner of your home.
+        </p>
+
+    </div>
+
+
+    <div class="categories">
+
+
+        <div
+            class="category"
+            onclick="
+                window.location.href='shop.html'
+            "
+        >
+
+            <h3>
+                Home Decor
+            </h3>
+
+        </div>
+
+
+        <div
+            class="category"
+            onclick="
+                window.location.href='shop.html'
+            "
+        >
+
+            <h3>
+                Textiles
+            </h3>
+
+        </div>
+
+
+        <div
+            class="category"
+            onclick="
+                window.location.href='shop.html'
+            "
+        >
+
+            <h3>
+                Jewellery
+            </h3>
+
+        </div>
+
+
+        <div
+            class="category"
+            onclick="
+                window.location.href='shop.html'
+            "
+        >
+
+            <h3>
+                Art & Craft
+            </h3>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- FEATURED PRODUCTS -->
+
+<section class="section">
+
+
+    <div class="section-title">
+
+        <h2>
+            Featured Collection
+        </h2>
+
+        <p>
+            Handpicked creations from our artisans.
+        </p>
+
+    </div>
+
+
+    <div
+        class="products"
+        id="featuredProducts"
+    >
+
+        <div
+            style="
+                grid-column:1/-1;
+                text-align:center;
+                padding:60px 20px;
+                background:white;
+                border-radius:8px;
+                color:#777;
+            "
+        >
+
+            🛍️ Loading products...
+
+        </div>
+
+    </div>
+
+
+    <div class="view-all">
+
+        <a href="shop.html">
+            View All Products →
+        </a>
+
+    </div>
+
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+
+    <div>
+
+        <h3>
+            CRAFTORA
+        </h3>
+
+        <p>
+            Celebrating Indian craftsmanship,
+            one beautiful creation at a time.
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <h3>
+            Shop
+        </h3>
+
+        <p>
+            <a href="shop.html">
+                All Products
+            </a>
+        </p>
+
+        <p>
+            <a href="shop.html">
+                Home Decor
+            </a>
+        </p>
+
+        <p>
+            <a href="shop.html">
+                Jewellery
+            </a>
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <h3>
+            Company
+        </h3>
+
+        <p>
+            <a href="about.html">
+                About Us
+            </a>
+        </p>
+
+        <p>
+            <a href="contact.html">
+                Our Artisans
+            </a>
+        </p>
+
+        <p>
+            <a href="contact.html">
+                Contact
+            </a>
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <h3>
+            Help
+        </h3>
+
+        <p>
+            <a href="#">
+                Shipping
+            </a>
+        </p>
+
+        <p>
+            <a href="#">
+                Returns
+            </a>
+        </p>
+
+        <p>
+            <a href="#">
+                FAQ
+            </a>
+        </p>
+
+    </div>
+
+
+</footer>
+
+
+<script>
+
+/* =========================
+   CRAFTORA HOME
+========================= */
+
+
+/* =========================
+   ORIGINAL PRODUCTS
+========================= */
+
+const originalProducts = [
+
+    {
+        name:"Handmade Vase",
+        price:1599,
+        image:"🏺",
+        productId:"vase",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Artisan Basket",
+        price:899,
+        image:"🧺",
+        productId:"basket",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Brass Diya Set",
+        price:1299,
+        image:"🪔",
+        productId:"diya",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Traditional Artwork",
+        price:2499,
+        image:"🎨",
+        productId:"artwork",
+        category:"Art & Craft"
+    },
+
+    {
+        name:"Handwoven Cushion",
+        price:699,
+        image:"🧵",
+        productId:"cushion",
+        category:"Textiles"
+    },
+
+    {
+        name:"Handmade Necklace",
+        price:1799,
+        image:"📿",
+        productId:"necklace",
+        category:"Jewellery"
+    },
+
+    {
+        name:"Handmade Painting",
+        price:2999,
+        image:"🖼️",
+        productId:"painting",
+        category:"Art & Craft"
+    },
+
+    {
+        name:"Traditional Dupatta",
+        price:1199,
+        image:"🧣",
+        productId:"dupatta",
+        category:"Textiles"
+    },
+
+    {
+        name:"Wooden Craft",
+        price:1599,
+        image:"🪵",
+        productId:"wooden",
+        category:"Art & Craft"
+    },
+
+    {
+        name:"Handmade Jute Bag",
+        price:799,
+        image:"👜",
+        productId:"jute",
+        category:"Textiles"
+    },
+
+    {
+        name:"Decorative Candle Set",
+        price:599,
+        image:"🕯️",
+        productId:"candle",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Handcrafted Lantern",
+        price:1899,
+        image:"🏮",
+        productId:"lantern",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Decorative Wall Hanging",
+        price:1299,
+        image:"🪷",
+        productId:"wall",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Handmade Wall Art",
+        price:1899,
+        image:"🧿",
+        productId:"wallart",
+        category:"Art & Craft"
+    },
+
+    {
+        name:"Terracotta Pot",
+        price:999,
+        image:"🏺",
+        productId:"pot",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Handwoven Rug",
+        price:2499,
+        image:"🧶",
+        productId:"rug",
+        category:"Textiles"
+    },
+
+    {
+        name:"Ceramic Bowl Set",
+        price:1099,
+        image:"🥣",
+        productId:"bowl",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Handmade Mirror",
+        price:2199,
+        image:"🪞",
+        productId:"mirror",
+        category:"Home Decor"
+    },
+
+    {
+        name:"Handmade Toy",
+        price:899,
+        image:"🧸",
+        productId:"toy",
+        category:"Art & Craft"
+    },
+
+    {
+        name:"Floral Decor Set",
+        price:1499,
+        image:"🌸",
+        productId:"floral",
+        category:"Home Decor"
+    }
+
+];
+
+
+/* =========================
+   PRODUCTS
+========================= */
+
+let products = [
+    ...originalProducts
+];
+
+
+/* =========================
+   USER
+========================= */
+
+function loadUser(){
+
+    try{
+
+        const user =
+            JSON.parse(
+                localStorage.getItem(
+                    "craftoraUser"
+                )
+            );
+
+
+        window.craftoraUser =
+            user || null;
+
+    }
+    catch(error){
+
+        window.craftoraUser =
+            null;
+
+    }
+
+}
+
+
+/* =========================
+   WISHLIST
+========================= */
+
+function getWishlist(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                "craftoraWishlist"
+            )
+        ) || [];
+
+    }
+    catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+function saveWishlist(
+    wishlist
+){
+
+    localStorage.setItem(
+        "craftoraWishlist",
+        JSON.stringify(
+            wishlist
+        )
+    );
+
+}
+
+
+function toggleWishlist(
+    event,
+    productName
+){
+
+    event.stopPropagation();
+
+
+    let wishlist =
+        getWishlist();
+
+
+    const index =
+        wishlist.indexOf(
+            productName
+        );
+
+
+    if(index === -1){
+
+        wishlist.push(
+            productName
+        );
+
+    }
+    else{
+
+        wishlist.splice(
+            index,
+            1
+        );
+
+    }
+
+
+    saveWishlist(
+        wishlist
+    );
+
+
+    const button =
+        event.currentTarget;
+
+
+    if(
+        wishlist.includes(
+            productName
+        )
+    ){
+
+        button.innerText =
+            "❤️";
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+    else{
+
+        button.innerText =
+            "♡";
+
+        button.classList.remove(
+            "active"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   CART
+========================= */
+
+function getCart(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                "craftoraCart"
+            )
+        ) || [];
+
+    }
+    catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+function addToCart(
+    button,
+    name,
+    price,
+    image
+){
+
+    let cart =
+        getCart();
+
+
+    const existing =
+        cart.find(
+            function(item){
+
+                return item.name ===
+                    name;
+
+            }
+        );
+
+
+    if(existing){
+
+        existing.quantity =
+            Number(
+                existing.quantity || 0
+            ) + 1;
+
+    }
+    else{
+
+        cart.push({
+
+            name:name,
+
+            price:Number(price),
+
+            image:image,
+
+            quantity:1
+
+        });
+
+    }
+
+
+    localStorage.setItem(
+        "craftoraCart",
+        JSON.stringify(
+            cart
+        )
+    );
+
+
+    const old =
+        button.innerHTML;
+
+
+    button.innerHTML =
+        "✓ Added";
+
+
+    setTimeout(
+        function(){
+
+            button.innerHTML =
+                old;
+
+        },
+        1000
+    );
+
+}
+
+
+/* =========================
+   BUY NOW
+========================= */
+
+function buyNow(
+    name,
+    price,
+    image
+){
+
+    localStorage.setItem(
+        "craftoraBuyNow",
+        JSON.stringify([
+
+            {
+                name:name,
+                price:Number(price),
+                image:image,
+                quantity:1
+            }
+
+        ])
+    );
+
+
+    window.location.href =
+        "checkout.html";
+
+}
+
+
+/* =========================
+   OPEN PRODUCT
+========================= */
+
+function openProduct(
+    productId
+){
+
+    window.location.href =
+        "product.html?product=" +
+        encodeURIComponent(
+            productId
+        );
+
+}
+
+
+/* =========================
+   ESCAPE
+========================= */
+
+function escapeHTML(
+    value
+){
+
+    return String(value)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+function escapeJS(
+    value
+){
+
+    return String(value)
+
+        .replaceAll(
+            "\\",
+            "\\\\"
+        )
+
+        .replaceAll(
+            "'",
+            "\\'"
+        );
+
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+function getImage(
+    product
+){
+
+    const image =
+        product.image ||
+        "🛍️";
+
+
+    if(
+        typeof image ===
+            "string" &&
+        (
+            image.startsWith(
+                "http"
+            ) ||
+            image.startsWith(
+                "images/"
+            ) ||
+            image.startsWith(
+                "./"
+            ) ||
+            /\.(jpg|jpeg|png|webp|gif)$/i
+                .test(image)
+        )
+    ){
+
+        return `
+
+            <img
+                src="${escapeHTML(image)}"
+                alt="${escapeHTML(
+                    product.name
+                )}"
+                style="
+                    width:100%;
+                    height:100%;
+                    object-fit:cover;
+                "
+                onerror="
+                    this.style.display='none';
+                    this.parentElement.innerHTML='🛍️';
+                "
+            >
+
+        `;
+
+    }
+
+
+    return escapeHTML(
+        image
+    );
+
+}
+
+
+/* =========================
+   RENDER PRODUCTS
+========================= */
+
+function renderProducts(
+    list
+){
+
+    const container =
+document.getElementById(
+    "featuredProducts"
+)
+
+    if(!container){
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        "";
+
+
+    list.forEach(
+        function(product){
+
+            const name =
+                product.name ||
+                "Craftora Product";
+
+
+            const price =
+                Number(
+                    product.price || 0
+                );
+
+
+            const image =
+                product.image ||
+                "🛍️";
+
+
+            const productId =
+                product.productId ||
+                product.id ||
+                product._id ||
+                name
+                    .replaceAll(
+                        " ",
+                        "-"
+                    )
+                    .toLowerCase();
+
+
+            const wishlist =
+                getWishlist();
+
+
+            const active =
+                wishlist.includes(
+                    name
+                );
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "product";
+
+
+            card.innerHTML = `
+
+                <button
+                    class="wishlist ${
+                        active
+                            ? "active"
+                            : ""
+                    }"
+                    onclick="
+                        toggleWishlist(
+                            event,
+                            '${escapeJS(name)}'
+                        )
+                    "
+                >
+                    ${
+                        active
+                            ? "❤️"
+                            : "♡"
+                    }
+                </button>
+
+
+                <div
+                    class="product-image"
+                    onclick="
+                        openProduct(
+                            '${escapeJS(
+                                productId
+                            )}'
+                        )
+                    "
+                >
+
+                    ${getImage(product)}
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        ${escapeHTML(name)}
+                    </h3>
+
+
+                    <div class="price">
+                        ₹${price.toLocaleString(
+                            "en-IN"
+                        )}
+                    </div>
+
+
+                    <div class="product-buttons">
+
+                        <button
+                            class="cart-btn"
+                            onclick="
+                                addToCart(
+                                    this,
+                                    '${escapeJS(name)}',
+                                    ${price},
+                                    '${escapeJS(image)}'
+                                )
+                            "
+                        >
+                            🛒 Cart
+                        </button>
+
+
+                        <button
+                            class="buy-btn"
+                            onclick="
+                                buyNow(
+                                    '${escapeJS(name)}',
+                                    ${price},
+                                    '${escapeJS(image)}'
+                                )
+                            "
+                        >
+                            ⚡ Buy
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
+   LOAD PRODUCTS
+========================= */
+
+function loadFeaturedProducts(){
+
+    /*
+        IMPORTANT:
+
+        Home par API ka wait NAHI hoga.
+
+        Pehle local products show.
+    */
+
+    renderProducts(
+        products
+    );
+
+
+    /*
+        API background mein.
+    */
+
+    fetch(
+        "http://localhost:5000/api/products",
+        {
+            method:"GET",
+            cache:"no-store"
+        }
+    )
+
+    .then(
+        function(response){
+
+            if(
+                !response.ok
+            ){
+
+                throw new Error(
+                    "Product API failed"
+                );
+
+            }
+
+
+            return response.json();
+
+        }
+    )
+
+    .then(
+        function(data){
+
+            const databaseProducts =
+                Array.isArray(data)
+                    ? data
+                    : (
+                        Array.isArray(
+                            data.products
+                        )
+                            ? data.products
+                            : []
+                    );
+
+
+            databaseProducts.forEach(
+                function(dbProduct){
+
+                    if(
+                        !dbProduct ||
+                        !dbProduct.name
+                    ){
+
+                        return;
+
+                    }
+
+
+                    const existingIndex =
+                        products.findIndex(
+                            function(item){
+
+                                return (
+                                    String(
+                                        item.name
+                                    )
+                                    .trim()
+                                    .toLowerCase()
+                                    ===
+                                    String(
+                                        dbProduct.name
+                                    )
+                                    .trim()
+                                    .toLowerCase()
+                                );
+
+                            }
+                        );
+
+
+                    if(
+                        existingIndex !== -1
+                    ){
+
+                        products[
+                            existingIndex
+                        ] = {
+
+                            ...products[
+                                existingIndex
+                            ],
+
+                            ...dbProduct,
+
+                            price:
+                                Number(
+                                    dbProduct.price ||
+                                    products[
+                                        existingIndex
+                                    ].price ||
+                                    0
+                                ),
+
+                            productId:
+                                dbProduct.productId ||
+                                dbProduct._id ||
+                                products[
+                                    existingIndex
+                                ].productId
+
+                        };
+
+                    }
+                    else{
+
+                        products.push({
+
+                            name:
+                                dbProduct.name,
+
+                            price:
+                                Number(
+                                    dbProduct.price ||
+                                    0
+                                ),
+
+                            image:
+                                dbProduct.image ||
+                                "🛍️",
+
+                            productId:
+                                dbProduct.productId ||
+                                dbProduct._id ||
+                                dbProduct.name
+                                    .replaceAll(
+                                        " ",
+                                        "-"
+                                    )
+                                    .toLowerCase(),
+
+                            category:
+                                dbProduct.category ||
+                                ""
+
+                        });
+
+                    }
+
+                }
+            );
+
+
+            /*
+                Database products mil gaye.
+                Ab Home ko update karo.
+            */
+
+            if(
+                databaseProducts.length > 0
+            ){
+
+                renderProducts(
+                    products
+                );
+
+            }
+
+        }
+    )
+
+    .catch(
+        function(error){
+
+            /*
+                API fail ho to bhi
+                Home already visible hai.
+            */
+
+            console.error(
+                "Home Product API Error:",
+                error
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadUser();
+
+loadFeaturedProducts();
+
+</script>
+
+
+</body>
+
+</html>

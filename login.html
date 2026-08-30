@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Login — Craftora</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#faf7f2;
+    color:#29251f;
+}
+
+
+/* TOP BAR */
+
+.topbar{
+    background:#29251f;
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-size:13px;
+}
+
+
+/* NAVBAR */
+
+nav{
+    height:80px;
+    padding:0 6%;
+    background:white;
+    border-bottom:1px solid #eee;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+    color:#9b5b32;
+}
+
+.logo span{
+    color:#29251f;
+}
+
+.menu{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:14px;
+}
+
+.menu a:hover{
+    color:#9b5b32;
+}
+
+.nav-actions{
+    display:flex;
+    gap:15px;
+}
+
+.nav-actions a{
+    text-decoration:none;
+    color:#29251f;
+    font-size:20px;
+}
+
+
+/* LOGIN SECTION */
+
+.login-section{
+    min-height:calc(100vh - 170px);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:60px 20px;
+}
+
+.login-box{
+    width:100%;
+    max-width:450px;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:10px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.08);
+}
+
+.login-box h1{
+    text-align:center;
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#777;
+    margin-bottom:30px;
+}
+
+
+/* FORM */
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.form-group input{
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #ddd;
+    border-radius:5px;
+
+    font-size:15px;
+
+    outline:none;
+}
+
+.form-group input:focus{
+    border-color:#9b5b32;
+}
+
+
+/* SEND OTP BUTTON */
+
+.otp-btn{
+    width:100%;
+
+    padding:15px;
+
+    border:0;
+    border-radius:5px;
+
+    background:#9b5b32;
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+}
+
+.otp-btn:hover{
+    background:#704020;
+}
+
+
+/* OTP SECTION */
+
+.otp-section{
+    display:none;
+    margin-top:25px;
+}
+
+.otp-section input{
+    width:100%;
+
+    padding:15px;
+
+    border:1px solid #ddd;
+    border-radius:5px;
+
+    text-align:center;
+
+    font-size:22px;
+
+    letter-spacing:8px;
+
+    outline:none;
+}
+
+.otp-section input:focus{
+    border-color:#9b5b32;
+}
+
+.verify-btn{
+    width:100%;
+
+    padding:15px;
+
+    margin-top:15px;
+
+    border:0;
+    border-radius:5px;
+
+    background:#29251f;
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+}
+
+.verify-btn:hover{
+    background:#403a32;
+}
+
+
+/* CHANGE NUMBER */
+
+.change-number{
+    text-align:center;
+
+    margin-top:15px;
+
+    color:#9b5b32;
+
+    font-size:14px;
+
+    cursor:pointer;
+}
+
+
+/* MESSAGE */
+
+.message{
+    text-align:center;
+
+    margin-top:18px;
+
+    font-size:14px;
+
+    display:none;
+
+    line-height:1.6;
+}
+
+
+/* DEMO OTP */
+
+.demo-otp{
+    display:none;
+
+    margin-top:15px;
+
+    padding:12px;
+
+    background:#f4e7d5;
+
+    border-radius:5px;
+
+    text-align:center;
+
+    color:#704020;
+
+    font-size:14px;
+}
+
+
+/* DIVIDER */
+
+.divider{
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    margin:25px 0;
+
+    color:#aaa;
+
+    font-size:13px;
+}
+
+.divider::before,
+.divider::after{
+    content:"";
+
+    height:1px;
+
+    background:#ddd;
+
+    flex:1;
+}
+
+
+/* REGISTER */
+
+.register{
+    text-align:center;
+
+    color:#777;
+
+    font-size:14px;
+}
+
+.register a{
+    color:#9b5b32;
+
+    text-decoration:none;
+
+    font-weight:bold;
+}
+
+
+/* FOOTER */
+
+footer{
+    background:#29251f;
+    color:white;
+
+    text-align:center;
+
+    padding:30px 20px;
+}
+
+footer p{
+    color:#bbb;
+
+    margin-top:8px;
+}
+
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .menu{
+        display:none;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .login-box{
+        padding:25px;
+    }
+
+    .login-box h1{
+        font-size:28px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+    Free shipping on orders above ₹999
+</div>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        CRAFT<span>ORA</span>
+    </div>
+
+
+    <ul class="menu">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Shop
+            </a>
+        </li>
+
+        <li>
+            <a href="shop.html">
+                Categories
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                About
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                Contact
+            </a>
+        </li>
+
+    </ul>
+
+
+    <div class="nav-actions">
+
+        <a href="wishlist.html">
+            ❤️
+        </a>
+
+        <a href="login.html">
+            👤
+        </a>
+
+        <a href="cart.html">
+            🛒
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- LOGIN -->
+
+<section class="login-section">
+
+    <div class="login-box">
+
+        <h1>
+            Welcome Back
+        </h1>
+
+        <p class="subtitle">
+            Login to your Craftora account
+        </p>
+
+
+        <!-- MOBILE NUMBER -->
+
+        <div class="form-group">
+
+            <label>
+                Mobile Number
+            </label>
+
+            <input
+                type="tel"
+                id="mobile"
+                placeholder="Enter 10-digit mobile number"
+                maxlength="10"
+                inputmode="numeric"
+            >
+
+        </div>
+
+
+        <!-- SEND OTP -->
+
+        <button
+            class="otp-btn"
+            onclick="sendOTP()"
+            id="sendOtpButton"
+        >
+            Send OTP
+        </button>
+
+
+        <!-- OTP -->
+
+        <div
+            class="otp-section"
+            id="otpSection"
+        >
+
+            <div class="form-group">
+
+                <label>
+                    Enter OTP
+                </label>
+
+                <input
+                    type="text"
+                    id="otp"
+                    placeholder="Enter OTP"
+                    maxlength="6"
+                    inputmode="numeric"
+                >
+
+            </div>
+
+
+            <button
+                class="verify-btn"
+                onclick="verifyOTP()"
+            >
+                Verify OTP
+            </button>
+
+
+            <div
+                class="change-number"
+                onclick="changeNumber()"
+            >
+                ← Change Mobile Number
+            </div>
+
+        </div>
+
+
+        <!-- MESSAGE -->
+
+        <div
+            class="message"
+            id="message"
+        >
+        </div>
+
+
+        <!-- DEMO OTP -->
+
+        <div
+            class="demo-otp"
+            id="demoOtp"
+        >
+        </div>
+
+
+        <div class="divider">
+            OR
+        </div>
+
+
+        <div class="register">
+
+            New to Craftora?
+
+            <a
+                href="register.html"
+            >
+                Create Account
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>
+        CRAFTORA
+    </h3>
+
+    <p>
+        Celebrating Indian craftsmanship,
+        one beautiful creation at a time.
+    </p>
+
+</footer>
+
+
+<script>
+
+
+/* CURRENT OTP */
+
+let generatedOTP = "";
+
+
+/* SEND OTP */
+
+async function sendOTP(){
+
+    let mobile =
+        document.getElementById(
+            "mobile"
+        ).value.trim();
+
+
+    let message =
+        document.getElementById(
+            "message"
+        );
+
+
+    let demoOtp =
+        document.getElementById(
+            "demoOtp"
+        );
+
+
+    /* CHECK MOBILE */
+
+    if(
+        mobile.length !== 10 ||
+        isNaN(mobile)
+    ){
+
+        message.innerText =
+            "Please enter a valid 10-digit mobile number.";
+
+        message.style.display =
+            "block";
+
+        message.style.color =
+            "#b00020";
+
+        return;
+
+    }
+
+
+    /* CHECK USER FROM BACKEND */
+
+    try{
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/login",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+                        mobile:mobile
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        /* USER NOT FOUND */
+
+        if(!response.ok){
+
+            message.innerText =
+                data.message ||
+                "No account found.";
+
+            message.style.display =
+                "block";
+
+            message.style.color =
+                "#b00020";
+
+            return;
+
+        }
+
+
+        /* USER EXISTS */
+
+        /* GENERATE OTP */
+
+        generatedOTP =
+            Math.floor(
+                100000 +
+                Math.random() * 900000
+            ).toString();
+
+
+        /* SHOW OTP BOX */
+
+        document.getElementById(
+            "otpSection"
+        ).style.display =
+            "block";
+
+
+        document.getElementById(
+            "sendOtpButton"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "mobile"
+        ).readOnly =
+            true;
+
+
+        /* DEMO OTP */
+
+        demoOtp.innerText =
+            "Demo OTP: " + generatedOTP;
+
+
+        demoOtp.style.display =
+            "block";
+
+
+        message.innerText =
+            "OTP sent successfully 📱";
+
+
+        message.style.display =
+            "block";
+
+
+        message.style.color =
+            "green";
+
+
+        document.getElementById(
+            "otp"
+        ).focus();
+
+
+        /* SAVE USER TEMPORARILY */
+
+        localStorage.setItem(
+            "craftoraLoginUser",
+            JSON.stringify(data.user)
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Login Error:",
+            error
+        );
+
+
+        message.innerText =
+            "Backend server is not running. Please start the server.";
+
+        message.style.display =
+            "block";
+
+        message.style.color =
+            "#b00020";
+
+    }
+
+}
+
+
+/* VERIFY OTP */
+
+function verifyOTP(){
+
+    let otp =
+        document.getElementById(
+            "otp"
+        ).value.trim();
+
+
+    let mobile =
+        document.getElementById(
+            "mobile"
+        ).value.trim();
+
+
+    let message =
+        document.getElementById(
+            "message"
+        );
+
+
+    if(
+        otp.length !== 6 ||
+        isNaN(otp)
+    ){
+
+        message.innerText =
+            "Please enter the 6-digit OTP.";
+
+        message.style.display =
+            "block";
+
+        message.style.color =
+            "#b00020";
+
+        return;
+
+    }
+
+
+    if(otp === generatedOTP){
+
+        /* GET USER */
+
+        let storedUser =
+            localStorage.getItem(
+                "craftoraLoginUser"
+            );
+
+
+        let user =
+            storedUser
+                ? JSON.parse(storedUser)
+                : {
+                    name:"",
+                    mobile:mobile
+                };
+
+
+        /* SAVE LOGIN */
+
+        localStorage.setItem(
+            "craftoraUser",
+            JSON.stringify(user)
+        );
+
+
+        localStorage.setItem(
+            "craftoraLoggedIn",
+            "true"
+        );
+
+
+        message.innerText =
+            "Login successful! 👤";
+
+
+        message.style.display =
+            "block";
+
+
+        message.style.color =
+            "green";
+
+
+        document.getElementById(
+            "demoOtp"
+        ).style.display =
+            "none";
+
+
+        setTimeout(function(){
+
+            window.location.href =
+                "index.html";
+
+        },1000);
+
+
+    }else{
+
+        message.innerText =
+            "Incorrect OTP. Please try again.";
+
+        message.style.display =
+            "block";
+
+        message.style.color =
+            "#b00020";
+
+    }
+
+}
+
+
+/* CHANGE NUMBER */
+
+function changeNumber(){
+
+    generatedOTP = "";
+
+
+    localStorage.removeItem(
+        "craftoraLoginUser"
+    );
+
+
+    document.getElementById(
+        "mobile"
+    ).readOnly =
+        false;
+
+
+    document.getElementById(
+        "mobile"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "otp"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "otpSection"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "sendOtpButton"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "demoOtp"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "message"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "mobile"
+    ).focus();
+
+}
+
+</script>
+
+
+</body>
+
+</html>
