@@ -11,7 +11,7 @@ const Product = require("./models/Product");
 
 const app = express();
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 
 /* =========================
@@ -1769,7 +1769,8 @@ mongoose.connect(
 
 
     app.listen(
-        PORT,
+    PORT,
+    "0.0.0.0",
         () => {
 
             console.log(
